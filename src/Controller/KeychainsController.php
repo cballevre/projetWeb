@@ -9,7 +9,7 @@
 class KeychainsController extends AppController
 {
 
-    public function index() {
+    public function home() {
         $this->render('index');
     }
 

@@ -7,16 +7,13 @@ require './config/bootstrap.php';
 
 /* require 'core/Autoloader.php';
 Core\Autoloader::register(); */
-$controller = $_GET['controller'];
-$action = $_GET['action'];
 
-if(empty($controller)){
-    $controller = 'Pages';
+if(empty($controller) && empty($action)){
+    $controller = 'pages';
     $action = 'home';
-}
-
-if(empty($action)){
-    $action = 'home';
+} else {
+    $controller = $_GET['controller'];
+    $action = $_GET['action'];
 }
 
 if(file_exists('src/Controller/' . $controller . 'Controller.php')) {
@@ -31,11 +28,11 @@ if(file_exists('src/Controller/' . $controller . 'Controller.php')) {
     if(method_exists($controller, $action)) {
         $controller->$action();
     }else{
-        echo 'erreur 404 - action not found';
+        echo 'erreur 404';
     }
 
 }else{
-    echo 'erreur 404 - controller not found';
+    echo 'erreur 404';
 }
 
 
