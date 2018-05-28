@@ -10,6 +10,11 @@ class PagesController extends AppController
 {
 
     public function home() {
+
+        $var = array(
+          "message" => "new welcome"
+        );
+        $this->set($var);
         $this->render('home');
     }
 
