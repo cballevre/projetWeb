@@ -9,4 +9,4 @@
 
 ?>
 
-<p>Welcome to home <p>
+<p> <?php echo $this->var["message"]; ?> <p>

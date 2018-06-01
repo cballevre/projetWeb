@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Model\VO;
+
 class KeyVO
 {
 
@@ -7,7 +10,7 @@ class KeyVO
     protected $id;
     protected $type; //Clef ou Passe Partiel ou Passe Total
 
-    public __construct($type)
+    public function __construct($type)
     {
       $this->type = $type;
     }

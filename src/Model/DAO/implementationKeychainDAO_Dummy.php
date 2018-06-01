@@ -1,6 +1,8 @@
 <?php
-require_once '../../Model/VO/KeychainVO.php';
-require_once '../../Model/DAO/interfaceKeychainDAO.php';
+
+namespace App\Model\DAO;
+
+use App\Model\VO\KeychainVO;
 
 class implementationKeychainDAO_Dummy implements interfaceKeyChainDAO
 {

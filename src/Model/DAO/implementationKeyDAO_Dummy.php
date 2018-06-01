@@ -1,7 +1,8 @@
 <?php
-require_once '../../Model/VO/KeyVO.php';
-require_once '../../Model/DAO/interfaceKeyDAO.php';
 
+namespace App\Model\DAO;
+
+use App\Model\VO\KeyVO;
 
 class implementationKeyDAO_Dummy implements interfaceKeyDAO
 {

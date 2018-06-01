@@ -1,5 +1,8 @@
 <?php
-class PassVO
+
+namespace App\Model\VO;
+
+class DoorVO
 {
     protected $id;
 
