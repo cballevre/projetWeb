@@ -34,8 +34,8 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="../../../assets/css/vendor.css">
-    <link rel="stylesheet" id="theme-style" href="../../../assets/css/app.css">
+    <link rel="stylesheet" href="<?php echo WEBROOT; ?>assets/css/vendor.css">
+    <link rel="stylesheet" id="theme-style" href="<?php echo WEBROOT; ?>assets/css/app.css">
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
