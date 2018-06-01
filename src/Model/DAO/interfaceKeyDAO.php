@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model\DAO;
+
 interface interfaceKeyDAO
 {
 

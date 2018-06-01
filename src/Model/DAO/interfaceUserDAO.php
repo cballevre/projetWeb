@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Model\DAO;
+
 // Declaration de l'interface 'iTemplate'
 interface interfaceUserDAO
 {

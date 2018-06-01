@@ -1,7 +1,6 @@
 <?php
 
-require_once '../../Model/Service/interfaceBorrowService.php';
-
+namespace App\Model\Service;
 
 class implementationBorrowService_Dummy implements interfaceBorrowService
 {

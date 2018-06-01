@@ -17,3 +17,4 @@ header('Content-Type: text/html; charset=utf-8');
  * Require les chemins de base
  */
 require __DIR__ . '/paths.php';
+

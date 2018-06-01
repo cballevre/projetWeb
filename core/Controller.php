@@ -7,7 +7,7 @@
  * Time: 22:37
  */
 
-//namespace Core;
+namespace Core;
 
 class Controller
 {
@@ -19,6 +19,7 @@ class Controller
     private $name;
     private $var = array();
     private $layout = "default";
+    private $headline;
 
     protected $data;
 
@@ -70,6 +71,22 @@ class Controller
     private function setName(){
         $name = str_replace('App','',str_replace('\\', '', str_replace('Controller','',get_class($this))));
         return $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeadline()
+    {
+        return $this->headline;
+    }
+
+    /**
+     * @param mixed $headline
+     */
+    public function setHeadline($headline)
+    {
+        $this->headline = $headline;
     }
 
     public function setData($data){

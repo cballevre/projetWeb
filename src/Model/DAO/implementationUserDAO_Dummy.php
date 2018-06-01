@@ -1,7 +1,8 @@
 <?php
-require_once '../../Model/VO/UserVO.php';
-require_once '../../Model/DAO/interfaceUserDAO.php';
 
+namespace App\Model\DAO;
+
+use App\Model\VO\UserVO;
 
 
 // Implémentation de l'interface
