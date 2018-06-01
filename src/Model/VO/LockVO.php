@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Model\VO;
+
 class LockVO
 {
     protected $id;
