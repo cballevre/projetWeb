@@ -39,9 +39,9 @@ class Request
         
         $this->url = '/';
         
-        if($_GET["controller"]) {
+        if(isset($_GET["controller"])) {
             $this->url .= $_GET["controller"];
-            if($_GET["action"]) {
+            if(isset($_GET["action"])) {
                 $this->url .= '/';
                 $this->url .= $_GET["action"];
             }
