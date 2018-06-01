@@ -25,9 +25,19 @@ class Autoloader
     static function autoload($class){
         $params = explode('\\', $class);
         if($params[0] == 'App'){
-            require ROOT.'src'.DS . $params[1]. DS .$params[2].'.php';
+            $result = ROOT . 'src';
+            for ($i = 1; $i < count($params); $i++) {
+                $result .= DS . $params[$i];
+            }
+            $result .= '.php';
+            require $result;
         }elseif($params[0] == 'Core'){
-            require ROOT.'vendor'.DS.$params[0].DS. $params[1].'.php';
+            $result = ROOT . strtolower ($params[0]);
+            for ($i = 1; $i < count($params); $i++) {
+                $result .= DS . $params[$i];
+            }
+            $result .= '.php';
+            require $result;
         }
     }
 }

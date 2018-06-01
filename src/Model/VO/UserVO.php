@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Model\VO;
+
 class UserVO
 {
 

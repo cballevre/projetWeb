@@ -1,10 +1,11 @@
 <?php
 
+namespace App\Model\Service;
 
 interface interfaceBorrowService
 {
   //on emprunte toujours un trousseau
-    public function borrowKeychain(int $user,int $keychain,DateTime $dueDate);
+    public function borrowKeychain($user,$keychain,DateTime $dueDate);
 
     public function returnKeychain($borrowingId,$comment);
 

@@ -4,8 +4,12 @@
         {
             "name": "cballevre",
             "email": "celestin.ballevre@gmail.com"
+        },
+        {
+            "name": "jcarfantan",
+            "email": "carfantanjohann@gmail.com"
         }
     ],
     "require": {},
-    "require-dev": {}
+    "require-dev": {},
 }
