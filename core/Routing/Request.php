@@ -36,8 +36,18 @@ class Request
      */
     public function __construct()
     {
-
-        $this->url = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '/';
+        
+        $this->url = '/';
+        
+        if($_GET["controller"]) {
+            $this->url .= $_GET["controller"];
+            if($_GET["action"]) {
+                $this->url .= '/';
+                $this->url .= $_GET["action"];
+            }
+        } 
+        
+       // $this->url = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '/';
 
         if(!empty($_POST)){
             $this->data = new \stdClass();
