@@ -9,7 +9,18 @@
 
 namespace App\Controller;
 
+use App\Model\DAO\implementationKeyDAO_Dummy;
+
 class KeysController extends AppController
 {
+    public function index() {
 
+        $keyDAO = implementationKeyDAO_Dummy::getInstance();
+        $keys = $keyDAO->getkeys();
+
+        $this->setHeadline("Clés");
+        $this->set($keys);
+        $this->render('index');
+
+    }
 }

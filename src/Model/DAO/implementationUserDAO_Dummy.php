@@ -44,7 +44,7 @@ class implementationUserDAO_Dummy implements interfaceUserDAO
          array_push($this->_users,$user);
        }
      } else {
-         throw new RuntimeException('Echec lors de l\'ouverture du fichier users.xml.');
+         throw new \RuntimeException('Echec lors de l\'ouverture du fichier users.xml.');
      }
 
    }
