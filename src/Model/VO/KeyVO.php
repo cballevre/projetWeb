@@ -29,7 +29,7 @@ class KeyVO
       }
       else
       {
-        throw new RuntimeException('Le type de clef <strong>' . $type . '</strong> n\'existe pas !');
+        throw new \RuntimeException('Le type de clef <strong>' . $type . '</strong> n\'existe pas !');
       }
     }
 
