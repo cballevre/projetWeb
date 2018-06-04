@@ -41,7 +41,7 @@ class implementationKeyDAO_Dummy implements interfaceKeyDAO
          array_push($this->_keys,$key);
        }
      } else {
-         throw new RuntimeException('Echec lors de l\'ouverture du fichier keys.xml.');
+         throw new \RuntimeException('Echec lors de l\'ouverture du fichier keys.xml.');
      }
 
    }
