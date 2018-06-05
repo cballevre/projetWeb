@@ -1,0 +1,19 @@
+<?xml version='1.0' standalone='yes'?>
+<keys>
+    <key>
+        <id>1</id>
+        <type>Simple</type>
+    </key>
+    <key>
+        <id>2</id>
+        <type>Simple</type>
+    </key>
+    <key>
+        <id>3</id>
+        <type>Partiel</type>
+    </key>
+    <key>
+        <id>4</id>
+        <type>Total</type>
+    </key>
+</keys>
