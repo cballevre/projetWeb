@@ -16,7 +16,7 @@ class KeyVO
     }
 
     public function setId($id) {
-        $this->id = $id;
+            $this->id = $id;
     }
 
     public function getId() {

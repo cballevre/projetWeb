@@ -26,7 +26,10 @@
                         </thead>
                         <tbody>
                         <?php foreach ($this->var as $key): ?>
-                            <?php var_dump($key);?>
+                            <tr>
+                                <td><?php echo $key->getId(); ?></td>
+                                <td><?php echo $key->getType(); ?></td>
+                            </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
