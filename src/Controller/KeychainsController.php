@@ -9,10 +9,21 @@
 
 namespace App\Controller;
 
+use App\Model\DAO\implementationKeychainDAO_Dummy;
+
 class KeychainsController extends AppController
 {
 
-    public function home() {
+//    public function home() {
+//        $this->render('index');
+//    }
+
+    public function index(){
+        $keychainDAO = implementationKeychainDAO_Dummy::getInstance();
+        $keychains = $keychainDAO->getKeychains();
+
+        $this->setHeadline("Keychains");
+        $this->set($keychains);
         $this->render('index');
     }
 
