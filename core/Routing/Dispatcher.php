@@ -34,7 +34,7 @@ class Dispatcher
             $this->loadAction("error404", $controller);
         } finally {
             try {
-                $this->loadAction($this->request->action, $controller);
+                $this->loadAction($this->request->action, $controller, $this->request->params);
             } catch (\RuntimeException $e) {
                 if($this->request->controller != 'pages') {
                     $controller = $this->loadController("pages");
@@ -67,14 +67,25 @@ class Dispatcher
      * Permet d\'afficher l\'action demander par l\'utilisateur
      * @param $controller : Controller créer
      */
-    private function loadAction($name, $controller){
+    private function loadAction($name, $controller, $params = array()){
 
         if(method_exists($controller, $name)) {
-            if(!empty($this->request->params[0])){
-                $controller->{$name}($this->request->params[0]);
-            }else{
-                $controller->{$name}();
+
+            $reflect = new \ReflectionClass($controller);
+            $reflectMethod = $reflect->getMethod($name);
+
+            $methodParams = array();
+
+            foreach ($reflectMethod->getParameters() as $reflectionParameter) {
+                foreach ($params as $key => $value) {
+                    if($reflectionParameter->getName() == $key) {
+                      array_push($methodParams, $value);
+                    }
+                }
             }
+
+            $controller->{$name}(...$methodParams);
+
         } else {
             throw new \RuntimeException("File doesn't exist");
         }

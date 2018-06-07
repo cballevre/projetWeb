@@ -25,14 +25,12 @@ class UsersController extends AppController
 
     }
 
-    public function single() {
-
-        $id = 3;
+    public function single($id) {
 
         $model = RepositoryFactory::getRepository('users');
         $user = $model->findById($id);
 
-        $this->setHeadline("Utilisateurs");
+        $this->setHeadline($user->getSurname() . ' ' . $user->getName());
         $this->set(compact('user'));
         $this->render('single');
 
@@ -41,8 +39,6 @@ class UsersController extends AppController
     public function store() {
 
     }
-
-
 
     public function update($id) {
 

@@ -30,6 +30,8 @@ class Request
      */
     public $data = false;
 
+    public $params;
+
     /**
      * Request constructor.
      * @param $url
