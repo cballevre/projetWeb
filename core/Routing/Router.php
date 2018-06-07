@@ -20,7 +20,7 @@ class Router
         $url = trim($url,'/');
 
         if(empty($url)){
-            $url = 'pages/home';
+            $url = 'pages/dashboard';
         }
 
         $params = explode('/', $url);

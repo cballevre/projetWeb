@@ -36,7 +36,9 @@ class Dispatcher
             try {
                 $this->loadAction($this->request->action, $controller);
             } catch (\RuntimeException $e) {
-                $controller = $this->loadController("pages");
+                if($this->request->controller != 'pages') {
+                    $controller = $this->loadController("pages");
+                }
                 $this->loadAction("error404", $controller);
             }
         }
