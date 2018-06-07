@@ -1,0 +1,19 @@
+<?xml version='1.0' standalone='yes'?>
+<providerLockss>
+    <providerLock>
+        <idProvider>1</idProvider>
+        <idLock>1</idLock>
+    </providerLock>
+    <providerKey>
+        <idProvider>2</idProvider>
+        <idLock>2</idLock>
+    </providerKey>
+    <providerKey>
+        <idProvider>2</idProvider>
+        <idLock>3</idLock>
+    </providerKey>
+    <providerKey>
+        <idProvider>4</idProvider>
+        <idLock>4</idLock>
+    </providerKey>
+</providerLockss>

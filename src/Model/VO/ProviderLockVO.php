@@ -2,17 +2,17 @@
 
 namespace App\Model\VO;
 
-class DoorVO
+class ProviderLockVO
 {
-    protected $id;
+    protected $idProvider;
     protected $idLock;
 
-    public function setId($id) {
-        $this->id = $id;
+    public function setIdProvider($idProvider) {
+        $this->idProvider = $idProvider;
     }
 
-    public function getId() {
-        return $this->id;
+    public function getIdProvider() {
+        return $this->idProvider;
     }
 
     public function setIdLock($idLock) {
