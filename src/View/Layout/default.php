@@ -10,7 +10,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="no-js gr__modularcode_io">
 <head>
 
     <!-- Basic Page Needs
@@ -109,10 +109,13 @@
                 <?php echo $getContent; ?>
             </article>
             <footer class="footer">
-
-
             </footer>
         </div><!-- end #app.app -->
     </div><!-- end .main-wrapper -->
 </body>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
 </html>

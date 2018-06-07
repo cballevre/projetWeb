@@ -1,0 +1,17 @@
+<?xml version='1.0' standalone='yes'?>
+<doorAccesses>
+    <doorAccess>
+        <id>1</id>
+        <idUser>1</idUser>
+        <idRoom>1</idRoom>
+        <dateDebut>1282508903</dateDebut>
+        <dateFin>1272508903</dateFin>
+    </doorAccess>
+    <doorAccess>
+        <id>2</id>
+        <idUser>1</idUser>
+        <idRoom>2</idRoom>
+        <dateDebut>1282508903</dateDebut>
+        <dateFin>1272508903</dateFin>
+    </doorAccess>
+</doorAccesses>

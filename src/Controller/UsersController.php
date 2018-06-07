@@ -9,15 +9,15 @@
 
 namespace App\Controller;
 
-use App\Model\DAO\implementationUserDAO_Dummy;
+use Core\Repositories\RepositoryFactory;
 
 class UsersController extends AppController
 {
 
     public function index() {
 
-        $userDAO = implementationUserDAO_Dummy::getInstance();
-        $users = $userDAO->getUsers();
+        $model = RepositoryFactory::getRepository('users');
+        $users = $model->findAll();
 
         $this->setHeadline("Utilisateurs");
         $this->set($users);
@@ -25,19 +25,30 @@ class UsersController extends AppController
 
     }
 
-    public function single($id) {
+    public function single() {
+
+        $id = 3;
+
+        $model = RepositoryFactory::getRepository('users');
+        $user = $model->findBy('enssatPrimaryKey', $id);
+
+        $this->setHeadline("Utilisateurs");
+        $this->set($user);
+        $this->render('single');
 
     }
 
-    public function add() {
+    public function store() {
 
     }
 
-    public function edit($id) {
+
+
+    public function update($id) {
 
     }
 
-    public function delete($id) {
+    public function destroy($id) {
 
     }
 }
