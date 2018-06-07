@@ -20,10 +20,7 @@ class Controller
     private $var = array();
     private $layout = "default";
     private $headline;
-
-    protected $data;
-
-    protected $session;
+    protected $request;
 
     /**
      * Constructeur
@@ -86,8 +83,20 @@ class Controller
         $this->headline = $headline;
     }
 
-    public function setData($data) {
-        $this->data = $data;
+    /**
+     * @return mixed
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @param mixed $request
+     */
+    public function setRequest($request)
+    {
+        $this->request = $request;
     }
 
     function redirect($url) {

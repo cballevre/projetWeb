@@ -129,8 +129,36 @@ class XMLRepository {
     /**
      * @param array $data
      */
-    public function create(array $data) {
+    public function create($entities) {
 
+        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+
+        $path = ROOT .'/data/'. $this->entityName .'.xml';
+
+        if (file_exists($path)) {
+
+            $xml = simplexml_load_file($path);
+
+            foreach ($entities as $entity) {
+                $xmlEntity = $xml->addChild($this->singular($this->entityName));
+                $reflect = new \ReflectionClass($entity);
+
+                foreach($reflect->getProperties() as $reflectionProperty) {
+
+                    $propertyName = $reflectionProperty->name;
+
+                    if($propertyName == $this->primaryKey) {
+                        $value = (int) $xml->children()->count();
+                    } else {
+                        $methodName = 'get' . ucfirst($propertyName);
+                        $value = $entity->$methodName();
+                    }
+
+                    $xmlEntity->addChild($propertyName, $value);
+                }
+            }
+            $xml->saveXML($path);
+        }
     }
 
     /**
@@ -138,7 +166,30 @@ class XMLRepository {
      * @param $id
      * @return mixed
      */
-    public function update(array $data, $id) {
+    public function update($entity, $id) {
+
+        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+
+        $path = ROOT .'/data/'. $this->entityName .'.xml';
+
+        if (file_exists($path)) {
+
+            $xml = simplexml_load_file($path);
+
+            foreach ($xml->children() as $child) {
+                if ($child->{$this->primaryKey}->__toString() == $id) {
+                    foreach ($child->children() as $test) {
+                        $reflect = new \ReflectionClass($entity);
+                        foreach($reflect->getProperties() as $reflectionProperty) {
+                            $propertyName = $reflectionProperty->name;
+                            $methodName = 'get' . ucfirst($propertyName);
+                            $child->$propertyName = $entity->$methodName();
+                        }
+                    }
+                }
+            }
+            $xml->saveXML($path);
+        }
 
     }
 
@@ -148,6 +199,24 @@ class XMLRepository {
      */
     public function delete($id) {
 
+        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+
+        $path = ROOT .'/data/'. $this->entityName .'.xml';
+
+        if (file_exists($path)) {
+
+            $xml = simplexml_load_file($path);
+
+            foreach ($xml->children() as $child) {
+                if($child->{$this->primaryKey}->__toString() == $id) {
+                    $dom=dom_import_simplexml($child);
+                    $dom->parentNode->removeChild($dom);
+                }
+            }
+
+            $xml->saveXML($path);
+
+        }
     }
 
     /**

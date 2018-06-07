@@ -14,8 +14,8 @@ class User
     /**
      * @Id
      */
-    protected $ur1identifier; //code apogee ou harpege, selon statut
     protected $enssatPrimaryKey; //32 bits
+    protected $ur1identifier; //code apogee ou harpege, selon statut
     protected $username;
     protected $name;
     protected $surname;

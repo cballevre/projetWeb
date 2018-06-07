@@ -8,7 +8,7 @@
 ?>
 
 <section class="section">
-    <a href="/?controller=users&action=add" class="btn btn-primary">Ajouter</a>
+    <a href="/?controller=users&action=store" class="btn btn-primary">Ajouter</a>
     <a href="/?controller=users&action=import" class="btn btn-secondary float-right">Importer</a>
 </section>
 <section class="section">

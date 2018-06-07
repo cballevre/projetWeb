@@ -28,7 +28,7 @@ class Dispatcher
         Router::parse($this->request->url, $this->request);
 
         try {
-            $controller = $this->loadController($this->request->controller, $this->request->data);
+            $controller = $this->loadController($this->request->controller, $this->request);
         } catch (\RuntimeException $e) {
             $controller = $this->loadController("pages");
             $this->loadAction("error404", $controller);
@@ -48,7 +48,7 @@ class Dispatcher
     /**
      * Permet de charger le controller en fonction de l'url demander par l'utilisateur
      */
-    private function loadController($name, $data = array()){
+    private function loadController($name, $request){
 
         $name = ucfirst($name).'Controller';
         $namespace = '\App\Controller\\'. $name;
@@ -56,7 +56,7 @@ class Dispatcher
         if(file_exists($file)){
             require($file);
             $controller = new $namespace();
-            $controller->setData($data);
+            $controller->setRequest($request);
             return $controller;
         } else {
             throw new \RuntimeException("File doesn't exist");
