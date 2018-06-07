@@ -12,7 +12,7 @@ namespace App\Controller;
 class PagesController extends AppController
 {
 
-    public function home() {
+    public function dashboard() {
 
         $var = array(
             "message" => "new welcome"
@@ -21,17 +21,18 @@ class PagesController extends AppController
         $this->render('home');
     }
 
-    public function dashboard() {
 
         $var = array(
             "message" => "test dashboard"
         );
+        $this->setHeadline("Tableau de bord");
         $this->set($var);
         $this->render('home');
     }
 
-    public function error() {
-        $this->render('error');
+    public function error404() {
+        $this->setHeadline("Page non trouvée");
+        $this->render('../Errors/404');
     }
 
 }

@@ -1,9 +1,9 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <users>
   <user>
     <enssatPrimaryKey>1</enssatPrimaryKey>
     <ur1identifier>1</ur1identifier>
-    <username>jDalton</username>
+    <username>jDalton1</username>
     <name>Dalton</name>
     <surname>Joe</surname>
     <status>Student</status>
@@ -50,5 +50,4 @@
     <phone>5555</phone>
     <email>lucky.luke@fbi.fr</email>
   </user>
-
 </users>

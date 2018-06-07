@@ -30,6 +30,8 @@ class Request
      */
     public $data = false;
 
+    public $params;
+
     /**
      * Request constructor.
      * @param $url
@@ -38,14 +40,16 @@ class Request
     {
         
         $this->url = '/';
-        
-        if(isset($_GET["controller"])) {
-            $this->url .= $_GET["controller"];
-            if(isset($_GET["action"])) {
+
+        if(isset($_GET['controller'])) {
+            $this->url .= $_GET['controller'];
+            if(isset($_GET['action'])) {
                 $this->url .= '/';
-                $this->url .= $_GET["action"];
+                $this->url .= $_GET['action'];
             }
-        } 
+        }  else if($_SERVER['REQUEST_URI'] != '/') {
+            $this->url = '/pages/error404';
+        }
         
        // $this->url = isset($_SERVER["REQUEST_URI"]) ? $_SERVER["REQUEST_URI"] : '/';
 

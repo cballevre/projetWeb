@@ -26,21 +26,40 @@ class Dispatcher
 
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);
-        $this->loadController();
+
+        try {
+            $controller = $this->loadController($this->request->controller, $this->request);
+        } catch (\RuntimeException $e) {
+            $controller = $this->loadController("pages");
+            $this->loadAction("error404", $controller);
+        } finally {
+            try {
+                $this->loadAction($this->request->action, $controller, $this->request->params);
+            } catch (\RuntimeException $e) {
+                if($this->request->controller != 'pages') {
+                    $controller = $this->loadController("pages");
+                }
+                $this->loadAction("error404", $controller);
+            }
+        }
+
     }
 
     /**
      * Permet de charger le controller en fonction de l'url demander par l'utilisateur
      */
-    private function loadController(){
-        $name = ucfirst($this->request->controller).'Controller';
+    private function loadController($name, $request){
+
+        $name = ucfirst($name).'Controller';
         $namespace = '\App\Controller\\'. $name;
         $file = ROOT . DS . 'src/Controller/' . $name . '.php';
         if(file_exists($file)){
             require($file);
             $controller = new $namespace();
-            $controller->setData($this->request->data);
-            $this->loadAction($controller);
+            $controller->setRequest($request);
+            return $controller;
+        } else {
+            throw new \RuntimeException("File doesn't exist");
         }
     }
 
@@ -48,18 +67,27 @@ class Dispatcher
      * Permet d\'afficher l\'action demander par l\'utilisateur
      * @param $controller : Controller créer
      */
-    private function loadAction($controller){
+    private function loadAction($name, $controller, $params = array()){
 
-        $action =  $this->request->action;
+        if(method_exists($controller, $name)) {
 
-        if(method_exists($controller, $action)) {
+            $reflect = new \ReflectionClass($controller);
+            $reflectMethod = $reflect->getMethod($name);
 
-            if(!empty($this->request->params[0])){
-                $controller->{$action}($this->request->params[0]);
-            }else{
-                $controller->{$action}();
+            $methodParams = array();
+
+            foreach ($reflectMethod->getParameters() as $reflectionParameter) {
+                foreach ($params as $key => $value) {
+                    if($reflectionParameter->getName() == $key) {
+                      array_push($methodParams, $value);
+                    }
+                }
             }
 
-        } else $controller->redirect('\\');
+            $controller->{$name}(...$methodParams);
+
+        } else {
+            throw new \RuntimeException("File doesn't exist");
+        }
     }
 }

@@ -8,10 +8,9 @@
 ?>
 
 <section class="section">
-    <a href="/users/add" class="btn btn-primary">Ajouter</a>
-    <a href="/users/import" class="btn btn-secondary">Importer</a>
+    <a href="/?controller=users&action=store" class="btn btn-primary">Ajouter</a>
+    <a href="/?controller=users&action=import" class="btn btn-secondary float-right">Importer</a>
 </section>
-
 <section class="section">
     <div class="row">
         <div class="col-md-12">
@@ -27,18 +26,31 @@
                             <th scope="col">Numéro de téléphone</th>
                             <th scope="col">Status</th>
                             <th scope="col">Email</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->var as $user): ?>
+                        <?php foreach ($users as $user): ?>
                             <tr>
                                 <td><?php echo $user->getEnssatPrimaryKey(); ?></td>
-                                <td><?php echo $user->getSurname(); ?></td>
-                                <td><?php echo $user->getName(); ?></td>
+                                <td colspan="2">
+                                    <a href="/?controller=users&action=single&id=<?php echo $user->getEnssatPrimaryKey(); ?>">
+                                        <?php echo $user->getSurname(); ?>
+                                        <?php echo $user->getName(); ?>
+                                    </a>
+                                </td>
                                 <td><?php echo $user->getUsername(); ?></td>
                                 <td><?php echo $user->getPhone(); ?></td>
                                 <td><?php echo $user->getStatus(); ?></td>
                                 <td><?php echo $user->getEmail(); ?></td>
+                                <td>
+                                    <a href="/?controller=users&action=update&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
+                                        <i class="fas fa-edit"></i>
+                                    </a>&nbsp;
+                                    <a href="/?controller=users&action=destroy&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

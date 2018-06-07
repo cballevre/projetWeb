@@ -11,8 +11,11 @@ namespace App\Model;
 
 class User
 {
-    protected $ur1identifier; //code apogee ou harpege, selon statut
+    /**
+     * @Id
+     */
     protected $enssatPrimaryKey; //32 bits
+    protected $ur1identifier; //code apogee ou harpege, selon statut
     protected $username;
     protected $name;
     protected $surname;
