@@ -16,61 +16,16 @@ class KeyAssociationVO
     protected $idKey;
     protected $idMasterKey;
 
-    public function setId($id) {
-        $this->id = $id;
-    }
+    public function setId(int $id) { $this->id = $id; }
+    public function getId() { return $this->id; }
 
-    public function getId() {
-        return $this->id;
-    }
+    public function getIdKeyChain(){ return $this->idKeyChain; }
+    public function setIdKeyChain(int $idKeyChain){ $this->idKeyChain = $idKeyChain; }
 
-    /**
-     * @return mixed
-     */
-    public function getIdKeyChain()
-    {
-        return $this->idKeyChain;
-    }
+    public function getIdKey(){ return $this->idKey; }
+    public function setIdKey(int $idKey){ $this->idKey = $idKey; }
 
-    /**
-     * @param mixed $idKeyChain
-     */
-    public function setIdKeyChain($idKeyChain)
-    {
-        $this->idKeyChain = $idKeyChain;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdKey()
-    {
-        return $this->idKey;
-    }
-
-    /**
-     * @param mixed $idKey
-     */
-    public function setIdKey($idKey)
-    {
-        $this->idKey = $idKey;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdMasterKey()
-    {
-        return $this->idMasterKey;
-    }
-
-    /**
-     * @param mixed $idMasterKey
-     */
-    public function setIdMasterKey($idMasterKey)
-    {
-        $this->idMasterKey = $idMasterKey;
-    }
-
+    public function getIdMasterKey(){ return $this->idMasterKey;}
+    public function setIdMasterKey(int $idMasterKey){ $this->idMasterKey = $idMasterKey; }
 
 }

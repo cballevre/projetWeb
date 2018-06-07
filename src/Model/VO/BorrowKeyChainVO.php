@@ -15,13 +15,13 @@ class BorrowKeyChainVO
     protected $idUser;
     protected $dateRetour;
 
-    public function setIdKeyChain($idKeyChain) { $this->idKeyChain = $idKeyChain; }
+    public function setIdKeyChain(int $idKeyChain) { $this->idKeyChain = $idKeyChain; }
     public function getIdKeyChain() { return $this->idKeyChain; }
 
-    public function setIdUser($idUser){ $this->idUser=$idUser; }
+    public function setIdUser(int $idUser){ $this->idUser=$idUser; }
     public function getIdUser(){ return $this->idUser; }
 
-    public function setDateRetour($dateRetour){ $this->dateRetour=$dateRetour; }
+    public function setDateRetour(\Date $dateRetour){ $this->dateRetour=$dateRetour; }
     public function getDateRetour(){ return $this->dateRetour; }
 
 }
