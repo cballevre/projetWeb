@@ -1,0 +1,15 @@
+<?xml version='1.0' standalone='yes'?>
+<roomDoors>
+    <roomDoor>
+        <idDoor>1</idDoor>
+        <idRoom>1</idRoom>
+    </roomDoor>
+    <roomDoor>
+        <idDoor>1</idDoor>
+        <idRoom>2</idRoom>
+    </roomDoor>
+    <roomDoor>
+        <idDoor>2</idDoor>
+        <idRoom>2</idRoom>
+    </roomDoor>
+</roomDoors>
