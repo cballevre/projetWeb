@@ -8,8 +8,8 @@
 ?>
 
 <section class="section">
-    <a href="/users/add" class="btn btn-primary">Ajouter</a>
-    <a href="/users/import" class="btn btn-secondary">Importer</a>
+    <a href="/?controller=users&action=add" class="btn btn-primary">Ajouter</a>
+    <a href="/?controller=users&action=import" class="btn btn-secondary">Importer</a>
 </section>
 
 <section class="section">
@@ -30,7 +30,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->var as $user): ?>
+                        <?php foreach ($users as $user): ?>
                             <tr>
                                 <td><?php echo $user->getEnssatPrimaryKey(); ?></td>
                                 <td><?php echo $user->getSurname(); ?></td>

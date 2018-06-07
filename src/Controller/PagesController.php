@@ -30,8 +30,9 @@ class PagesController extends AppController
         $this->render('home');
     }
 
-    public function error() {
-        $this->render('error');
+    public function error404() {
+        $this->setHeadline("Page non trouvée");
+        $this->render('../Errors/404');
     }
 
 }

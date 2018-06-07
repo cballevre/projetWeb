@@ -20,7 +20,7 @@ class UsersController extends AppController
         $users = $model->findAll();
 
         $this->setHeadline("Utilisateurs");
-        $this->set($users);
+        $this->set(compact('users'));
         $this->render('index');
 
     }
@@ -30,10 +30,10 @@ class UsersController extends AppController
         $id = 3;
 
         $model = RepositoryFactory::getRepository('users');
-        $user = $model->findBy('enssatPrimaryKey', $id);
+        $user = $model->findById($id);
 
         $this->setHeadline("Utilisateurs");
-        $this->set($user);
+        $this->set(compact('user'));
         $this->render('single');
 
     }
