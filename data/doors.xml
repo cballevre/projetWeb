@@ -1,0 +1,16 @@
+<?xml version='1.0' standalone='yes'?>
+<doors>
+    <door>
+        <id>1</id>
+        <idLock>1</idLock>
+    </door>
+    <door>
+        <id>2</id>
+        <idLock>1</idLock>
+    </door>
+    <door>
+        <id>3</id>
+        <idLock>4</idLock>
+    </door>
+
+</doors>

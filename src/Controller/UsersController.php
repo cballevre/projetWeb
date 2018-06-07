@@ -9,15 +9,15 @@
 
 namespace App\Controller;
 
-use Core\DAO\ImplementationDAOFactory;
+use Core\Repositories\RepositoryFactory;
 
 class UsersController extends AppController
 {
 
     public function index() {
 
-        $userDAO = ImplementationDAOFactory::getInstance('users');
-        $users = $userDAO->findAll();
+        $model = RepositoryFactory::getRepository('users');
+        $users = $model->findAll();
 
         $this->setHeadline("Utilisateurs");
         $this->set($users);
@@ -27,24 +27,28 @@ class UsersController extends AppController
 
     public function single() {
 
-        $userDAO = ImplementationDAOFactory::getInstance('users');
-        $users = $userDAO->findAll();
+        $id = 3;
+
+        $model = RepositoryFactory::getRepository('users');
+        $user = $model->findBy('enssatPrimaryKey', $id);
 
         $this->setHeadline("Utilisateurs");
-        $this->set($users);
-        $this->render('index');
+        $this->set($user);
+        $this->render('single');
 
     }
 
-    public function add() {
+    public function store() {
 
     }
 
-    public function edit($id) {
+
+
+    public function update($id) {
 
     }
 
-    public function delete($id) {
+    public function destroy($id) {
 
     }
 }

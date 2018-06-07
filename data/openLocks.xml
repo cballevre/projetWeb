@@ -1,0 +1,11 @@
+<?xml version='1.0' standalone='yes'?>
+<openLocks>
+    <openLock>
+        <idKey>2</idKey>
+        <idLock>2</idLock>
+    </openLock>
+    <openLock>
+        <idKey>1</idKey>
+        <idLock>1</idLock>
+    </openLock>
+</openLocks>

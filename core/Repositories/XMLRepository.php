@@ -2,20 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: cballevre
- * Date: 06/06/2018
- * Time: 22:37
+ * Date: 07/06/2018
+ * Time: 13:58
  */
 
-namespace Core\DAO;
+namespace Core\Repositories;
 
-class ImplementationDAO implements interfaceDAO
-{
+
+class XMLRepository {
 
     /**
      * @var array
      */
     protected $data = array();
     protected $table;
+    protected $primaryKey;
 
     /**
      * Constructeur de la classe
@@ -67,14 +68,61 @@ class ImplementationDAO implements interfaceDAO
     }
 
     /**
-     * @param string $type
-     * @param array $params
+     * @return array
      */
     public function findAll() {
         return $this->data;
     }
 
-    public function findByPrimaryKey($primaryKey) {
+    /**
+     * @param $id
+     */
+    public function findById($id) {
+
+    }
+
+    /**
+     * @param $type
+     * @param $value
+     * @return array
+     */
+    public function findBy($type, $value) {
+
+        $method = 'get' . ucfirst($type);
+
+        $result = array();
+
+        foreach ($this->data as $entity) {
+            if($entity->$method() == $value) {
+                array_push($result, $entity);
+            }
+        }
+
+        return $result;
+
+    }
+
+    /**
+     * @param array $data
+     */
+    public function create(array $data) {
+        
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @return mixed
+     */
+    public function update(array $data, $id) {
+
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id) {
 
     }
 
@@ -91,8 +139,5 @@ class ImplementationDAO implements interfaceDAO
         } else {
             throw new \RuntimeException('Problème de pluriel dans le nom de la table');
         }
-
     }
-
-
 }
