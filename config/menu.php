@@ -11,7 +11,7 @@ return array(
     array(
         'title' => 'Tableau de bord',
         'icon' => 'fas fa-tachometer-alt',
-        'route' => '/pages/dashboard'
+        'route' => '/?controller=pages&action=index'
     ),
     array(
         'title' => 'Réservations',
@@ -29,7 +29,7 @@ return array(
         'children' => array(
             array(
                 'title' => 'Toutes les utilisateurs',
-                'route' => '/users/index'
+                'route' => ''
             ),
             array(
                 'title' => 'Ajouter',

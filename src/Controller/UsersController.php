@@ -9,15 +9,15 @@
 
 namespace App\Controller;
 
-use App\Model\DAO\implementationUserDAO_Dummy;
+use Core\DAO\ImplementationDAOFactory;
 
 class UsersController extends AppController
 {
 
     public function index() {
 
-        $userDAO = implementationUserDAO_Dummy::getInstance();
-        $users = $userDAO->getUsers();
+        $userDAO = ImplementationDAOFactory::getInstance('users');
+        $users = $userDAO->findAll();
 
         $this->setHeadline("Utilisateurs");
         $this->set($users);
@@ -25,7 +25,14 @@ class UsersController extends AppController
 
     }
 
-    public function single($id) {
+    public function single() {
+
+        $userDAO = ImplementationDAOFactory::getInstance('users');
+        $users = $userDAO->findAll();
+
+        $this->setHeadline("Utilisateurs");
+        $this->set($users);
+        $this->render('index');
 
     }
 

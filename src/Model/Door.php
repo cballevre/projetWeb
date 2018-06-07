@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model\VO;
+namespace App\Model;
 
-class RoomVO
+class Door
 {
     protected $id;
 

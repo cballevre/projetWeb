@@ -1,71 +1,80 @@
 <?php
 
-namespace App\Model\VO;
+namespace App\Model;
 
-class UserVO
+class User
 {
 
     protected $ur1identifier; //code apogee ou harpege, selon statu
-    public function setUr1Identifier($id) {
+    protected $enssatPrimaryKey; //32 bits
+    protected $username;
+    protected $name;
+    protected $surname;
+    protected $phone;
+    protected $status; //Etudiant, Exterieur, personel
+    protected $email;
+
+    public function setUr1Identifier(int $id) {
         $this->ur1identifier = $id;
     }
+
     public function getUr1Identifier() {
         return $this->ur1identifier;
     }
 
-
-    protected $enssatPrimaryKey; //32 bits
-    public function setEnssatPrimaryKey($id) {
+    public function setEnssatPrimaryKey(float $id)
+    {
         $this->enssatPrimaryKey = $id;
     }
+
     public function getEnssatPrimaryKey() {
         return $this->enssatPrimaryKey;
     }
 
-    protected $username;
-    public function setUsername($username) {
+    public function setUsername(string $username) {
         $this->username = $username;
     }
+
     public function getUsername() {
         return $this->username;
     }
 
-    protected $name;
-    public function setName($name) {
+    public function setName(string $name) {
         $this->name = $name;
     }
+
     public function getName() {
         return $this->name;
     }
 
-    protected $surname;
-    public function setSurname($surname) {
+    public function setSurname(string $surname) {
         $this->surname = $surname;
     }
+
     public function getSurname() {
         return $this->surname;
     }
 
-    protected $phone;
-    public function setPhone($phone) {
+    public function setPhone(int $phone) {
         $this->phone = $phone;
     }
+
     public function getPhone() {
         return $this->phone;
     }
 
-    protected $status; //Etudiant, Exterieur, personel
-    public function setStatus($status) {
+    public function setStatus(string $status) {
         $this->status = $status;
     }
+
     public function getStatus() {
         return $this->status;
     }
 
-    protected $email;
-    public function setEmail($email) {
+    public function setEmail(string $email) {
         $this->email = $email;
     }
+
     public function getEmail() {
         return $this->email;
     }

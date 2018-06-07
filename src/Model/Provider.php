@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model\VO;
+namespace App\Model;
 
-class ProviderVO
+class Provider
 {
     protected $id;
     protected $username;

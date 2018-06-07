@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model\VO;
+namespace App\Model;
 
-class LockVO
+class Lock
 {
     protected $id;
     protected $length;
