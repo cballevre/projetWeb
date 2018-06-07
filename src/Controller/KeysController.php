@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: cballevre
+ * User: cballevre, aaudemard
  * Date: 27/05/2018
  * Time: 22:44
  */
@@ -25,17 +25,6 @@ class KeysController extends AppController
 
     public function add($id, $type){
 
-
-        $document = DOMDocument::load("keys.xml" );
-
-        $key = $document->createElement("key");
-        $key = $document->appendChild($key);
-        $keyId = $document->createElement("id", $id);
-        $keyId = $key->appendChild($keyId);
-        $keyType = $document->createElement("type", $type);
-        $keyType = $key->appendChild($keyType);
-
-        print $document->saveXML();
 
     }
 }

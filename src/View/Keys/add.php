@@ -8,8 +8,7 @@
 ?>
 
 <section class="section">
-    <a href="/keys/add" class="btn btn-primary">Ajouter</a>
-    <a href="/keys/import" class="btn btn-secondary">Importer</a>
+    <a href="/keys/index" class="btn btn-primary">Accueil clé</a>
 </section>
 
 <section class="section">

@@ -1,0 +1,27 @@
+<?xml version='1.0' standalone='yes'?>
+<keyAssociations>
+    <keyAssociation>
+        <id>1</id>
+        <idKeyChain>2</idKeyChain>
+        <idKey>3</idKey>
+        <idMasterKey></idMasterKey>
+    </keyAssociation>
+    <keyAssociation>
+        <id>2</id>
+        <idKeyChain>2</idKeyChain>
+        <idKey>1</idKey>
+        <idMasterKey></idMasterKey>
+    </keyAssociation>
+    <keyAssociation>
+        <id>3</id>
+        <idKeyChain>1</idKeyChain>
+        <idKey>2</idKey>
+        <idMasterKey></idMasterKey>
+    </keyAssociation>
+    <keyAssociation>
+        <id>4</id>
+        <idKeyChain>3</idKeyChain>
+        <idKey></idKey>
+        <idMasterKey>1</idMasterKey>
+    </keyAssociation>
+</keyAssociations>
