@@ -4,6 +4,9 @@ namespace App\Model;
 
 class Door
 {
+    /**
+     * @Id
+     */
     protected $id;
     protected $idLock;
 

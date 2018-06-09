@@ -26,7 +26,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->var as $keychain): ?>
+                        <?php foreach ($keychains as $keychain): ?>
                             <tr>
                                 <td><?php echo $keychain->getId(); ?></td>
                                 <td><?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s'); ?></td>

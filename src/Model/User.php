@@ -20,7 +20,10 @@ class User
     protected $name;
     protected $surname;
     protected $phone;
-    protected $status; //Etudiant, Exterieur, personnel
+    /**
+     * @Domaine(Etudiant, Exterieur, personnel)
+     */
+    protected $status;
     protected $email;
 
     public function setUr1Identifier(string $id) { $this->ur1identifier = $id; }

@@ -11,16 +11,17 @@ namespace App\Model;
 
 class KeyAssociation
 {
+    /** @Id */
     protected $id;
-    protected $idKeyChain;
+    protected $idKeychain;
     protected $idKey;
     protected $idMasterKey;
 
     public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
-    public function getIdKeyChain(){ return $this->idKeyChain; }
-    public function setIdKeyChain(int $idKeyChain){ $this->idKeyChain = $idKeyChain; }
+    public function getIdKeychain(){ return $this->idKeychain; }
+    public function setIdKeychain(int $idKeychain){ $this->idKeychain = $idKeychain; }
 
     public function getIdKey(){ return $this->idKey; }
     public function setIdKey(int $idKey){ $this->idKey = $idKey; }
