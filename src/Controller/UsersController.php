@@ -54,7 +54,7 @@ class UsersController extends AppController
             $model = RepositoryFactory::getRepository('users');
             $model->create(array($user));
 
-            $this->redirect("/?controller=users&action=index");
+            $this->redirect(WEBROOT . "?controller=users&action=index");
 
         } else {
             $this->setHeadline("Ajouter un utilisateur");
@@ -81,7 +81,7 @@ class UsersController extends AppController
             $model = RepositoryFactory::getRepository('users');
             $model->update($user, $id);
 
-            $this->redirect("/?controller=users&action=index");
+            $this->redirect(WEBROOT . "?controller=users&action=index");
 
         } else {
             $this->setHeadline("Modifier un utilisateur");
@@ -96,7 +96,7 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $model->delete($id);
 
-        $this->redirect("/?controller=users&action=index");
+        $this->redirect(WEBROOT . "?controller=users&action=index");
     }
 
     public function import() {

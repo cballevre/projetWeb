@@ -8,7 +8,7 @@
 ?>
 
 <section class="section">
-    <a href="/?controller=doors&action=store" class="btn btn-primary">Ajouter</a>
+    <a href="<?php echo WEBROOT; ?>?controller=doors&action=store" class="btn btn-primary">Ajouter</a>
 </section>
 <section class="section">
     <div class="row">
@@ -19,7 +19,7 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Numéro de barillet</th>
+                            <th scope="col">Id du barillet</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -28,6 +28,14 @@
                             <tr>
                                 <td><?php echo $door->getId(); ?></td>
                                 <td><?php echo $door->getIdLock(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=doors&action=update&id=<?php echo $door->getId(); ?>">
+                                        <i class="fas fa-edit"></i>
+                                    </a>&nbsp;
+                                    <a href="<?php echo WEBROOT; ?>?controller=doors&action=destroy&id=<?php echo $door->getId(); ?>">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
