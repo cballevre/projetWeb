@@ -7,22 +7,16 @@
  */
 ?>
 
-<section class="section">
-    <a href="<?php echo WEBROOT?>?controller=keychains&action=store" class="btn btn-primary">Ajouter</a>
-    <a href="<?php echo WEBROOT?>?controller=keychains&action=import" class="btn btn-secondary float-right">Importer</a>
-</section>
-
-<section class="section">
+<section>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <table class="table">
-                        <thead>
+            <table class="table table-striped">
+                <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Création date</th>
                             <th scope="col">Destruction date</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,10 +40,7 @@
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
-                    </table>
-                </div>
-            </div>
+            </table>
         </div>
     </div>
 </section>
-
