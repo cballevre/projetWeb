@@ -9,6 +9,9 @@
 
 namespace App\Controller;
 
+use App\Model\Door;
+use Core\Repositories\RepositoryFactory;
+
 class DoorsController extends AppController
 {
     public function index() {
