@@ -9,7 +9,7 @@
 
 namespace App\Controller;
 
-use App\Model\DAO\implementationKeychainDAO_Dummy;
+use Core\Repositories\RepositoryFactory;
 
 class KeychainsController extends AppController
 {
@@ -19,11 +19,12 @@ class KeychainsController extends AppController
 //    }
 
     public function index(){
-        $keychainDAO = implementationKeychainDAO_Dummy::getInstance();
-        $keychains = $keychainDAO->getKeychains();
 
-        $this->setHeadline("Keychains");
-        $this->set($keychains);
+        $model = RepositoryFactory::getRepository('keychains');
+        $keychains = $model->findAll();
+
+        $this->setHeadline("Tous les trousseaux");
+        $this->set(compact('keychains'));
         $this->render('index');
     }
 

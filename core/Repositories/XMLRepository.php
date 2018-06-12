@@ -9,13 +9,19 @@
 namespace Core\Repositories;
 
 
+use Core\Utils\Serializer;
+
 class XMLRepository {
 
     /**
      * @var array
      */
     protected $data = array();
+
     protected $entityName;
+    protected $entityNamespace;
+    protected $entityStorage;
+
     protected $primaryKey;
 
     /**
@@ -27,58 +33,28 @@ class XMLRepository {
     public function __construct($entityName) {
 
         $this->entityName = $entityName;
-        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+        $this->entityNamespace = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+        $this->entityStorage = ROOT .'/data/'. $this->entityName .'.xml';
+        $this->entityPrimaryKey = $this->findPrimaryKey();
 
-        $reflect = new \ReflectionClass($entityName);
+        if (file_exists($this->entityStorage)) {
 
-        foreach($reflect->getProperties() as $reflectionProperty) {
+            $xml = simplexml_load_file($this->entityStorage);
 
-            $re = '/@id/mi';
-            $str = $reflectionProperty->getDocComment();
+            foreach ($xml->children() as $child) {
 
-            if(preg_match($re, $str)) {
-                $this->primaryKey = $reflectionProperty->name;
-            }
-        }
+                $serializer = new Serializer();
+                $entity = $serializer->fromXML($child, $this->entityNamespace);
 
-        $path = ROOT .'/data/'. $this->entityName .'.xml';
-
-        if (file_exists($path)) {
-
-            $xml = simplexml_load_file($path);
-            foreach ($xml->children() as $element) {
-
-                $entity = new $entityName();
-
-                $reflect = new \ReflectionClass($entityName);
-
-                foreach($reflect->getProperties() as $reflectionProperty) {
-
-                    $propertyName = $reflectionProperty->name;
-                    $methodName = 'set' . ucfirst($propertyName);
-                    $reflectMethod = $reflect->getMethod($methodName);
-
-                    $methodType = $reflectMethod->getParameters()[0]->getType();
-
-                    if(!is_null($methodType)) {
-
-                            $methodTypeName = $methodType->__toString();
-
-                            $result = $element->$propertyName;
-                            if($methodTypeName == "int") { $result = (int) $result; }
-                            else if($methodTypeName == "float") { $result = (float) $result; }
-                            else if($methodTypeName == "string") { $result = (string) $result; }
-
-                            $entity->$methodName($result);
-
-                    }
-                }
+                $this->makeAssociation($entity);
 
                 array_push($this->data, $entity);
             }
+
         } else {
             throw new \RuntimeException('Echec lors de l\'ouverture du fichier'. $this->entityName .'.xml.');
         }
+
     }
 
     /**
@@ -93,7 +69,7 @@ class XMLRepository {
      */
     public function findById($id) {
 
-        $method = 'get' . ucfirst($this->primaryKey);
+        $method = 'get' . ucfirst($this->entityPrimaryKey);
 
         foreach ($this->data as $entity) {
             if($entity->$method() == $id) {
@@ -227,10 +203,118 @@ class XMLRepository {
 
         $last = substr($str, -1);
 
-        if($last = 's') {
+        if($last == 's') {
             return substr($str, 0, strlen ($str)-1);
         } else {
             throw new \RuntimeException('Problème de pluriel dans le nom de la table');
+        }
+    }
+
+    /**
+     * @param $str
+     * @return bool|string
+     */
+    private function plural($str) {
+
+        return $str . 's';
+
+    }
+
+    private function findPrimaryKey() {
+
+        $reflect = new \ReflectionClass($this->entityNamespace);
+
+        foreach($reflect->getProperties() as $reflectionProperty) {
+
+            $regex = '/@Id/mi';
+            $doc = $reflectionProperty->getDocComment();
+
+            if(preg_match($regex, $doc)) {
+                return $reflectionProperty->name;
+            }
+        }
+
+
+
+        throw new \RuntimeException('L\'entité ' . $this->entityName . ' ne possède pas de primaryKey');
+
+    }
+
+    private function makeAssociation($entity) {
+
+        $regex_expression = '/@([a-zA-Z\(\)="\',]*)/m';
+        $regex_association = '/([a-zA-Z]*)\((?:[a-zA-Z]*)="([a-zA-Z]*)",(?:[a-zA-Z]*)="([a-zA-Z]*)"\)
+/xm';
+
+        $reflect = new \ReflectionClass($entity);
+
+        foreach($reflect->getProperties() as $reflectionProperty) {
+
+            $reflectionPropertyDoc = $reflectionProperty->getDocComment();
+            $propertyName = $reflectionProperty->name;
+            $methodName = 'set' . ucfirst($propertyName);
+
+            if(!empty($reflectionPropertyDoc)) {
+
+                $reflectionPropertyDoc = str_replace(" ", "", $reflectionPropertyDoc);
+                preg_match_all($regex_expression, $reflectionPropertyDoc, $expressions, PREG_SET_ORDER, 0);
+
+                foreach ($expressions as $expression) {
+
+                    preg_match_all($regex_association, $expression[0], $params, PREG_SET_ORDER, 0);
+
+                    if(!empty($params)) {
+
+                        $associationType = $params[0][1];
+                        $associationEntity = $params[0][2];
+                        $associationMappedBy= $params[0][3];
+
+                        $associationResults = array();
+
+                        switch ($associationType) {
+
+                            case 'OneToMany':
+
+                                $associationRepository = RepositoryFactory::getRepository(lcfirst($this->plural($associationEntity)));
+                                $associationResults = $associationRepository->findBy('id'. ucfirst($this->singular($this->entityName)), $entity->{'get'.ucfirst($this->entityPrimaryKey)}());
+
+                                $entity->$methodName($associationResults);
+
+                            break;
+                            case 'ManyToOne':
+                                /*
+                                $associationRepository = RepositoryFactory::getRepository(lcfirst($this->plural($associationEntity)));
+
+                                preg_match_all($regex_association, $expressions[1][1], $joinColumns, PREG_SET_ORDER, 0);
+
+                                if(!empty($joinColumns)) {
+                                    var_dump($joinColumns);
+                                } */
+
+                                break;
+                            case 'ManyToMany':
+                                $associationRepository = RepositoryFactory::getRepository($associationMappedBy);
+                                $associationResults = $associationRepository->findBy('id'. ucfirst($this->singular($this->entityName)), $entity->{'get'.ucfirst($this->entityPrimaryKey)}());
+                                $associationEntityRepository = RepositoryFactory::getRepository($associationEntity);
+
+                                $result = array();
+
+                                foreach ($associationResults as $associationResult) {
+                                   $data = $associationEntityRepository->findById($associationResult->{'getId'. $this->singular(ucfirst($associationEntity))}());
+
+                                   if(!is_null($data)) {
+                                       array_push($result, $data);
+                                   }
+                                }
+
+                                $entity->$methodName($result);
+
+                                break;
+                        }
+
+                    }
+                }
+            }
         }
     }
 }

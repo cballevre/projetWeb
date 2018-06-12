@@ -15,14 +15,6 @@ class PagesController extends AppController
     public function dashboard() {
 
         $var = array(
-            "message" => "new welcome"
-        );
-        $this->set($var);
-        $this->render('home');
-    }
-
-
-        $var = array(
             "message" => "test dashboard"
         );
         $this->setHeadline("Tableau de bord");

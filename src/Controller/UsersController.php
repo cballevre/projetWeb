@@ -20,6 +20,8 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $users = $model->findAll();
 
+        var_dump($users);
+
         $this->setHeadline("Utilisateurs");
         $this->set(compact('users'));
         $this->render('index');

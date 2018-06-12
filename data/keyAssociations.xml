@@ -2,25 +2,25 @@
 <keyAssociations>
     <keyAssociation>
         <id>1</id>
-        <idKeyChain>2</idKeyChain>
+        <idKeychain>2</idKeychain>
         <idKey>3</idKey>
         <idMasterKey></idMasterKey>
     </keyAssociation>
     <keyAssociation>
         <id>2</id>
-        <idKeyChain>2</idKeyChain>
+        <idKeychain>2</idKeychain>
         <idKey>1</idKey>
         <idMasterKey></idMasterKey>
     </keyAssociation>
     <keyAssociation>
         <id>3</id>
-        <idKeyChain>1</idKeyChain>
+        <idKeychain>1</idKeychain>
         <idKey>2</idKey>
         <idMasterKey></idMasterKey>
     </keyAssociation>
     <keyAssociation>
         <id>4</id>
-        <idKeyChain>3</idKeyChain>
+        <idKeychain>3</idKeychain>
         <idKey></idKey>
         <idMasterKey>1</idMasterKey>
     </keyAssociation>

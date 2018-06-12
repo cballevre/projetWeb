@@ -44,10 +44,10 @@
     <enssatPrimaryKey>5</enssatPrimaryKey>
     <ur1identifier>5</ur1identifier>
     <username>lluke</username>
-    <name>Luke</name>
+    <name>Luke1</name>
     <surname>Lucky</surname>
     <status>Outsider</status>
     <phone>5555</phone>
     <email>lucky.luke@fbi.fr</email>
   </user>
-</users>
+<user><enssatPrimaryKey>6</enssatPrimaryKey><ur1identifier/><username>fsfsf</username><name>fsf</name><surname>fsf</surname><phone/><status/><email/></user></users>

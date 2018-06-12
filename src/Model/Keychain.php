@@ -11,17 +11,42 @@ namespace App\Model;
 
 class Keychain
 {
+    /**
+     * @Id
+     * @GeneratedValue
+     */
     protected $id;
     protected $creationDate;
     protected $destructionDate;
 
+    /**
+     * @ManyToMany(targetEntity="keys", mappedBy="keyAssociations")
+     */
+    protected $keys;
+
+    /**
+     * @ManyToMany(targetEntity="masterKeys", mappedBy="keyAssociations")
+     */
+    protected $masterKeys;
+
+    protected $borrowKeychains;
+
     public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
-    public function setCreationDate(\Date $date){ $this->creationDate=$date; }
+    public function setCreationDate(\DateTime $date){ $this->creationDate=$date; }
     public function getCreationDate(){ return $this->creationDate; }
 
-    public function setDestructionDate(\Date $date){ $this->destructionDate=$date; }
+    public function setDestructionDate(\DateTime $date){ $this->destructionDate=$date; }
     public function getDestructionDate(){ return $this->destructionDate; }
+
+    public function getKeys() { return $this->keys; }
+    public function setKeys($keys) { $this->keys = $keys; }
+
+    public function getMasterKeys() { return $this->masterKeys; }
+    public function setMasterKeys($masterKeys) { $this->masterKeys = $masterKeys; }
+
+    public function getBorrowKeychains() { return $this->borrowKeychains; }
+    public function setBorrowKeychains($borrowKeychains) { $this->borrowKeychains = $borrowKeychains; }
 
 }

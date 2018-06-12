@@ -25,15 +25,7 @@ class RepositoryFactory{
      */
     public static function getRepository(string $entityName) {
 
-        $is_null = true;
-
-        foreach (self::$instances as $instanceName => $instance) {
-            if($instanceName == $entityName) {
-                $is_null = false;
-            }
-        }
-
-        if($is_null) {
+        if(!isset(self::$instances[$entityName])) {
             self::$instances[$entityName] = new XMLRepository($entityName);
         }
 
