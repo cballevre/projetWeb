@@ -11,16 +11,20 @@ return array(
     array(
         'title' => 'Tableau de bord',
         'icon' => 'fas fa-tachometer-alt',
-        'route' => '/?controller=pages&action=dashboard'
+        'route' => '?controller=pages&action=dashboard'
     ),
     array(
-        'title' => 'Réservations',
+        'title' => 'Emprunts',
         'icon' => 'fas fa-receipt',
         'children' => array(
             array(
-                'title' => 'Toutes les réservations',
-                'route' => ''
+                'title' => 'Toutes les emprunts',
+                'route' => '?controller=borrowKeychains&action=index'
             ),
+            array(
+                'title' => 'Ajouter',
+                'route' => '?controller=borrowKeychains&action=add'
+            )
         )
     ),
     array(
@@ -29,34 +33,58 @@ return array(
         'children' => array(
             array(
                 'title' => 'Toutes les utilisateurs',
-                'route' => ''
+                'route' => '?controller=users&action=index'
             ),
             array(
                 'title' => 'Ajouter',
-                'route' => '/users/add'
-            ),
+                'route' => '?controller=users&action=add'
+            )
         )
     ),
     array(
         'title' => 'Clés',
         'icon' => 'fa fa-key',
         'children' => array(
-            'title' => 'Réservations',
-            'route' => '/users/index'
+            array(
+                'title' => 'Toutes les clés',
+                'route' => '?controller=keys&action=index'
+            ),
+            array(
+                'title' => 'Ajouter',
+                'route' => '?controller=keys&action=add'
+            ),
+            array(
+                'title' => 'Trousseaux',
+                'route' => '?controller=keychains&action=index'
+            ),
+            array(
+                'title' => 'Barrilet',
+                'route' => '?controller=locks&action=index'
+            )
         )
     ),
     array(
         'title' => 'Portes',
         'icon' => 'fas fa-door-open',
         'children' => array(
-            'title' => 'Réservations',
-            'route' => '/users/index'
+            array(
+                'title' => 'Toutes les portes',
+                'route' => '?controller=borrowKeychains&action=index'
+            ),
+            array(
+                'title' => 'Ajouter',
+                'route' => '?controller=borrowKeychains&action=add'
+            ),
+            array(
+                'title' => 'Pièces',
+                'route' => '?controller=rooms&action=index'
+            )
         )
     ),
     array(
         'title' => 'Paramètres',
         'icon' => 'fa fa-cog',
-        'route' => '/?controller=pages&action=setting'
+        'route' => '?controller=pages&action=setting'
     )
 
 );

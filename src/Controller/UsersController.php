@@ -21,6 +21,8 @@ class UsersController extends AppController
         $users = $model->findAll();
 
         $this->setHeadline("Utilisateurs");
+        $this->setButtonAdd('?controller=users&action=store');
+        $this->setButtonImport('?controller=users&action=import');
         $this->set(compact('users'));
         $this->render('index');
 
@@ -32,6 +34,7 @@ class UsersController extends AppController
         $user = $model->findById($id);
 
         $this->setHeadline($user->getSurname() . ' ' . $user->getName());
+        $this->setBack('?controller=users&action=index');
         $this->set(compact('user'));
         $this->render('single');
 
@@ -56,6 +59,7 @@ class UsersController extends AppController
 
         } else {
             $this->setHeadline("Ajouter un utilisateur");
+            $this->setBack('?controller=users&action=index');
             $this->render('store');
         }
     }
@@ -81,6 +85,7 @@ class UsersController extends AppController
 
         } else {
             $this->setHeadline("Modifier un utilisateur");
+            $this->setBack('?controller=users&action=index');
             $this->set(compact('user'));
             $this->render('update');
         }
