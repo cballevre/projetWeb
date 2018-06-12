@@ -11,6 +11,7 @@ namespace App\Model;
 
 class Room
 {
+    /** @Id */
     protected $id;
 
     public function setId(int $id) { $this->id = $id; }
