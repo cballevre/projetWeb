@@ -76,6 +76,8 @@ class UsersController extends AppController
             $user->setStatus($this->request->data->status);
             $user->setEmail($this->request->data->email);
 
+
+
             $model = RepositoryFactory::getRepository('users');
             $model->update($user, $id);
 
