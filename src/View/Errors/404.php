@@ -8,15 +8,18 @@
 
 ?>
 
-<section class="section">
-    <div class="error-card">
-        <div class="error-title-block">
-            <h1 class="error-title">404</h1>
-            <h2 class="error-sub-title"> Désolé, la page n'est pas trouvée </h2>
-        </div>
-        <div class="error-container visible">
-            <a class="btn btn-primary" href="/">
-                <i class="fa fa-angle-left"></i> Retour au tableau de board</a>
+<div class="container error">
+    <div class="row">
+        <div class="error-template">
+            <h1>Oops!</h1>
+            <h2>404 Page non trouvée</h2>
+            <div class="error-details">
+                Désolé, une erreur est survenue, la page demandée n'a pas été trouvée!<br>
+            </div>
+            <div class="error-actions">
+                <a href="<?php echo WEBROOT; ?>" class="btn btn-primary">
+                    <i class="icon-home icon-white"></i><i class="fa fa-angle-left"></i> Retour au tableau de board</a>
+            </div>
         </div>
     </div>
-</section>
+</div>

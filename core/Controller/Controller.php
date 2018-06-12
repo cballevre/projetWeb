@@ -20,6 +20,9 @@ class Controller
     private $var = array();
     private $layout = "default";
     private $headline;
+    private $button_add = null;
+    private $button_import = null;
+    private $back = null;
     protected $request;
 
     /**
@@ -97,6 +100,30 @@ class Controller
     public function setRequest($request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * @param null $button_add
+     */
+    public function setButtonAdd($button_add)
+    {
+        $this->button_add = $button_add;
+    }
+
+    /**
+     * @param null $button_import
+     */
+    public function setButtonImport($button_import)
+    {
+        $this->button_import = $button_import;
+    }
+
+    /**
+     * @param null $back
+     */
+    public function setBack($back)
+    {
+        $this->back = $back;
     }
 
     function redirect($url) {

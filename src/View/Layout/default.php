@@ -34,8 +34,8 @@
 
     <!-- CSS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="<?php echo WEBROOT; ?>assets/css/vendor.css">
-    <link rel="stylesheet" id="theme-style" href="<?php echo WEBROOT; ?>assets/css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?php echo WEBROOT; ?>assets/css/style.css">
 
     <!-- Favicon
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -43,77 +43,76 @@
 
 </head>
 <body>
-    <div class="main-wrapper">
-        <div class="app" id="app">
-            <header class="header">
-                <div class="header-block header-block-search">
-                    <h3 class="title">
-                        <?php echo $this->getHeadline(); ?>
-                    </h3>
-                </div>
-            </header>
-            <aside class="sidebar">
-                <div class="sidebar-container">
-                    <div class="sidebar-header">
-                        <div class="brand">
-                            <div class="logo">
-                                <span class="l l1"></span>
-                                <span class="l l2"></span>
-                                <span class="l l3"></span>
-                                <span class="l l4"></span>
-                                <span class="l l5"></span>
-                            </div>
-                            Key Manager
-                        </div>
-                    </div>
-                    <nav class="menu">
-                        <ul class="sidebar-menu metismenu" id="sidebar-menu">
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <?php  /**
+                     * Require le fichier de conf du menu
+                     */
+                    $menu = require ROOT. '/config/menu.php';
 
-                            <?php  /**
-                            * Require le fichier de conf du menu
-                            */
-                            $menu = require ROOT. '/config/menu.php';
-
-                            foreach ($menu as $item): ?>
-                                <li>
-                                    <?php if(isset($item["children"])): ?>
-                                        <a href="">
-                                    <?php else: ?>
-                                        <a href="<?php echo $item["route"]; ?>">
-                                    <?php endif; ?>
+                    foreach ($menu as $item): ?>
+                            <li class="nav-item">
+                                <?php if(isset($item["children"])): ?>
+                                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                                    <span>
                                         <?php if(isset($item['icon'])) :  ?>
-                                            <i class="<?php echo $item['icon']; ?>"></i>
+                                            <i class="<?php echo $item['icon']; ?>"></i>&nbsp;
                                         <?php endif; ?>
                                         <?php echo $item['title']; ?>
-                                        <?php if(isset($item["children"])): ?>
-                                            <i class="fa arrow"></i>
-                                        <?php endif; ?>
+                                    </span>
+                                    </h6>
+                                    <ul class="nav flex-column mb-2 px-3">
+                                        <?php foreach ($item['children'] as $child): ?>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="<?php echo WEBROOT . $child['route']; ?>">
+                                                    <?php echo $child['title']; ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <a class="nav-link" href="<?php echo WEBROOT . $item['route']; ?>">
+                                        <h6 class="sidebar-heading d-flex justify-content-between align-items-center mb-1">
+                                            <span>
+                                                <?php if(isset($item['icon'])) :  ?>
+                                                    <i class="<?php echo $item['icon']; ?>"></i>&nbsp;
+                                                <?php endif; ?>
+                                                <?php echo $item['title']; ?>
+                                            </span>
+                                        </h6>
                                     </a>
-                                    <?php if(isset($item['children'])): ?>
-                                        <ul class="sidebar-nav">
-                                            <?php foreach ($item['children'] as $child): ?>
-                                                <?php var_dump($child); ?>
-                                                <li>
-                                                    <a href="items-list.html"> Items List </a>
-                                                </li>
-                                            <?php endforeach; ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </nav>
+                                <?php endif; ?>
+                            </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
+                <h1 class="h2">
+                    <?php if(!is_null($this->back)): ?>
+                        <a href="<?php echo WEBROOT . $this->back; ?>" class="pr-3"><i class="fas fa-angle-left"></i></a>
+                    <?php endif; ?>
+                    <?php echo $this->getHeadline(); ?></h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <?php if(!is_null($this->button_add)): ?>
+                            <a href="<?php echo WEBROOT . $this->button_add; ?>" class="btn btn-sm btn-outline-secondary">Ajouter</a>
+                        <?php endif; ?>
+                        <?php if(!is_null($this->button_import)): ?>
+                            <a href="<?php echo WEBROOT . $this->button_import; ?>" class="btn btn-sm btn-outline-secondary">Importer</a>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </aside>
-            <article class="content dashboard-page">
-                <?php echo $getContent; ?>
-            </article>
-            <footer class="footer">
-            </footer>
-        </div><!-- end #app.app -->
-    </div><!-- end .main-wrapper -->
+            </div>
+            <?php echo $getContent; ?>
+        </main>
+    </div>
+</div>
 </body>
-
 <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
