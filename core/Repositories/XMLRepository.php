@@ -9,13 +9,19 @@
 namespace Core\Repositories;
 
 
+use Core\Utils\Serializer;
+
 class XMLRepository {
 
     /**
      * @var array
      */
     protected $data = array();
+
     protected $entityName;
+    protected $entityNamespace;
+    protected $entityStorage;
+
     protected $primaryKey;
 
     /**
@@ -27,58 +33,26 @@ class XMLRepository {
     public function __construct($entityName) {
 
         $this->entityName = $entityName;
-        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+        $this->entityNamespace = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
+        $this->entityStorage = ROOT .'/data/'. $this->entityName .'.xml';
+        $this->entityPrimaryKey = $this->findPrimaryKey();
 
-        $reflect = new \ReflectionClass($entityName);
+        if (file_exists($this->entityStorage)) {
 
-        foreach($reflect->getProperties() as $reflectionProperty) {
+            $xml = simplexml_load_file($this->entityStorage);
 
-            $re = '/@id/mi';
-            $str = $reflectionProperty->getDocComment();
+            foreach ($xml->children() as $child) {
 
-            if(preg_match($re, $str)) {
-                $this->primaryKey = $reflectionProperty->name;
-            }
-        }
-
-        $path = ROOT .'/data/'. $this->entityName .'.xml';
-
-        if (file_exists($path)) {
-
-            $xml = simplexml_load_file($path);
-            foreach ($xml->children() as $element) {
-
-                $entity = new $entityName();
-
-                $reflect = new \ReflectionClass($entityName);
-
-                foreach($reflect->getProperties() as $reflectionProperty) {
-
-                    $propertyName = $reflectionProperty->name;
-                    $methodName = 'set' . ucfirst($propertyName);
-                    $reflectMethod = $reflect->getMethod($methodName);
-
-                    $methodType = $reflectMethod->getParameters()[0]->getType();
-
-                    if(!is_null($methodType)) {
-
-                            $methodTypeName = $methodType->__toString();
-
-                            $result = $element->$propertyName;
-                            if($methodTypeName == "int") { $result = (int) $result; }
-                            else if($methodTypeName == "float") { $result = (float) $result; }
-                            else if($methodTypeName == "string") { $result = (string) $result; }
-
-                            $entity->$methodName($result);
-
-                    }
-                }
+                $serializer = new Serializer();
+                $entity = $serializer->fromXML($child, $this->entityNamespace);
 
                 array_push($this->data, $entity);
             }
+
         } else {
             throw new \RuntimeException('Echec lors de l\'ouverture du fichier'. $this->entityName .'.xml.');
         }
+
     }
 
     /**
@@ -93,7 +67,7 @@ class XMLRepository {
      */
     public function findById($id) {
 
-        $method = 'get' . ucfirst($this->primaryKey);
+        $method = 'get' . ucfirst($this->entityPrimaryKey);
 
         foreach ($this->data as $entity) {
             if($entity->$method() == $id) {
@@ -131,8 +105,6 @@ class XMLRepository {
      */
     public function create($entities) {
 
-        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
-
         $path = ROOT .'/data/'. $this->entityName .'.xml';
 
         if (file_exists($path)) {
@@ -147,7 +119,7 @@ class XMLRepository {
 
                     $propertyName = $reflectionProperty->name;
 
-                    if($propertyName == $this->primaryKey) {
+                    if($propertyName == $this->entityPrimaryKey) {
                         $value = (int) $xml->children()->count();
                     } else {
                         $methodName = 'get' . ucfirst($propertyName);
@@ -168,8 +140,6 @@ class XMLRepository {
      */
     public function update($entity, $id) {
 
-        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
-
         $path = ROOT .'/data/'. $this->entityName .'.xml';
 
         if (file_exists($path)) {
@@ -177,7 +147,7 @@ class XMLRepository {
             $xml = simplexml_load_file($path);
 
             foreach ($xml->children() as $child) {
-                if ($child->{$this->primaryKey}->__toString() == $id) {
+                if ($child->{$this->entityPrimaryKey}->__toString() == $id) {
                     foreach ($child->children() as $test) {
                         $reflect = new \ReflectionClass($entity);
                         foreach($reflect->getProperties() as $reflectionProperty) {
@@ -199,8 +169,6 @@ class XMLRepository {
      */
     public function delete($id) {
 
-        $entityName = 'App\\Model\\'.ucfirst($this->singular($this->entityName));
-
         $path = ROOT .'/data/'. $this->entityName .'.xml';
 
         if (file_exists($path)) {
@@ -208,7 +176,7 @@ class XMLRepository {
             $xml = simplexml_load_file($path);
 
             foreach ($xml->children() as $child) {
-                if($child->{$this->primaryKey}->__toString() == $id) {
+                if($child->{$this->entityPrimaryKey}->__toString() == $id) {
                     $dom=dom_import_simplexml($child);
                     $dom->parentNode->removeChild($dom);
                 }
@@ -227,10 +195,41 @@ class XMLRepository {
 
         $last = substr($str, -1);
 
-        if($last = 's') {
+        if($last == 's') {
             return substr($str, 0, strlen ($str)-1);
         } else {
             throw new \RuntimeException('Problème de pluriel dans le nom de la table');
         }
     }
+
+    /**
+     * @param $str
+     * @return bool|string
+     */
+    private function plural($str) {
+
+        return $str . 's';
+
+    }
+
+    private function findPrimaryKey() {
+
+        $reflect = new \ReflectionClass($this->entityNamespace);
+
+        foreach($reflect->getProperties() as $reflectionProperty) {
+
+            $regex = '/@Id/mi';
+            $doc = $reflectionProperty->getDocComment();
+
+            if(preg_match($regex, $doc)) {
+                return $reflectionProperty->name;
+            }
+        }
+
+
+
+        throw new \RuntimeException('L\'entité ' . $this->entityName . ' ne possède pas de primaryKey');
+
+    }
+
 }

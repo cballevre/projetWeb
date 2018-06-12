@@ -1,0 +1,15 @@
+<?xml version='1.0' standalone='yes'?>
+<masterKeys>
+    <masterKey>
+        <id>1</id>
+    </masterKey>
+    <masterKey>
+        <id>2</id>
+    </masterKey>
+    <masterKey>
+        <id>3</id>
+    </masterKey>
+    <masterKey>
+        <id>4</id>
+    </masterKey>
+</masterKeys>

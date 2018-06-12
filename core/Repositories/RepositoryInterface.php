@@ -25,25 +25,24 @@ interface RepositoryInterface {
      */
     public function findById($id);
 
-
     /**
      * @param array $param
      * @return mixed
      */
-    public function findBy(array $param);
+    public function findBy($type, $value);
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function create(array $data);
+    public function create(array $entities);
 
     /**
      * @param array $data
      * @param $id
      * @return mixed
      */
-    public function update(array $data, $id);
+    public function update($entity, $id);
 
     /**
      * @param $id

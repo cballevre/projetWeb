@@ -1,72 +1,43 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: cballevre
- * Date: 28/05/2018
- * Time: 00:37
+ * User: alioune
+ * Date: 30/05/2018
+ * Time: 12:29
  */
-
-require '../../Model/DAO/implementationUserDAO_Dummy.php';
-require '../../Model/DAO/implementationKeychainDAO_Dummy.php';
-require '../../Model/Service/implementationBorrowService_Dummy.php';
-require '../../Model/Service/interfaceBorrowService.php';
-require '../../Model/DAO/interfaceUserDAO.php';
-
-$borrowService = implementationBorrowService_Dummy::getInstance();
-//print_r($borrowService->getBorrowings());
-
-
-$userDAO = implementationUserDAO_Dummy::getInstance();
-$keychainDAO = implementationKeychainDAO_Dummy::getInstance();
-
-$users = $userDAO->getUsers();
-$keychains = $keychainDAO->getKeychains();
-
-$tDate = new DateTime;
-$tDate->setTimestamp(time());
-$tDate->modify('+10 day');
-
-$borrowService->borrowKeychain($users[0]->getEnssatPrimaryKey(),$keychains[0]->getId(),$tDate);
-
-//print_r($borrowService->getBorrowings());
-
-echo "1 : ".$borrowService->getBorrowingStatus(1)."\n";
-echo "2 : ".$borrowService->getBorrowingStatus(2)."\n";
-echo "3 : ".$borrowService->getBorrowingStatus(3)."\n";
-echo "4 : ".$borrowService->getBorrowingStatus(4)."\n";
-echo "5 : ".$borrowService->getBorrowingStatus(5)."\n";
-echo "6 : ".$borrowService->getBorrowingStatus(6)."\n";
-echo "7 : ".$borrowService->getBorrowingStatus(7)."\n";
-echo "8 : ".$borrowService->getBorrowingStatus(8)."\n";
-
-
-
-$borrowService->returnKeychain(1,"tout est ok");
-$borrowService->lostKeychain(2,"poil au nez\n");
-
-echo "1 : ".$borrowService->getBorrowingStatus(1)."\n";
-echo "2 : ".$borrowService->getBorrowingStatus(2)."\n";
-echo "3 : ".$borrowService->getBorrowingStatus(3)."\n";
-echo "4 : ".$borrowService->getBorrowingStatus(4)."\n";
-echo "5 : ".$borrowService->getBorrowingStatus(5)."\n";
-echo "6 : ".$borrowService->getBorrowingStatus(6)."\n";
-echo "7 : ".$borrowService->getBorrowingStatus(7)."\n";
-echo "8 : ".$borrowService->getBorrowingStatus(8)."\n";
-
-
-$borrowService->returnKeychain(2,"tout est ok");
-
-echo "1 : ".$borrowService->getBorrowingStatus(1)."\n";
-echo "2 : ".$borrowService->getBorrowingStatus(2)."\n";
-echo "3 : ".$borrowService->getBorrowingStatus(3)."\n";
-echo "4 : ".$borrowService->getBorrowingStatus(4)."\n";
-echo "5 : ".$borrowService->getBorrowingStatus(5)."\n";
-echo "6 : ".$borrowService->getBorrowingStatus(6)."\n";
-echo "7 : ".$borrowService->getBorrowingStatus(7)."\n";
-echo "8 : ".$borrowService->getBorrowingStatus(8)."\n";
-
-
-$borrowService->returnKeychain(8,"tout est ok");
-
 ?>
+
+<section class="section">
+    <a href="/users/add" class="btn btn-primary">Ajouter</a>
+    <a href="/users/import" class="btn btn-secondary">Importer</a>
+</section>
+
+<section class="section">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-block">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Création date</th>
+                            <th scope="col">Destruction date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($keychains as $keychain): ?>
+                            <tr>
+                                <td><?php echo $keychain->getId(); ?></td>
+                                <td><?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s'); ?></td>
+                                <td><?php echo $keychain->getDestructionDate()->format('Y-m-d H:i:s'); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 

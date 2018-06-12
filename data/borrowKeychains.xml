@@ -1,13 +1,15 @@
 <?xml version='1.0' standalone='yes'?>
-<borrowKeyChains>
-    <borrowKeyChain>
-        <idKeyChain>1</idKeyChain>
+<borrowKeychains>
+    <borrowKeychain>
+        <id>1</id>
+        <idKeychain>1</idKeychain>
         <idUser>1</idUser>
         <dateRetour>1272508903</dateRetour>
-    </borrowKeyChain>
+    </borrowKeychain>
     <borrowKeyChain>
-        <idKeyChain>2</idKeyChain>
+        <id>2</id>
+        <idKeychain>2</idKeychain>
         <idUser>1</idUser>
         <dateRetour>1282508903</dateRetour>
     </borrowKeyChain>
-</borrowKeyChains>
+</borrowKeychains>

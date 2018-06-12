@@ -14,8 +14,6 @@ class PagesController extends AppController
 
     public function dashboard() {
 
-
-
         $var = array(
             "message" => "test dashboard"
         );

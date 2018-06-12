@@ -18,3 +18,4 @@ header('Content-Type: text/html; charset=utf-8');
  */
 require __DIR__ . '/paths.php';
 
+date_default_timezone_set('UTC');

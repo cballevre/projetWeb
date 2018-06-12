@@ -20,6 +20,8 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $users = $model->findAll();
 
+        var_dump($users);
+
         $this->setHeadline("Utilisateurs");
         $this->setButtonAdd('?controller=users&action=store');
         $this->setButtonImport('?controller=users&action=import');
@@ -77,6 +79,8 @@ class UsersController extends AppController
             $user->setPhone($this->request->data->phone);
             $user->setStatus($this->request->data->status);
             $user->setEmail($this->request->data->email);
+
+
 
             $model = RepositoryFactory::getRepository('users');
             $model->update($user, $id);

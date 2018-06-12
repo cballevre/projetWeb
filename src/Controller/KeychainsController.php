@@ -9,10 +9,18 @@
 
 namespace App\Controller;
 
+use Core\Repositories\RepositoryFactory;
+
 class KeychainsController extends AppController
 {
 
-    public function home() {
+    public function index(){
+
+        $model = RepositoryFactory::getRepository('keychains');
+        $keychains = $model->findAll();
+
+        $this->setHeadline("Tous les trousseaux");
+        $this->set(compact('keychains'));
         $this->render('index');
     }
 
