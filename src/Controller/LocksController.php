@@ -1,15 +1,15 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: cballevre
- * Date: 27/05/2018
- * Time: 22:47
+ * Date: 12/06/2018
+ * Time: 17:32
  */
 
 namespace App\Controller;
 
-class PassesController extends AppController
+
+class LocksController extends AppController
 {
 
 }
