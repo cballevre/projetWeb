@@ -14,10 +14,6 @@ use Core\Repositories\RepositoryFactory;
 class KeychainsController extends AppController
 {
 
-//    public function home() {
-//        $this->render('index');
-//    }
-
     public function index(){
 
         $model = RepositoryFactory::getRepository('keychains');
