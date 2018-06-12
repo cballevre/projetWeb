@@ -11,6 +11,7 @@ namespace App\Model;
 
 class DoorAccess
 {
+    /** @Id */
     protected $id;
     protected $idUser;
     protected $idRoom;

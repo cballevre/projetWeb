@@ -4,6 +4,7 @@ namespace App\Model;
 
 class Provider
 {
+    /** @Id */
     protected $id;
     protected $username;
     protected $name;
