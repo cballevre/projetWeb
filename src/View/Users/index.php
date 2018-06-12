@@ -7,7 +7,6 @@
  */
 ?>
 
-<section class="section">
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -45,7 +44,7 @@
                                 <i class="fas fa-trash"></i>
                                 </a>
                             </td>
-                        </tr>
+                        </tr>            
                     <?php endforeach; ?>
                 </tbody>
             </table>
