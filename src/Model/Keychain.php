@@ -29,6 +29,8 @@ class Keychain
      */
     protected $masterKeys;
 
+    protected $borrowKeychains;
+
     public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
@@ -43,5 +45,8 @@ class Keychain
 
     public function getMasterKeys() { return $this->masterKeys; }
     public function setMasterKeys($masterKeys) { $this->masterKeys = $masterKeys; }
+
+    public function getBorrowKeychains() { return $this->borrowKeychains; }
+    public function setBorrowKeychains($borrowKeychains) { $this->borrowKeychains = $borrowKeychains; }
 
 }

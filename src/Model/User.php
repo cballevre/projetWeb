@@ -24,7 +24,14 @@ class User
      * @Domaine(Etudiant, Exterieur, personnel)
      */
     protected $status;
+
     protected $email;
+
+    /**
+     * One User has Many BorrowKeychains.
+     * @OneToMany(targetEntity="BorrowKeychain", mappedBy="user")
+     */
+    protected $borrowKeychains;
 
     public function setUr1Identifier(string $id) { $this->ur1identifier = $id; }
     public function getUr1Identifier() { return $this->ur1identifier; }
@@ -49,4 +56,15 @@ class User
 
     public function setEmail(string $email) { $this->email = $email; }
     public function getEmail() { return $this->email; }
+
+    public function getBorrowKeychains()
+    {
+        return $this->borrowKeychains;
+    }
+    public function setBorrowKeychains($borrowKeychains)
+    {
+        $this->borrowKeychains = $borrowKeychains;
+    }
+
+
 }

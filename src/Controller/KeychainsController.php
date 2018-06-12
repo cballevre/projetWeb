@@ -9,8 +9,6 @@
 
 namespace App\Controller;
 
-
-
 use Core\Repositories\RepositoryFactory;
 
 class KeychainsController extends AppController
@@ -24,8 +22,6 @@ class KeychainsController extends AppController
 
         $model = RepositoryFactory::getRepository('keychains');
         $keychains = $model->findAll();
-
-        var_dump($keychains);
 
         $this->setHeadline("Tous les trousseaux");
         $this->set(compact('keychains'));

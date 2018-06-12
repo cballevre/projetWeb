@@ -243,7 +243,8 @@ class XMLRepository {
     private function makeAssociation($entity) {
 
         $regex_expression = '/@([a-zA-Z\(\)="\',]*)/m';
-        $regex_association = '/([a-zA-Z]*)\(targetEntity="([a-zA-Z]*)",mappedBy="([a-zA-Z]*)"\)/m';
+        $regex_association = '/([a-zA-Z]*)\((?:[a-zA-Z]*)="([a-zA-Z]*)",(?:[a-zA-Z]*)="([a-zA-Z]*)"\)
+/xm';
 
         $reflect = new \ReflectionClass($entity);
 
@@ -259,26 +260,40 @@ class XMLRepository {
                 preg_match_all($regex_expression, $reflectionPropertyDoc, $expressions, PREG_SET_ORDER, 0);
 
                 foreach ($expressions as $expression) {
+
                     preg_match_all($regex_association, $expression[0], $params, PREG_SET_ORDER, 0);
+
                     if(!empty($params)) {
 
                         $associationType = $params[0][1];
                         $associationEntity = $params[0][2];
                         $associationMappedBy= $params[0][3];
 
-                        $associationRepository = RepositoryFactory::getRepository($associationMappedBy);
-
                         $associationResults = array();
 
                         switch ($associationType) {
 
                             case 'OneToMany':
+
+                                $associationRepository = RepositoryFactory::getRepository(lcfirst($this->plural($associationEntity)));
                                 $associationResults = $associationRepository->findBy('id'. ucfirst($this->singular($this->entityName)), $entity->{'get'.ucfirst($this->entityPrimaryKey)}());
+
+                                $entity->$methodName($associationResults);
+
                             break;
                             case 'ManyToOne':
+                                /*
+                                $associationRepository = RepositoryFactory::getRepository(lcfirst($this->plural($associationEntity)));
+
+                                preg_match_all($regex_association, $expressions[1][1], $joinColumns, PREG_SET_ORDER, 0);
+
+                                if(!empty($joinColumns)) {
+                                    var_dump($joinColumns);
+                                } */
+
                                 break;
                             case 'ManyToMany':
-
+                                $associationRepository = RepositoryFactory::getRepository($associationMappedBy);
                                 $associationResults = $associationRepository->findBy('id'. ucfirst($this->singular($this->entityName)), $entity->{'get'.ucfirst($this->entityPrimaryKey)}());
                                 $associationEntityRepository = RepositoryFactory::getRepository($associationEntity);
 
