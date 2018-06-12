@@ -4,6 +4,7 @@ namespace App\Model;
 
 class Lock
 {
+    /** @Id */
     protected $id;
     protected $length;
 
