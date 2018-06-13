@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\Door;
+use App\Model\RoomDoor;
 use Core\Repositories\RepositoryFactory;
 
 class DoorsController extends AppController
@@ -18,13 +19,16 @@ class DoorsController extends AppController
 
         $model = RepositoryFactory::getRepository('doors');
         $doors = $model->findAll();
+
+        $roomDoor = new RoomDoor();
+        var_dump($roomDoor->doors(1));
         
         $this->setHeadline("Portes");
         $this->setButtonAdd('?controller=doors&action=store');
         $this->setButtonImport('?controller=doors&action=import');
         $this->set(compact('doors'));
         $this->render('index');
-        
+
     }
 
     public function store() {
@@ -74,4 +78,5 @@ class DoorsController extends AppController
 
         $this->redirect(WEBROOT . "?controller=doors&action=index");
     }
+
 }
