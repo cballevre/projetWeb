@@ -21,6 +21,8 @@ class KeychainsController extends AppController
         $keychains = $model->findAll();
 
         $this->setHeadline("Tous les trousseaux");
+        $this->setButtonAdd('?controller=keychains&action=store');
+        $this->setButtonImport('?controller=keychains&action=import');
         $this->set(compact('keychains'));
         $this->render('index');
     }

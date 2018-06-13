@@ -30,14 +30,14 @@ class Dispatcher
         try {
             $controller = $this->loadController($this->request->controller, $this->request);
         } catch (\RuntimeException $e) {
-            $controller = $this->loadController("pages");
+            $controller = $this->loadController("pages", $this->request);
             $this->loadAction("error404", $controller);
         } finally {
             try {
                 $this->loadAction($this->request->action, $controller, $this->request->params);
             } catch (\RuntimeException $e) {
                 if($this->request->controller != 'pages') {
-                    $controller = $this->loadController("pages");
+                    $controller = $this->loadController("pages", $this->request);
                 }
                 $this->loadAction("error404", $controller);
             }

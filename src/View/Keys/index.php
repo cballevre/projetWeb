@@ -7,34 +7,44 @@
  */
 ?>
 
-<section class="section">
-    <a href="/users/add" class="btn btn-primary">Ajouter</a>
-    <a href="/users/import" class="btn btn-secondary">Importer</a>
-</section>
-
-<section class="section">
+<section>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <table class="table">
+            <table class="table table-striped">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Type clé</th>
+                            <th scope="col">État</th>
+                            <th scope="col">Nombre de commande</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->var as $key): ?>
+                        <?php foreach ($keys as $key): ?>
                             <tr>
-                                <td><?php echo $key->getId(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
+                                        <?php echo $key->getId(); ?>
+                                    </a>
+                                </td>
                                 <td><?php echo $key->getType(); ?></td>
+                                <td><?php echo $key->getEtat(); ?></td>
+                                <td><?php echo $key->getNbCommande(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=keys&action=update&id=<?php echo $key->getId(); ?>"">
+                                        <i class="fas fa-edit"></i>
+                                    </a>&nbsp;
+                                    <a href="<?php echo WEBROOT; ?>?controller=keys&action=destroy&id=<?php echo $key->getId(); ?>"">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
-                    </table>
-                </div>
-            </div>
+            </table>
         </div>
     </div>
 </section>
+
+

@@ -17,10 +17,31 @@ class BorrowKeychainsController extends AppController
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychains = $model->findAll();
 
-        var_dump($borrowKeychains);
-
         $this->setHeadline("Tous les emprunts");
+        $this->setButtonAdd('?controller=borrowKeychains&action=store');
         $this->set(compact('borrowKeychains'));
         $this->render('index');
+    }
+
+    public function single() {
+
+        // TODO
+    }
+
+    public function store() {
+
+        // TODO
+    }
+
+    public function update() {
+
+        // TODO
+
+    }
+
+    public function destroy() {
+
+        // TODO
+
     }
 }

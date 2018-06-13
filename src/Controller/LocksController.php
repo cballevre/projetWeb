@@ -9,7 +9,34 @@
 namespace App\Controller;
 
 
-class LocksController extends AppController
-{
+class LocksController extends AppController {
+
+    public function index() {
+
+        // TODO
+
+    }
+
+    public function single() {
+
+        // TODO
+    }
+
+    public function store() {
+
+        // TODO
+    }
+
+    public function update() {
+
+        // TODO
+
+    }
+
+    public function destroy() {
+
+        // TODO
+
+    }
 
 }
