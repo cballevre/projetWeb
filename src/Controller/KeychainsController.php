@@ -33,26 +33,37 @@ class KeychainsController extends AppController
         $keychain = $model->findById($id);
 
         $this->setHeadline($keychain->getId());
-        $this->set(compact('keychains'));
+        $this->setBack('?controller=keychains&action=index');
+        $this->set(compact('keychain'));
         $this->render('single');
 
     }
 
     public function store() {
 
+
+
         if(!empty($this->request->data)) {
+
+
 
             $keychain = new Keychain();
             $keychain->setCreationDate($this->request->data->creationDate);
             $keychain->setDestructionDate($this->request->data->destructionDate);
 
+//            var_dump($keychain);
+
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
-            $this->redirect("/?controller=keychains&action=index");
+//            var_dump($keychain);
+//
+//            die();
+            $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
             $this->setHeadline("Ajouter un trousseau");
+            $this->setBack('?controller=keychains&action=index');
             $this->render('store');
         }
     }
@@ -72,13 +83,25 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->update($keychain, $id);
 
-            $this->redirect("/?controller=keychains&action=index");
+            $this->redirect(WEBROOT. "?controller=keychains&action=index");
 
         } else {
             $this->setHeadline("Modifier un trousseau");
-            $this->set(compact('keychains'));
+            $this->setBack('/?controller=keychains&action=index');
+            $this->set(compact('keychain'));
             $this->render('update');
         }
+
+    }
+    public function destroy($id) {
+
+        $model = RepositoryFactory::getRepository('keychains');
+        $model->delete($id);
+
+        $this->redirect(WEBROOT."?controller=keychains&action=index");
+    }
+
+    public function import() {
 
     }
 

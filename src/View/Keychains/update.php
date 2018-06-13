@@ -12,12 +12,12 @@
         <div class="form-group row">
             <label class="col-sm-2 form-control-label text-xs-right"> Modifier Date : </label>
             <div class="col-sm-10">
-                <input type="date" name="creationDate" class="form-control boxed" placeholder="" value="<?php echo $keychain->getCreationDate();?>"> </div>
+                <input type="date" name="creationDate" class="form-control boxed" placeholder="" value="<?php echo $keychain->getCreationDate()->format('Y-m-d');?>"> </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 form-control-label text-xs-right"> Destruction Date : </label>
             <div class="col-sm-10">
-                <input type="date" name="destructionDate" class="form-control boxed" placeholder="" value="<?php echo $keychain->getDestructionDate();?>"> </div>
+                <input type="date" name="destructionDate" class="form-control boxed" placeholder="" value="<?php echo $keychain->getDestructionDate()->format('Y-m-d');?>"> </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-10 col-sm-offset-2">
