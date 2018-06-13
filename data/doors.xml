@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <doors>
     <door>
         <id>1</id>
@@ -6,11 +6,11 @@
     </door>
     <door>
         <id>2</id>
-        <idLock>1</idLock>
+        <idLock>2</idLock>
     </door>
     <door>
         <id>3</id>
-        <idLock>4</idLock>
+        <idLock>6</idLock>
     </door>
 
-</doors>
+<door><id>4</id><idLock>1</idLock></door></doors>

@@ -20,6 +20,8 @@ class DoorsController extends AppController
         $doors = $model->findAll();
         
         $this->setHeadline("Portes");
+        $this->setButtonAdd('?controller=doors&action=store');
+        $this->setButtonImport('?controller=doors&action=import');
         $this->set(compact('doors'));
         $this->render('index');
         
