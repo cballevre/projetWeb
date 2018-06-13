@@ -20,8 +20,6 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $users = $model->findAll();
 
-        var_dump($users);
-
         $this->setHeadline("Utilisateurs");
         $this->setButtonAdd('?controller=users&action=store');
         $this->setButtonImport('?controller=users&action=import');

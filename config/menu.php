@@ -23,7 +23,7 @@ return array(
             ),
             array(
                 'title' => 'Ajouter',
-                'route' => '?controller=borrowKeychains&action=add'
+                'route' => '?controller=borrowKeychains&action=store'
             )
         )
     ),
@@ -37,7 +37,7 @@ return array(
             ),
             array(
                 'title' => 'Ajouter',
-                'route' => '?controller=users&action=add'
+                'route' => '?controller=users&action=store'
             )
         )
     ),
@@ -51,15 +51,11 @@ return array(
             ),
             array(
                 'title' => 'Ajouter',
-                'route' => '?controller=keys&action=add'
+                'route' => '?controller=keys&action=store'
             ),
             array(
                 'title' => 'Trousseaux',
                 'route' => '?controller=keychains&action=index'
-            ),
-            array(
-                'title' => 'Barrilet',
-                'route' => '?controller=locks&action=index'
             )
         )
     ),
@@ -69,11 +65,15 @@ return array(
         'children' => array(
             array(
                 'title' => 'Toutes les portes',
-                'route' => '?controller=borrowKeychains&action=index'
+                'route' => '?controller=doors&action=index'
             ),
             array(
                 'title' => 'Ajouter',
-                'route' => '?controller=borrowKeychains&action=add'
+                'route' => '?controller=doors&action=store'
+            ),
+            array(
+                'title' => 'Barrilet',
+                'route' => '?controller=locks&action=index'
             ),
             array(
                 'title' => 'Pièces',

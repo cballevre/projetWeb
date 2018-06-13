@@ -22,6 +22,8 @@ class KeysController extends AppController
         var_dump($keys);
 
         $this->setHeadline("Clés");
+        $this->setButtonAdd('?controller=keys&action=store');
+        $this->setButtonImport('?controller=keys&action=import');
         $this->set(compact('keys'));
         $this->render('index');
 

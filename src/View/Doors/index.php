@@ -7,16 +7,11 @@
  */
 ?>
 
-<section class="section">
-    <a href="<?php echo WEBROOT; ?>?controller=doors&action=store" class="btn btn-primary">Ajouter</a>
-</section>
-<section class="section">
+<section>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-block">
-                    <table class="table">
-                        <thead>
+            <table class="table table-striped">
+                <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Id du barillet</th>
@@ -39,9 +34,7 @@
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
-                    </table>
-                </div>
-            </div>
+            </table>
         </div>
     </div>
 </section>
