@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\Room;
+use App\Model\RoomDoor;
 use Core\Repositories\RepositoryFactory;
 
 class RoomsController extends AppController
@@ -34,8 +35,22 @@ class RoomsController extends AppController
         $model = RepositoryFactory::getRepository('rooms');
         $room = $model->findById($id);
 
+        $roomDoors = new RoomDoor();
+        $roomDoorsSelected = $roomDoors->doors($room->getId());
+
+        $doors = array();
+        $modelDoors = RepositoryFactory::getRepository('doors');
+        foreach($roomDoorsSelected as $roomDoorSelected){
+            array_push($doors,$modelDoors->findById($roomDoorSelected->getIdRoom()));
+        }
+        $array = array(
+            'doors' => $doors,
+            'room'  => $room
+        );
+
         $this->setHeadline($room->getRoomName());
-        $this->set(compact('room'));
+        $this->setBack('?controller=rooms&action=index');
+        $this->set(compact('array'));
         $this->render('single');
 
     }
