@@ -48,7 +48,7 @@ class RoomsController extends AppController
             'room'  => $room
         );
 
-        $this->setHeadline($room->getRoomName());
+        $this->setHeadline("Salle " . $room->getRoomName());
         $this->setBack('?controller=rooms&action=index');
         $this->set(compact('array'));
         $this->render('single');
@@ -67,10 +67,10 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->create(array($room));
 
-            $this->redirect("/?controller=rooms&action=index");
+            $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un utilisateur");
+            $this->setHeadline("Ajouter une porte");
             $this->render('store');
         }
     }
@@ -89,7 +89,7 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->update($room, $id);
 
-            $this->redirect("/?controller=rooms&action=index");
+            $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
             $this->setHeadline("Modifier une pièce");
@@ -104,7 +104,7 @@ class RoomsController extends AppController
         $model = RepositoryFactory::getRepository('rooms');
         $model->delete($id);
 
-        $this->redirect("</?controller=rooms&action=index");
+        $this->redirect(WEBROOT . "?controller=rooms&action=index");
     }
 
     public function import() {

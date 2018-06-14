@@ -8,6 +8,8 @@
 $room = $array['room'];
 $doors = $array['doors'];
 ?>
+<h5>Etage : <?php echo $room->getFloor(); ?> </h5>
+<h5>Bâtiment : <?php echo $room->getBuilding(); ?> </h5>
 <section>
     <h4>Portes associées</h4>
     <div class="row">

@@ -12,6 +12,7 @@ $rooms = $array['rooms'];
 $door = $array['door'];
 
 ?>
+<h5>Barillet : <?php echo $door->getIdLock(); ?> </h5>
 <section>
     <h4>Salles associées</h4>
     <div class="row">
