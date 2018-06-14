@@ -8,6 +8,8 @@
 $room = $array['room'];
 $doors = $array['doors'];
 ?>
+<h5>Etage : <?php echo $room->getFloor(); ?> </h5>
+<h5>Bâtiment : <?php echo $room->getBuilding(); ?> </h5>
 <section>
     <h4>Portes associées</h4>
     <div class="row">
@@ -27,11 +29,20 @@ $doors = $array['doors'];
                                         <?php echo $door->getId(); ?>
                                     </a>
                                 </td>
-                                <td><?php echo $door->getIdLock(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+                                        <?php echo $door->getIdLock(); ?>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
-                        </tbody>
+                    </tbody>
             </table>
+            <div class="col-sm-10 col-sm-offset-2">
+                <a href="<?php echo WEBROOT; ?>?controller=rooms&action=linkDoor&id=<?php echo $room->getId(); ?>">
+                    <button class="btn btn-primary"> Ajouter porte </button>
+                </a>
+            </div>
         </div>
     </div>
 </section>

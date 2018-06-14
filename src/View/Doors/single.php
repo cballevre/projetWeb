@@ -12,6 +12,12 @@ $rooms = $array['rooms'];
 $door = $array['door'];
 
 ?>
+<h5>Barillet :  
+    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+        <?php echo $door->getIdLock(); ?>
+    </a>
+</h5>
+
 <section>
     <h4>Salles associées</h4>
     <div class="row">
