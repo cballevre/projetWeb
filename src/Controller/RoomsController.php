@@ -41,14 +41,14 @@ class RoomsController extends AppController
         $doors = array();
         $modelDoors = RepositoryFactory::getRepository('doors');
         foreach($roomDoorsSelected as $roomDoorSelected){
-            array_push($doors,$modelDoors->findById($roomDoorSelected->getIdRoom()));
+            array_push($doors,$modelDoors->findById($roomDoorSelected->getIdDoor()));
         }
         $array = array(
             'doors' => $doors,
             'room'  => $room
         );
 
-        $this->setHeadline($room->getRoomName());
+        $this->setHeadline("Salle " . $room->getRoomName());
         $this->setBack('?controller=rooms&action=index');
         $this->set(compact('array'));
         $this->render('single');
@@ -67,10 +67,10 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->create(array($room));
 
-            $this->redirect("/?controller=rooms&action=index");
+            $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un utilisateur");
+            $this->setHeadline("Ajouter une porte");
             $this->render('store');
         }
     }
@@ -89,7 +89,7 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->update($room, $id);
 
-            $this->redirect("/?controller=rooms&action=index");
+            $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
             $this->setHeadline("Modifier une pièce");
@@ -104,11 +104,52 @@ class RoomsController extends AppController
         $model = RepositoryFactory::getRepository('rooms');
         $model->delete($id);
 
-        $this->redirect("</?controller=rooms&action=index");
+        $this->redirect(WEBROOT . "?controller=rooms&action=index");
+    }
+
+    public function destroyLink($id) {
+
+        //TODO
+
+        $model = RepositoryFactory::getRepository('roomDoors');
+        $model->delete($id);
+
+        $this->redirect(WEBROOT . "?controller=rooms&action=index");
     }
 
     public function import() {
 
+    }
+
+    public function linkDoor($id) {
+        $model = RepositoryFactory::getRepository('rooms');
+        $room = $model->findById($id);
+
+        if(!empty($this->request->data)) {
+            
+            $roomDoors = new RoomDoor();
+
+            $roomDoors->setIdDoor($this->request->data->idDoor);
+            $roomDoors->setIdRoom($this->request->data->idRoom);
+
+            $model = RepositoryFactory::getRepository('roomDoors');
+            $model->create(array($roomDoors));
+
+            $this->redirect(WEBROOT . "?controller=rooms&action=single&id=" . $room->getId());
+
+        } else {
+            $model = RepositoryFactory::getRepository('doors');
+            $doors = $model->findAll();
+
+            $array = array(
+                'room'  => $room,
+                'doors' => $doors
+            );
+
+            $this->setHeadline("Associer une porte à la salle : " . $room->getRoomName());
+            $this->set(compact('array'));
+            $this->render('linkDoor');
+        }
     }
 
 }

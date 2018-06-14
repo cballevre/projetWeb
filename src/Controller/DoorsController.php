@@ -62,9 +62,12 @@ class DoorsController extends AppController
             $model->create(array($door));
 
             $this->redirect(WEBROOT . "?controller=doors&action=index");
-
         } else {
+            $model = RepositoryFactory::getRepository('locks');
+            $locks = $model->findAll();
+
             $this->setHeadline("Ajouter une porte");
+            $this->set(compact('locks'));
             $this->render('store');
         }
     }
@@ -84,8 +87,16 @@ class DoorsController extends AppController
             $this->redirect(WEBROOT . "?controller=doors&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('locks');
+            $locks = $model->findAll();
+
+            $array = array(
+                'door'  => $door,
+                'locks' => $locks
+            );
+
             $this->setHeadline("Modifier une porte");
-            $this->set(compact('door'));
+            $this->set(compact('array'));
             $this->render('update');
         }
 
