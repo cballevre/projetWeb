@@ -20,15 +20,35 @@ class DoorsController extends AppController
         $model = RepositoryFactory::getRepository('doors');
         $doors = $model->findAll();
 
-        $roomDoor = new RoomDoor();
-        var_dump($roomDoor->doors(1));
-        
         $this->setHeadline("Portes");
         $this->setButtonAdd('?controller=doors&action=store');
         $this->setButtonImport('?controller=doors&action=import');
         $this->set(compact('doors'));
         $this->render('index');
 
+    }
+
+    public function single($id) {
+        $model = RepositoryFactory::getRepository('doors');
+        $door = $model->findById($id);
+
+        $roomDoors = new RoomDoor();
+        $roomDoorsSelected = $roomDoors->rooms($door->getId());
+
+        $rooms = array();
+        $modelRooms = RepositoryFactory::getRepository('rooms');
+        foreach($roomDoorsSelected as $roomDoorSelected){
+            array_push($rooms,$modelRooms->findById($roomDoorSelected->getIdRoom()));
+        }
+        $array = array(
+            'rooms' => $rooms,
+            'door'  => $door
+        );
+
+        $this->setHeadline("Porte " . $door->getId());
+        $this->setBack('?controller=doors&action=index');
+        $this->set(compact('array'));
+        $this->render('single');
     }
 
     public function store() {

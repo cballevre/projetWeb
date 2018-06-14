@@ -13,8 +13,13 @@ use Core\Repositories\RepositoryFactory;
 
 class RoomDoor
 {
+    /** @Id */
+    protected $id;
     protected $idDoor;
     protected $idRoom;
+
+    public function setId(int $id) { $this->id = $id; }
+    public function getId() { return $this->id; }
 
     public function setIdDoor(int $idDoor) { $this->idDoor = $idDoor; }
     public function getIdDoor() { return $this->idDoor; }
@@ -29,10 +34,7 @@ class RoomDoor
 
     public function doors($id){
         $model = RepositoryFactory::getRepository('roomDoors');
-        var_dump($model);
-        var_dump('AZEAZE');
-        //var_dump($model->findBy('idRoom', $id));
-        //return $model->findBy('idRoom', $id);
+        $model->findBy('idRoom', $id);
     }
 
 }
