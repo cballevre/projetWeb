@@ -29,7 +29,11 @@ $doors = $array['doors'];
                                         <?php echo $door->getId(); ?>
                                     </a>
                                 </td>
-                                <td><?php echo $door->getIdLock(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+                                        <?php echo $door->getIdLock(); ?>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

@@ -17,13 +17,17 @@ $lock = $array['lock'];
             <table class="table table-striped">
                 <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Numéro</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php foreach ($doors as $door): ?>
                             <tr>
-                                <td><?php echo $door->getId(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(); ?>">
+                                        <?php echo $door->getId(); ?>
+                                    </a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
