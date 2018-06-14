@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\Door;
+use App\Model\RoomDoor;
 use Core\Repositories\RepositoryFactory;
 
 class DoorsController extends AppController
@@ -18,13 +19,36 @@ class DoorsController extends AppController
 
         $model = RepositoryFactory::getRepository('doors');
         $doors = $model->findAll();
-        
+
         $this->setHeadline("Portes");
         $this->setButtonAdd('?controller=doors&action=store');
         $this->setButtonImport('?controller=doors&action=import');
         $this->set(compact('doors'));
         $this->render('index');
-        
+
+    }
+
+    public function single($id) {
+        $model = RepositoryFactory::getRepository('doors');
+        $door = $model->findById($id);
+
+        $roomDoors = new RoomDoor();
+        $roomDoorsSelected = $roomDoors->rooms($door->getId());
+
+        $rooms = array();
+        $modelRooms = RepositoryFactory::getRepository('rooms');
+        foreach($roomDoorsSelected as $roomDoorSelected){
+            array_push($rooms,$modelRooms->findById($roomDoorSelected->getIdRoom()));
+        }
+        $array = array(
+            'rooms' => $rooms,
+            'door'  => $door
+        );
+
+        $this->setHeadline("Porte " . $door->getId());
+        $this->setBack('?controller=doors&action=index');
+        $this->set(compact('array'));
+        $this->render('single');
     }
 
     public function store() {
@@ -74,4 +98,5 @@ class DoorsController extends AppController
 
         $this->redirect(WEBROOT . "?controller=doors&action=index");
     }
+
 }
