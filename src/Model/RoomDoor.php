@@ -34,7 +34,7 @@ class RoomDoor
 
     public function doors($id){
         $model = RepositoryFactory::getRepository('roomDoors');
-        $model->findBy('idRoom', $id);
+        return $model->findBy('idRoom', $id);
     }
 
 }

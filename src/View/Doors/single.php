@@ -23,7 +23,6 @@ $door = $array['door'];
                         <th scope="col">Salle</th>
                         <th scope="col">Étage</th>
                         <th scope="col">Bâtiment</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,14 +36,6 @@ $door = $array['door'];
                         </td>
                         <td><?php echo $room->getFloor(); ?></td>
                         <td><?php echo $room->getBuilding(); ?></td>
-                        <td>
-                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=update&id=<?php echo $room->getId(); ?>"">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=destroy&id=<?php echo $room->getId(); ?>"">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
