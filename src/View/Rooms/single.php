@@ -36,8 +36,13 @@ $doors = $array['doors'];
                                 </td>
                             </tr>
                         <?php endforeach; ?>
-                        </tbody>
+                    </tbody>
             </table>
+            <div class="col-sm-10 col-sm-offset-2">
+                <a href="<?php echo WEBROOT; ?>?controller=rooms&action=linkDoor&id=<?php echo $room->getId(); ?>">
+                    <button class="btn btn-primary"> Ajouter porte </button>
+                </a>
+            </div>
         </div>
     </div>
 </section>
