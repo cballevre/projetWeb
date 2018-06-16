@@ -72,7 +72,7 @@ return array(
                 'route' => '?controller=doors&action=store'
             ),
             array(
-                'title' => 'Barrilet',
+                'title' => 'Barillet',
                 'route' => '?controller=locks&action=index'
             ),
             array(

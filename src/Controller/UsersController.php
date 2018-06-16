@@ -34,7 +34,7 @@ class UsersController extends AppController
         $user = $model->findById($id);
 
         $this->setHeadline($user->getSurname() . ' ' . $user->getName());
-        $this->setBack('?controller=users&action=index');
+        $this->setBack(WEBROOT . '?controller=users&action=index');
         $this->set(compact('user'));
         $this->render('single');
 

@@ -53,7 +53,7 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->create(array($key));
 
-            $this->redirect("/?controller=keys&action=index");
+            $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
             $this->setHeadline("Ajouter une clé");
@@ -75,7 +75,7 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->update($key, $id);
 
-            $this->redirect("/?controller=keys&action=index");
+            $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
             $this->setHeadline("Modifier une clé");
@@ -90,7 +90,7 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $model->delete($id);
 
-        $this->redirect("/?controller=keys&action=index");
+        $this->redirect(WEBROOT . "?controller=keys&action=index");
     }
 
     public function import() {
