@@ -68,15 +68,11 @@ return array(
                 'route' => '?controller=doors&action=index'
             ),
             array(
-                'title' => 'Ajouter',
-                'route' => '?controller=doors&action=store'
-            ),
-            array(
-                'title' => 'Barillet',
+                'title' => 'Tous les barrilets',
                 'route' => '?controller=locks&action=index'
             ),
             array(
-                'title' => 'Pièces',
+                'title' => 'Toutes les salles',
                 'route' => '?controller=rooms&action=index'
             )
         )

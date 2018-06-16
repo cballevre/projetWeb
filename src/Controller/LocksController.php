@@ -9,7 +9,9 @@
 namespace App\Controller;
 
 use App\Model\Lock;
+
 use Core\Repositories\RepositoryFactory;
+use App\Model\Door;
 
 class LocksController extends AppController {
 
@@ -17,8 +19,6 @@ class LocksController extends AppController {
 
         $model = RepositoryFactory::getRepository('locks');
         $locks = $model->findAll();
-
-        var_dump($locks);
 
         $this->setHeadline("Barillets");
         $this->setButtonAdd('?controller=locks&action=store');
@@ -33,8 +33,17 @@ class LocksController extends AppController {
         $model = RepositoryFactory::getRepository('locks');
         $lock = $model->findById($id);
 
-        $this->setHeadline('Barillet '.$lock->getId());
-        $this->set(compact('lock'));
+        $modelDoors = RepositoryFactory::getRepository('doors');
+        $doors = $modelDoors->findBy('idLock',$id);
+
+        $array = array(
+            'lock' => $lock,
+            'doors'  => $doors
+        );
+
+        $this->setHeadline("Barillet " . $id);
+        $this->setBack('?controller=locks&action=index');
+        $this->set(compact('array'));
         $this->render('single');
 
     }
@@ -55,6 +64,7 @@ class LocksController extends AppController {
             $this->setHeadline("Ajouter un barillet");
             $this->render('store');
         }
+
     }
 
     public function update($id) {
@@ -63,15 +73,14 @@ class LocksController extends AppController {
         $lock = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            $lock->setLength($this->request->data->length);
 
-            $model = RepositoryFactory::getRepository('locks');
+            $lock->setLength($this->request->data->length);
             $model->update($lock, $id);
 
             $this->redirect(WEBROOT . "?controller=locks&action=index");
 
         } else {
-            $this->setHeadline("Modifier une clé");
+            $this->setHeadline("Modifier un barillet");
             $this->set(compact('lock'));
             $this->render('update');
         }
@@ -84,9 +93,6 @@ class LocksController extends AppController {
         $model->delete($id);
 
         $this->redirect(WEBROOT . "?controller=locks&action=index");
-    }
-
-    public function import() {
 
     }
 

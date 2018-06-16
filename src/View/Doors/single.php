@@ -1,12 +1,25 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: aymeric
+ * User: jcarfantan
  * Date: 12/06/18
- * Time: 17:52
- */?>
+ * Time: 17:12
+ */
+?>
+<?php
+
+$rooms = $array['rooms'];
+$door = $array['door'];
+
+?>
+<h5>Barillet :  
+    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+        <?php echo $door->getIdLock(); ?>
+    </a>
+</h5>
 
 <section>
+    <h4>Salles associées</h4>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -16,7 +29,6 @@
                         <th scope="col">Salle</th>
                         <th scope="col">Étage</th>
                         <th scope="col">Bâtiment</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,14 +42,6 @@
                         </td>
                         <td><?php echo $room->getFloor(); ?></td>
                         <td><?php echo $room->getBuilding(); ?></td>
-                        <td>
-                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=update&id=<?php echo $room->getId(); ?>">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=destroy&id=<?php echo $room->getId(); ?>">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

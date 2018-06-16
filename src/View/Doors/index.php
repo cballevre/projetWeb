@@ -21,8 +21,15 @@
                         <tbody>
                         <?php foreach ($doors as $door): ?>
                             <tr>
-                                <td><?php echo $door->getId(); ?></td>
-                                <td><?php echo $door->getIdLock(); ?></td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(); ?>">
+                                        <?php echo $door->getId(); ?>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+                                        <?php echo $door->getIdLock(); ?>
+                                    </a>
                                 <td>
                                     <a href="<?php echo WEBROOT; ?>?controller=doors&action=update&id=<?php echo $door->getId(); ?>">
                                         <i class="fas fa-edit"></i>
