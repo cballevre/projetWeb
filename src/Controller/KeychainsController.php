@@ -51,14 +51,9 @@ class KeychainsController extends AppController
             $keychain->setCreationDate($this->request->data->creationDate);
             $keychain->setDestructionDate($this->request->data->destructionDate);
 
-//            var_dump($keychain);
-
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
-//            var_dump($keychain);
-//
-//            die();
             $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
@@ -74,10 +69,8 @@ class KeychainsController extends AppController
         $keychain = $model->findById($id);
 
         if(!empty($this->request->data)) {
-
             $keychain->setCreationDate($this->request->data->creationDate);
             $keychain->setDestructionDate($this->request->data->destructionDate);
-
 
 
             $model = RepositoryFactory::getRepository('keychains');
@@ -87,7 +80,7 @@ class KeychainsController extends AppController
 
         } else {
             $this->setHeadline("Modifier un trousseau");
-            $this->setBack('/?controller=keychains&action=index');
+            $this->setBack('?controller=keychains&action=index');
             $this->set(compact('keychain'));
             $this->render('update');
         }
