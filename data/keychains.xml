@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <keychains>
   <keychain>
     <id>1</id>
@@ -18,22 +18,18 @@
   <keychain>
     <id>4</id>
     <creationDate>1272508903</creationDate>
-    <destructionDate></destructionDate>
+    <destructionDate/>
   </keychain>
   <keychain>
     <id>5</id>
     <creationDate>1171502725</creationDate>
-    <destructionDate></destructionDate>
+    <destructionDate/>
   </keychain>
   <keychain>
     <id>6</id>
     <creationDate>1171502725</creationDate>
-    <destructionDate></destructionDate>
+    <destructionDate/>
   </keychain>
-  <keychain>
-    <id>7</id>
-    <creationDate>1171502725</creationDate>
-    <destructionDate></destructionDate>
-  </keychain>
+  
 
 </keychains>
