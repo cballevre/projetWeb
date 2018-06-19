@@ -41,15 +41,12 @@ class KeychainsController extends AppController
 
     public function store() {
 
-
-
         if(!empty($this->request->data)) {
 
-
-
             $keychain = new Keychain();
-            $keychain->setCreationDate($this->request->data->creationDate);
-            $keychain->setDestructionDate($this->request->data->destructionDate);
+
+            $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
+            $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
 
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
@@ -69,9 +66,10 @@ class KeychainsController extends AppController
         $keychain = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            $keychain->setCreationDate($this->request->data->creationDate);
-            $keychain->setDestructionDate($this->request->data->destructionDate);
 
+
+            $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
+            $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
 
             $model = RepositoryFactory::getRepository('keychains');
             $model->update($keychain, $id);

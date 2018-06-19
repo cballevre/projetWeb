@@ -60,6 +60,8 @@ class Serializer {
 
     public function toXML($class) {
 
+
+
     }
 
 }
