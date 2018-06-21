@@ -14,7 +14,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Utilisateurt</th>
+                    <th scope="col">Utilisateurs</th>
                     <th scope="col">Trousseaux</th>
                     <th scope="col">Date de retour</th>
                     <th scope="col">Action</th>

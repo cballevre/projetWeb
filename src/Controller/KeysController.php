@@ -19,8 +19,6 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $keys = $model->findAll();
 
-        var_dump($keys);
-
         $this->setHeadline("Clés");
         $this->setButtonAdd('?controller=keys&action=store');
         $this->setButtonImport('?controller=keys&action=import');

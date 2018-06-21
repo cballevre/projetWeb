@@ -73,6 +73,14 @@ class Controller
     }
 
     /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
      * @return mixed
      */
     public function getHeadline() {

@@ -59,7 +59,6 @@ class UsersController extends AppController
 
         } else {
             $this->setHeadline("Ajouter un utilisateur");
-            $this->setBack('?controller=users&action=index');
             $this->render('store');
         }
     }

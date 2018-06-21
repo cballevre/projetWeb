@@ -13,8 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Nom</th>
+                        <th scope="col">Nom / Prénom</th>
                         <th scope="col">Surnom</th>
                         <th scope="col">Numéro de téléphone</th>
                         <th scope="col">Status</th>
@@ -27,7 +26,7 @@
                         <tr>
                             <td><?php echo $user->getEnssatPrimaryKey(); ?></td>
                             <td colspan="2">
-                                <a href="/?controller=users&action=single&id=<?php echo $user->getEnssatPrimaryKey(); ?>">
+                                <a href="<?php WEBROOT ?>?controller=users&action=single&id=<?php echo $user->getEnssatPrimaryKey(); ?>">
                                     <?php echo $user->getSurname(); ?>
                                     <?php echo $user->getName(); ?>
                                 </a>
@@ -37,10 +36,11 @@
                             <td><?php echo $user->getStatus(); ?></td>
                             <td><?php echo $user->getEmail(); ?></td>
                             <td>
-                                <a href="/?controller=users&action=update&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
+                                <a href="<?php WEBROOT ?>?controller=users&action=update&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
                                 <i class="fas fa-edit"></i>
                                 </a>&nbsp;
-                                <a href="/?controller=users&action=destroy&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
+
+                                <a href="<?php WEBROOT ?>?controller=users&action=destroy&id=<?php echo $user->getEnssatPrimaryKey(); ?>"">
                                 <i class="fas fa-trash"></i>
                                 </a>
                             </td>
