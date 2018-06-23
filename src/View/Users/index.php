@@ -13,8 +13,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Prénom</th>
-                        <th scope="col">Nom</th>
+                        <th scope="col">Nom / Prénom</th>
                         <th scope="col">Surnom</th>
                         <th scope="col">Numéro de téléphone</th>
                         <th scope="col">Status</th>

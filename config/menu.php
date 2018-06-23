@@ -68,7 +68,7 @@ return array(
                 'route' => '?controller=doors&action=index'
             ),
             array(
-                'title' => 'Tous les barrilets',
+                'title' => 'Tous les barillets',
                 'route' => '?controller=locks&action=index'
             ),
             array(
