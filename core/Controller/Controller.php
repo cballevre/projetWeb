@@ -52,6 +52,7 @@ class Controller
         if(!empty($this->layout)){
             require ROOT. 'src'. DS.'View'.DS.'Layout'.DS. $this->layout .'.php';
         }
+
     }
 
     /**

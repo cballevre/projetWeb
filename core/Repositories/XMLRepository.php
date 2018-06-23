@@ -126,9 +126,17 @@ class XMLRepository {
                         $value = $entity->$methodName();
                     }
 
+                    if(gettype($value) == 'object') {
+                        if(get_class($value) == 'DateTime') {
+                            $tmp = $value;
+                            $value = $tmp->getTimestamp();
+                        }
+                    }
+
                     $xmlEntity->addChild($propertyName, $value);
                 }
             }
+
             $xml->saveXML($path);
         }
     }
@@ -153,7 +161,17 @@ class XMLRepository {
                         foreach($reflect->getProperties() as $reflectionProperty) {
                             $propertyName = $reflectionProperty->name;
                             $methodName = 'get' . ucfirst($propertyName);
-                            $child->$propertyName = $entity->$methodName();
+
+                            $value = $entity->$methodName();
+
+                            if(gettype($value) == 'object') {
+                                if(get_class($value) == 'DateTime') {
+                                    $tmp = $value;
+                                    $value = $tmp->getTimestamp();
+                                }
+                            }
+
+                            $child->$propertyName = $value;
                         }
                     }
                 }
