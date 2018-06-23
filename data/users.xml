@@ -7,7 +7,7 @@
     <name>Dalton</name>
     <surname>Joe</surname>
     <status>Student</status>
-    <phone>5551fsf</phone>
+    <phone>5551</phone>
     <email>joe@dalton.fr</email>
   </user>
   <user>
@@ -50,4 +50,4 @@
     <phone>5555</phone>
     <email>lucky.luke@fbi.fr</email>
   </user>
-</users>
+<user><enssatPrimaryKey>6</enssatPrimaryKey><ur1identifier/><username>tetse</username><name>tests</name><surname>testse</surname><phone>test</phone><status>test</status><email>estes</email></user><user><enssatPrimaryKey>7</enssatPrimaryKey><ur1identifier/><username>gsg</username><name>gss</name><surname>gsg</surname><phone>gssgsg</phone><status>gsgs</status><email>gsgsg</email></user><user><enssatPrimaryKey>8</enssatPrimaryKey><ur1identifier/><username>fsfsf</username><name>fsf</name><surname>fsfsf</surname><phone>fsfsf</phone><status>fsfsf</status><email>fsfsf</email></user></users>

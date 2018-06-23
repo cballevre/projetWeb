@@ -40,6 +40,15 @@ class UsersController extends AppController
 
     }
 
+    public function singleToJson($id) {
+
+        $model = RepositoryFactory::getRepository('users');
+        $user = $model->findById($id);
+
+        $this->renderJSON(json_encode($user));
+
+    }
+
     public function store() {
 
         if(!empty($this->request->data)) {

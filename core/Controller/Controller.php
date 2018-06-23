@@ -55,6 +55,10 @@ class Controller
 
     }
 
+    public function renderJSON($json) {
+        header('Content-Type: application/json');
+        echo $json;
+    }
     /**
      * Permet de changer la View pour l'action
      * @param $layout : Layout choisit
