@@ -9,6 +9,8 @@
 
 namespace App\Model;
 
+use Core\Repositories\RepositoryFactory;
+
 class BorrowKeychain {
 
     /**
@@ -20,16 +22,21 @@ class BorrowKeychain {
     protected $dateRetour;
 
     public function getId() { return $this->id; }
-    public function setId($id) { $this->id = $id; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function setIdKeychain(int $idKeychain) { $this->idKeychain = $idKeychain; }
     public function getIdKeychain() { return $this->idKeychain; }
+    public function setIdKeychain(int $idKeychain) { $this->idKeychain = $idKeychain; }
 
-    public function setIdUser(int $idUser){ $this->idUser=$idUser; }
     public function getIdUser(){ return $this->idUser; }
+    public function setIdUser(int $idUser){ $this->idUser=$idUser; }
 
-    public function setDateRetour(\DateTime $dateRetour){ $this->dateRetour=$dateRetour; }
     public function getDateRetour(){ return $this->dateRetour; }
+    public function setDateRetour(\DateTime $dateRetour){ $this->dateRetour=$dateRetour; }
+
+    public function user() {
+        $model = RepositoryFactory::getRepository('users');
+        return $model->findByID($this->idUser);
+    }
 
     public function jsonSerialize() {
         return [

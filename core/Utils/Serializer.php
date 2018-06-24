@@ -20,6 +20,8 @@ class Serializer {
         foreach($reflect->getProperties() as $reflectionProperty) {
 
             $propertyName = $reflectionProperty->name;
+
+
             $methodName = 'set' . ucfirst($propertyName);
 
             $reflectMethod = $reflect->getMethod($methodName);
@@ -87,6 +89,7 @@ class Serializer {
             $reflect = new \ReflectionClass($object);
 
             foreach($reflect->getProperties() as $reflectionProperty) {
+
 
                 $propertyName = $reflectionProperty->name;
                 $methodName = 'set' . ucfirst($propertyName);

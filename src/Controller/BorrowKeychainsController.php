@@ -80,4 +80,15 @@ class BorrowKeychainsController extends AppController
         $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
     }
+
+    public function reminder($id) {
+
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychain = $model->findById($id);
+
+        // mail($borrowKeychain->user()->getEmail(), "Relance de l'emprunt du trousseau n°" . $borrowKeychain->getIdKeychain(), "Votre messsage");
+
+        $this->redirect(WEBROOT . "?controller=pages&action=dashboard");
+
+    }
 }
