@@ -127,11 +127,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?php echo WEBROOT; ?>?controller=<?php echo $this->name;?>&action=import" method="post">
+                <form enctype="multipart/form-data" action="<?php echo WEBROOT; ?>?controller=<?php echo $this->name;?>&action=import" method="post">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <label for="exampleFormControlFile1">Votre fichier d'import au format csv</label>
+                            <input type="file" class="form-control-file" name="import">
                         </div>
                     </div>
                     <div class="modal-footer">

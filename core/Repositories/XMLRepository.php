@@ -110,8 +110,9 @@ class XMLRepository {
         if (file_exists($path)) {
 
             $xml = simplexml_load_file($path);
-
+            
             foreach ($entities as $entity) {
+
                 $xmlEntity = $xml->addChild($this->singular($this->entityName));
                 $reflect = new \ReflectionClass($entity);
 

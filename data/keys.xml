@@ -5,7 +5,7 @@
         <type>Simple</type>
         <etat>Disponible</etat>
         <keyParent>1</keyParent>
-        <nbCommande></nbCommande>
+        <nbCommande/>
     </key>
     <key>
         <id>2</id>
@@ -17,7 +17,7 @@
     <key>
         <id>3</id>
         <type>Partiel</type>
-        <etat>Empruntée</etat>
+        <etat>Emprunt&#xE9;e</etat>
         <keyParent>3</keyParent>
         <nbCommande>0</nbCommande>
     </key>
@@ -28,4 +28,4 @@
         <keyParent>0</keyParent>
         <nbCommande>0</nbCommande>
     </key>
-</keys>
+<key><id>5</id><type>Simple</type><etat>Disponible</etat><keyParent>1</keyParent><nbCommande>0</nbCommande></key></keys>

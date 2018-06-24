@@ -30,4 +30,13 @@ class BorrowKeychain {
 
     public function setDateRetour(\DateTime $dateRetour){ $this->dateRetour=$dateRetour; }
     public function getDateRetour(){ return $this->dateRetour; }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'idKeychain' => $this->idKeychain,
+            'idUser' => $this->idUser,
+            'dateRetour' => $this->dateRetour
+        ];
+    }
 }
