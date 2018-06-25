@@ -53,7 +53,9 @@
                             <tbody>
                             <?php foreach ($user->borrowKeychains() as $borrowKeychain): ?>
                                 <tr>
-                                    <td><?php echo $borrowKeychain->getIdKeychain(); ?></td>
+                                    <td><a href="<?php echo WEBROOT; ?>?controller=keychains&action=single&id=<?php echo $borrowKeychain->getIdKeychain();?>">
+                                            Trousseau n°<?php echo $borrowKeychain->getIdKeychain(); ?>
+                                        </a></td>
                                     <td><?php echo $borrowKeychain->getDateRetour()->format('Y-m-d H:i:s'); ?></td>
                                     <td>
                                         <a href="<?php echo WEBROOT; ?>?controller=borrowKeychains&action=update&id=<?php echo $borrowKeychain->getId(); ?>">
@@ -108,7 +110,7 @@
                             <?php foreach($user->keys() as $key):?>
                                 <tr>
                                     <td><a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
-                                            <?php echo $key->getId(); ?>
+                                           Clé n°<?php echo $key->getId(); ?>
                                         </a></td>
                                     <td><?php echo $key->getType()?></td>
                                     <td><?php echo $key->getEtat()?></td>

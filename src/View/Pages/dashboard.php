@@ -29,7 +29,7 @@
                             <td>Trouseau n°<?php echo $borrowKeychain->getIdKeychain(); ?></td>
                             <td><?php echo $borrowKeychain->getDateRetour()->format('Y-m-d H:i'); ?></td>
                             <td>
-                                <a href='mailto:<?php echo $borrowKeychain->user()->getEmail() ?>?subject=Rappel emprunt trousseau&body=Bonjour <?php echo $borrowKeychain->user()->getSurname()?> <?php echo $borrowKeychain->user()->getName()?>,%0D%0DVous êtes prié de ramener le trousseau que vous avez emprunté car la date limite approche à grand pas.%0D%0DBonne journée à vous.%0DBien cordialement, le service technique'
+                                <a target="_blank" href='mailto:<?php echo $borrowKeychain->user()->getEmail() ?>?subject=Rappel emprunt trousseau&body=Bonjour <?php echo $borrowKeychain->user()->getSurname()?> <?php echo $borrowKeychain->user()->getName()?>,%0D%0DVous êtes prié de ramener le trousseau que vous avez emprunté car la date limite approche à grand pas.%0D%0DBonne journée à vous.%0DBien cordialement, le service technique'
                                    class="btn btn-primary btn-sm"
                                    role="button"
                                    aria-pressed="true">Relance</a>

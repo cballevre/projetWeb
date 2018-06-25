@@ -23,9 +23,10 @@
                 <tbody>
                 <?php foreach ($borrowKeychains as $borrowKeychain): ?>
                     <tr>
-                        <td><?php echo $borrowKeychain->getId(); ?></td>
+                        <td>Emprunt n°<?php echo $borrowKeychain->getId(); ?></td>
                         <td><?php echo $borrowKeychain->getIdUser(); ?></td>
-                        <td><?php echo $borrowKeychain->getIdKeychain(); ?></td>
+                        <td><a href="<?php echo WEBROOT?>?controller=keychains&action=single&id=<?php echo $borrowKeychain->getId(); ?>">
+                                Trousseau n°<?php echo $borrowKeychain->getIdKeychain(); ?></a></td>
                         <td><?php echo $borrowKeychain->getDateRetour()->format('Y-m-d H:i:s'); ?></td>
                         <td>
                             <button type="button" class="btn btn-link btn-sm btn-modif" data-id="<?php echo $borrowKeychain->getId(); ?>"><i class="fas fa-edit"></i></button>
