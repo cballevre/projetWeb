@@ -27,7 +27,7 @@ class KeysController extends AppController
         $keys = $model->findAll();
 
         $this->setHeadline("Clés");
-        $this->setButtonAdd(WEBROOT .'?controller=keys&action=store');
+        $this->setButtonAdd('?controller=keys&action=store');
         $this->setButtonImport(WEBROOT .'?controller=keys&action=import');
         $this->set(compact('keys'));
         $this->render('index');
@@ -70,7 +70,8 @@ class KeysController extends AppController
             $model->create(array($key));
 
             $this->flash->set("La clé est bien ajoutée.", "success");
-            $this->redirect(WEBROOT . "?controller=keys&action=index");
+
+            $this->redirect(WEBROOT. "?controller=keys&action=index");
 
         } else {
             $model = RepositoryFactory::getRepository('keys');
