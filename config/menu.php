@@ -32,10 +32,6 @@ return array(
                 'route' => '?controller=keys&action=index'
             ),
             array(
-                'title' => 'Ajouter',
-                'route' => '?controller=keys&action=store'
-            ),
-            array(
                 'title' => 'Trousseaux',
                 'route' => '?controller=keychains&action=index'
             )

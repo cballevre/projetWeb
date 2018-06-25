@@ -17,7 +17,6 @@ class KeyAssociation
     protected $id;
     protected $idKeychain;
     protected $idKey;
-    protected $idMasterKey;
 
     public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
@@ -27,9 +26,6 @@ class KeyAssociation
 
     public function getIdKey(){ return $this->idKey; }
     public function setIdKey(int $idKey){ $this->idKey = $idKey; }
-
-    public function getIdMasterKey(){ return $this->idMasterKey;}
-    public function setIdMasterKey(int $idMasterKey){ $this->idMasterKey = $idMasterKey; }
 
     public function keys($id){
         $model = RepositoryFactory::getRepository('keyAssociations');

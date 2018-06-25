@@ -61,9 +61,13 @@ class LocksController extends AppController {
             $model = RepositoryFactory::getRepository('locks');
             $model->create(array($lock));
 
+            $this->flash->set("Le barillet est bien ajouté.", "success");
             $this->redirect(WEBROOT . "?controller=locks&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('locks');
+            $locks = $model->findAll();
+            $this->set(compact('locks'));
             $this->renderWithoutLayout('store');
         }
 
@@ -79,6 +83,7 @@ class LocksController extends AppController {
             $lock->setLength($this->request->data->length);
             $model->update($lock, $id);
 
+            $this->flash->set("Le barillet est bien modifié.", "success");
             $this->redirect(WEBROOT . "?controller=locks&action=index");
 
         } else {
@@ -94,6 +99,7 @@ class LocksController extends AppController {
         $model = RepositoryFactory::getRepository('locks');
         $model->delete($id);
 
+        $this->flash->set("Un barillet a été supprimé.", "info");
         $this->redirect(WEBROOT . "?controller=locks&action=index");
 
     }

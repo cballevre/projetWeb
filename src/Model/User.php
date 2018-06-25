@@ -84,9 +84,6 @@ class User implements \JsonSerializable{
     public function rooms(){
         $result = array();
 
-
-
-
         $borrowKeychainModel = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychains = $borrowKeychainModel->findBy('idUser', $this->enssatPrimaryKey);
 
@@ -104,10 +101,9 @@ class User implements \JsonSerializable{
             $keyAssociations = new KeyAssociation();
             $keyAssociationsSelected = $keyAssociations->keys($keychain->getId());
 
-            $modelKeys = RepositoryFactory::getRepository('keys');
+//            $modelKeys = RepositoryFactory::getRepository('keys');
             foreach($keyAssociationsSelected as $keyAssociationSelected){
                 $openLocks = $openLocksModel->findBy('idKey', $keyAssociationSelected->getIdKey());
-
 
                 foreach ($openLocks as $openLock) {
 
@@ -121,7 +117,6 @@ class User implements \JsonSerializable{
                             array_push($result, $rooms);
                         }
                     }
-
                 }
             }
         }

@@ -123,6 +123,7 @@ class XMLRepository {
 
                     if($propertyName == $this->entityPrimaryKey) {
                         $value = (int) $xml->children()->count();
+                        $entity->{"set" . ucfirst($this->entityPrimaryKey)}($value);
                     } else {
                         $methodName = 'get' . ucfirst($propertyName);
                         $value = $entity->$methodName();
@@ -141,6 +142,8 @@ class XMLRepository {
 
             $xml->saveXML($path);
         }
+
+        return $entities;
     }
 
     /**
