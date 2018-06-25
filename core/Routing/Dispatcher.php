@@ -28,18 +28,18 @@ class Dispatcher
         Router::parse($this->request->url, $this->request);
 
         try {
-            $controller = $this->loadController($this->request->controller, $this->request);
+            $controller = self::loadController($this->request->controller, $this->request);
         } catch (\RuntimeException $e) {
-            $controller = $this->loadController("pages", $this->request);
-            $this->loadAction("error404", $controller);
+            $controller = self::loadController("pages", $this->request);
+            self::loadAction("error404", $controller);
         } finally {
             try {
-                $this->loadAction($this->request->action, $controller, $this->request->params);
+                self::loadAction($this->request->action, $controller, $this->request->params);
             } catch (\RuntimeException $e) {
                 if($this->request->controller != 'pages') {
-                    $controller = $this->loadController("pages", $this->request);
+                    $controller = self::loadController("pages", $this->request);
                 }
-                $this->loadAction("error404", $controller);
+                self::loadAction("error404", $controller);
             }
         }
 
@@ -48,7 +48,7 @@ class Dispatcher
     /**
      * Permet de charger le controller en fonction de l'url demander par l'utilisateur
      */
-    private function loadController($name, $request){
+    public static function loadController($name, $request){
 
         $name = ucfirst($name).'Controller';
         $namespace = '\App\Controller\\'. $name;
@@ -67,7 +67,7 @@ class Dispatcher
      * Permet d\'afficher l\'action demander par l\'utilisateur
      * @param $controller : Controller créer
      */
-    private function loadAction($name, $controller, $params = array()){
+    public static function loadAction($name, $controller, $params = array()){
 
         if(method_exists($controller, $name)) {
 

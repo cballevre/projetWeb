@@ -16,6 +16,11 @@ use Core\Utils\Serializer;
 
 class KeysController extends AppController
 {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index() {
 
         $model = RepositoryFactory::getRepository('keys');
@@ -60,8 +65,6 @@ class KeysController extends AppController
             $key = new Key();
             $key->setType($this->request->data->type);
             $key->setEtat($this->request->data->etat);
-            $key->setKeyParent($this->request->data->keyParent);
-            $key->setNbCommande($this->request->data->nbCommande);
 
             $model = RepositoryFactory::getRepository('keys');
             $model->create(array($key));
@@ -69,8 +72,7 @@ class KeysController extends AppController
             $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
-            $this->setHeadline("Ajouter une clé");
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 
@@ -82,8 +84,6 @@ class KeysController extends AppController
         if(!empty($this->request->data)) {
             $key->setType($this->request->data->type);
             $key->setEtat($this->request->data->etat);
-            $key->setKeyParent($this->request->data->keyParent);
-            $key->setNbCommande($this->request->data->nbCommande);
 
             $model = RepositoryFactory::getRepository('keys');
             $model->update($key, $id);

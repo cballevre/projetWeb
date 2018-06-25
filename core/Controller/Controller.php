@@ -55,6 +55,13 @@ class Controller
 
     }
 
+    public function renderWithoutLayout($action) {
+        extract($this->var);
+        ob_start();
+        require ROOT .'src/View/'.$this->name.'/'.$action.'.php';
+        echo ob_get_clean();
+    }
+
     public function renderJSON($json) {
         header('Content-Type: application/json');
         echo $json;
@@ -143,4 +150,14 @@ class Controller
         header("Location: ".$url);
     }
 
+    /**
+     * Permet de charger un composant
+     * @param $name : Nom du composant à charger
+     */
+    public function loadComponent($name)
+    {
+        $component = '\\Core\\Controller\\Component\\'. ucfirst($name) . 'Component';
+        $this->{$name} = new $component();
+
+    }
 }

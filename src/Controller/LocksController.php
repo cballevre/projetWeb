@@ -15,6 +15,10 @@ use App\Model\Door;
 
 class LocksController extends AppController {
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index() {
 
         $model = RepositoryFactory::getRepository('locks');
@@ -60,8 +64,7 @@ class LocksController extends AppController {
             $this->redirect(WEBROOT . "?controller=locks&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un barillet");
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
 
     }

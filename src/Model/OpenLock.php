@@ -20,6 +20,14 @@ class OpenLock
     public function setIdLock(int $idLock){ $this->idLock = $idLock; }
     public function getIdLock(){ return $this->idLock; }
 
+    public function keys(int $idLock){
+        $model = RepositoryFactory::getRepository('openLocks');
+        return $model->findBy('idLock', $idLock);
+    }
 
+    public function locks(int $idKey){
+        $model = RepositoryFactory::getRepository('openLocks');
+        return $model->findBy('idKey', $idKey);
+    }
 
 }

@@ -14,12 +14,18 @@ use Core\Repositories\RepositoryFactory;
 class PagesController extends AppController
 {
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function dashboard() {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychains = $model->findAll();
 
         $now = new \DateTime('now');
+
+        $this->flash->set("L'utilisateur n'est pas connecté", "danger");
 
         $borrowKeychainDelays = array();
 

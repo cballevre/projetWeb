@@ -17,6 +17,10 @@ use Core\Utils\Serializer;
 class KeychainsController extends AppController
 {
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index(){
 
         $model = RepositoryFactory::getRepository('keychains');
@@ -68,9 +72,7 @@ class KeychainsController extends AppController
             $this->redirect("?controller=keychains&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un trousseau");
-            $this->setBack('?controller=keychains&action=index');
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 
