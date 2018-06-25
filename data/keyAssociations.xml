@@ -2,13 +2,13 @@
 <keyAssociations>
     <keyAssociation>
         <id>1</id>
-        <idKeychain>2</idKeychain>
-        <idKey>3</idKey>
+        <idKeychain>1</idKeychain>
+        <idKey>1</idKey>
     </keyAssociation>
     <keyAssociation>
         <id>2</id>
         <idKeychain>2</idKeychain>
-        <idKey>1</idKey>
+        <idKey>2</idKey>
     </keyAssociation>
 
 </keyAssociations>

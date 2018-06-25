@@ -13,7 +13,7 @@
         <select class="custom-select" id="idLock" name="idLock" >
             <?php foreach($locks as $lock){?>
                 <option value="<?php echo $lock->getId(); ?>"><?php echo $lock->getId(); ?></option>
-            <?php } ?>
+            <?php }?>
         </select>
     </div>
 </div>
