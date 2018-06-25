@@ -11,7 +11,7 @@
     <div class="form-group row">
         <label class="col-sm-2 form-control-label text-xs-right"> Longueur barillet : </label>
         <div class="col-sm-10">
-            <input type="text" name="length" class="form-control boxed" placeholder="Entrez la longueur !" required> </div>
+            <input type="text" name="length" class="form-control boxed" placeholder="Entrez la longueur" required> </div>
     </div>
     <div class="form-group row">
         <div class="col-sm-10 col-sm-offset-2">
