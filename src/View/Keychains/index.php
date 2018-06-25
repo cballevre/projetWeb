@@ -29,14 +29,6 @@
                                  </td>
                                 <td><?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s'); ?></td>
                                 <td><?php echo $keychain->getDestructionDate()->format('Y-m-d H:i:s'); ?></td>
-                                <td>
-                                    <a href="<?php echo WEBROOT?>?controller=keychains&action=update&id=<?php echo $keychain->getId(); ?>">
-                                    <i class="fas fa-edit"></i>
-                                    </a>&nbsp;
-                                    <a href="<?php echo WEBROOT?>?controller=keychains&action=destroy&id=<?php echo $keychain->getId(); ?>">
-                                    <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
                             </tr>
                         <?php endforeach;?>
                         </tbody>
