@@ -13,7 +13,7 @@ $keychains = $array['keychains'];
 <h5>Disponibilité : <?php echo $key->getEtat(); ?> </h5>
 
 <section>
-    <h4>Trousseaux associées</h4>
+    <h4>Trousseaux associés</h4>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">
@@ -29,7 +29,7 @@ $keychains = $array['keychains'];
                     <tr>
                         <td>
                             <a href="<?php echo WEBROOT; ?>?controller=keychains&action=single&id=<?php echo $keychain->getId(); ?>">
-                                <?php echo $keychain->getId(); ?>
+                                Trousseau n°<?php echo $keychain->getId(); ?>
                             </a>
                         </td>
                         <td>
@@ -42,6 +42,11 @@ $keychains = $array['keychains'];
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="col-sm-10 col-sm-offset-2 text-left">
+                <a href="<?php echo WEBROOT; ?>?controller=keys&action=linkLock&id=<?php echo $key->getId(); ?>">
+                    <button class="btn btn-primary"> Ajouter barillet </button>
+                </a>
+            </div>
         </div>
     </div>
 </section>

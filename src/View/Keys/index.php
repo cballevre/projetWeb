@@ -25,7 +25,7 @@
                             <tr>
                                 <td>
                                     <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
-                                        <?php echo $key->getId(); ?>
+                                        Clé n°<?php echo $key->getId(); ?>
                                     </a>
                                 </td>
                                 <td><?php echo $key->getType(); ?></td>

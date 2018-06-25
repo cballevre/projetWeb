@@ -72,7 +72,7 @@ $users = $array['users'];
                                 <tr>
                                     <td>
                                         <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
-                                            <?php echo $key->getId(); ?>
+                                            Clé n°<?php echo $key->getId(); ?>
                                         </a>
                                     </td>
                                     <td>
@@ -105,10 +105,10 @@ $users = $array['users'];
                                     <td><?php echo $user->getEnssatPrimaryKey(); ?></td>
                                     <td>
                                         <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $user->getEnssatPrimaryKey(); ?>">
-                                            <?php echo $user->getName(); ?>
+                                            <?php echo $user->getSurname();?><?php echo $user->getName(); ?>
                                         </a>
                                     </td>
-                                    <td><?php echo $user->getSurname(); ?></td>
+                                    <td><?php echo $user->getUsername(); ?></td>
                                     <td><?php echo $user->getPhone(); ?></td>
                                     <td><?php echo $user->getStatus(); ?></td>
                                     <td><?php echo $user->getEmail(); ?></td>

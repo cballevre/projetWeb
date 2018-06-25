@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\Key;
 use App\Model\KeyAssociation;
+use App\Model\OpenLock;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 
@@ -58,25 +59,64 @@ class KeysController extends AppController
         $this->render('single');
     }
 
+    public function linkLock($id){
+
+        $model = RepositoryFactory::getRepository('keys');
+        $key = $model->findById($id);
+
+        if(!empty($this->request->data)) {
+
+            $openLocks = new OpenLock();
+
+            $openLocks->setIdKey($this->request->data->idKey);
+            $openLocks->setIdLock($this->request->data->idLock);
+
+            $model = RepositoryFactory::getRepository('openLocks');
+            $model->create(array($openLocks));
+
+            $this->redirect(WEBROOT . "?controller=keys&action=single&id=" . $key->getId());
+
+        } else {
+            $model = RepositoryFactory::getRepository('locks');
+            $locks = $model->findAll();
+
+            $array = array(
+                'key'  => $key,
+                'locks' => $locks
+            );
+
+            $this->setHeadline("Associer un barillet à la clé n°" . $key->getId() . " : ");
+            $this->set(compact('array'));
+            $this->render('linkLock');
+        }
+
+    }
+
     public function store() {
 
         if(!empty($this->request->data)) {
 
             $key = new Key();
-            $key->setType($this->request->data->type);
-            $key->setEtat($this->request->data->etat);
 
-            $model = RepositoryFactory::getRepository('keys');
-            $model->create(array($key));
+            if($this->request->data->type==null){
+                $this->flash->set("Le type n'est pas valide", "warning");
+                $this->render('index');
+            }else if($this->request->data->etat==null){
+                $this->render('index');
+                $this->flash->set("L'état n'est pas valide", "warning");
+            }else {
+                $key->setType($this->request->data->type);
+                $key->setEtat($this->request->data->etat);
 
-            $this->flash->set("La clé est bien ajoutée.", "success");
+                $model = RepositoryFactory::getRepository('keys');
+                $model->create(array($key));
 
-            $this->redirect(WEBROOT. "?controller=keys&action=index");
+                $this->flash->set("La clé est bien ajoutée", "success");
+
+                $this->redirect(WEBROOT . "?controller=keys&action=index");
+            }
 
         } else {
-            $model = RepositoryFactory::getRepository('keys');
-            $key = $model->findAll();
-            $this->set(compact('key'));
             $this->renderWithoutLayout('store');
         }
     }
@@ -87,14 +127,22 @@ class KeysController extends AppController
         $key = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            $key->setType($this->request->data->type);
-            $key->setEtat($this->request->data->etat);
+            if($this->request->data->type==null){
+                $this->flash->set("Le type n'est pas valide", "warning");
+                $this->render('index');
+            }else if($this->request->data->etat==null){
+                $this->flash->set("L'état n'est pas valide", "warning");
+                $this->render('index');
+            }else {
+                $key->setType($this->request->data->type);
+                $key->setEtat($this->request->data->etat);
 
-            $model = RepositoryFactory::getRepository('keys');
-            $model->update($key, $id);
+                $model = RepositoryFactory::getRepository('keys');
+                $model->update($key, $id);
 
-            $this->flash->set("La clé est bien modifiée.", "success");
-            $this->redirect(WEBROOT . "?controller=keys&action=index");
+                $this->flash->set("La clé est bien modifiée", "success");
+                $this->redirect(WEBROOT . "?controller=keys&action=index");
+            }
 
         } else {
             $this->setHeadline("Modifier une clé");
@@ -110,7 +158,7 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $model->delete($id);
 
-        $this->flash->set("Une clé a été supprimée.", "info");
+        $this->flash->set("Une clé a été supprimée", "info");
         $this->redirect(WEBROOT . "?controller=keys&action=index");
     }
 

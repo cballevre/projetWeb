@@ -9,7 +9,7 @@
     <key>
         <id>2</id>
         <type>Simple</type>
-        <etat>Disponible</etat>
+        <etat>Emprunter</etat>
         <nbCommande>0</nbCommande>
     </key>
     <key>
@@ -24,10 +24,5 @@
         <etat>Perdue</etat>
         <nbCommande>0</nbCommande>
     </key>
-    <key>
-        <id>5</id>
-        <type>Simple</type>
-        <etat>Disponible</etat>
-        <nbCommande>0</nbCommande>
-    </key>
+    
 </keys>

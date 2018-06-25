@@ -15,7 +15,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Id du barillet</th>
-                            <th scope="col"></th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,12 +23,12 @@
                             <tr>
                                 <td>
                                     <a href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(); ?>">
-                                        <?php echo $door->getId(); ?>
+                                        Porte n°<?php echo $door->getId(); ?>
                                     </a>
                                 </td>
                                 <td>
                                     <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
-                                        <?php echo $door->getIdLock(); ?>
+                                        Barillet <?php echo $door->getIdLock(); ?>
                                     </a>
                                 <td>
                                     <a href="<?php echo WEBROOT; ?>?controller=doors&action=update&id=<?php echo $door->getId(); ?>">

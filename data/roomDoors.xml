@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <roomDoors>
     <roomDoor>
         <idDoor>1</idDoor>
@@ -12,4 +12,4 @@
         <idDoor>3</idDoor>
         <idRoom>3</idRoom>
     </roomDoor>
-</roomDoors>
+<roomDoor><id>4</id><idDoor>4</idDoor><idRoom>1</idRoom></roomDoor></roomDoors>

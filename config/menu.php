@@ -54,11 +54,5 @@ return array(
                 'route' => '?controller=rooms&action=index'
             )
         )
-    ),
-    array(
-        'title' => 'Paramètres',
-        'icon' => 'fa fa-cog',
-        'route' => '?controller=pages&action=setting'
     )
-
 );

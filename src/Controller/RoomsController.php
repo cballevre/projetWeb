@@ -60,7 +60,6 @@ class RoomsController extends AppController
         $doorAccesModel = RepositoryFactory::getRepository('doorAccesss');
         $userModel = RepositoryFactory::getRepository('users');
         $roomAccesss = $doorAccesModel->findBy('idRoom',$room->getId());
-//        $users = $userModel->findById('idUser',$room->getId());
 
         $users= array();
 
@@ -87,15 +86,26 @@ class RoomsController extends AppController
         if(!empty($this->request->data)) {
 
             $room = new Room();
-            $room->setRoomName($this->request->data->roomName);
-            $room->setFloor($this->request->data->floor);
-            $room->setBuilding($this->request->data->building);
+            if($this->request->data->roomName==null){
+                $this->flash->set("Le champ nom de la salle est vide", "warning");
+                $this->render('index');
+            }else if($this->request->data->building==null){
+                $this->flash->set("Renseignez le champ Bâtiment", "warning");
+                $this->render('index');
+            }else if($this->request->data->floor==null){
+                $this->flash->set("Renseignez le champ Étage", "warning");
+                $this->render('index');
+            }else {
+                $room->setRoomName($this->request->data->roomName);
+                $room->setFloor($this->request->data->floor);
+                $room->setBuilding($this->request->data->building);
 
-            $model = RepositoryFactory::getRepository('rooms');
-            $model->create(array($room));
+                $model = RepositoryFactory::getRepository('rooms');
+                $model->create(array($room));
 
-            $this->flash->set("La salle est bien ajoutée.", "success");
-            $this->redirect(WEBROOT . "?controller=rooms&action=index");
+                $this->flash->set("La salle est bien ajoutée.", "success");
+                $this->redirect(WEBROOT . "?controller=rooms&action=index");
+            }
 
         } else {
             $model = RepositoryFactory::getRepository('rooms');
@@ -112,15 +122,26 @@ class RoomsController extends AppController
 
         if(!empty($this->request->data)) {
 
-            $room->setRoomName($this->request->data->roomName);
-            $room->setFloor($this->request->data->floor);
-            $room->setBuilding($this->request->data->building);
+            if($this->request->data->roomName==null){
+                $this->flash->set("Le champ nom de la salle est vide", "warning");
+                $this->render('index');
+            }else if($this->request->data->building==null){
+                $this->flash->set("Renseignez le champ Bâtiment", "warning");
+                $this->render('index');
+            }else if($this->request->data->floor==null){
+                $this->flash->set("Renseignez le champ Étage", "warning");
+                $this->render('index');
+            }else {
+                $room->setRoomName($this->request->data->roomName);
+                $room->setFloor($this->request->data->floor);
+                $room->setBuilding($this->request->data->building);
 
-            $model = RepositoryFactory::getRepository('rooms');
-            $model->update($room, $id);
+                $model = RepositoryFactory::getRepository('rooms');
+                $model->update($room, $id);
 
-            $this->flash->set("La salle est bien modifiée.", "success");
-            $this->redirect(WEBROOT . "?controller=rooms&action=index");
+                $this->flash->set("La salle est bien modifiée.", "success");
+                $this->redirect(WEBROOT . "?controller=rooms&action=index");
+            }
 
         } else {
             $this->setHeadline("Modifier une pièce");

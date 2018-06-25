@@ -56,13 +56,17 @@ class LocksController extends AppController {
         if(!empty($this->request->data)) {
 
             $lock = new Lock();
-            $lock->setLength($this->request->data->length);
+            if($this->request->data->length==null){
+                $this->flash->set("Le type n'est pas valide.", "warning");
+                $this->render('index');
+            }else {
+                $lock->setLength($this->request->data->length);
+                $model = RepositoryFactory::getRepository('locks');
+                $model->create(array($lock));
 
-            $model = RepositoryFactory::getRepository('locks');
-            $model->create(array($lock));
-
-            $this->flash->set("Le barillet est bien ajouté.", "success");
-            $this->redirect(WEBROOT . "?controller=locks&action=index");
+                $this->flash->set("Le barillet est bien ajouté.", "success");
+                $this->redirect(WEBROOT . "?controller=locks&action=index");
+            }
 
         } else {
             $model = RepositoryFactory::getRepository('locks');
@@ -79,12 +83,16 @@ class LocksController extends AppController {
         $lock = $model->findById($id);
 
         if(!empty($this->request->data)) {
+            if($this->request->data->length==null){
+                $this->flash->set("Le type n'est pas valide.", "warning");
+                $this->render('index');
+            }else {
+                $lock->setLength($this->request->data->length);
+                $model->update($lock, $id);
 
-            $lock->setLength($this->request->data->length);
-            $model->update($lock, $id);
-
-            $this->flash->set("Le barillet est bien modifié.", "success");
-            $this->redirect(WEBROOT . "?controller=locks&action=index");
+                $this->flash->set("Le barillet est bien modifié.", "success");
+                $this->redirect(WEBROOT . "?controller=locks&action=index");
+            }
 
         } else {
             $this->setHeadline("Modifier un barillet");

@@ -171,7 +171,7 @@
 <script>
     $(document).ready(function(){
         $( "#btn-add" ).click(function() {
-            $('#modal-title').text("Ajouter un ");
+            $('#modal-title').text("Ajouter");
             $('#modal-form').attr('action', $(this).data('action'));
             $('#modal-submit').text("Ajouter");
             $('#modal').modal('show');
