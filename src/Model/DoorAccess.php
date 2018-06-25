@@ -15,8 +15,6 @@ class DoorAccess
     protected $id;
     protected $idUser;
     protected $idRoom;
-    protected $dateDebut;
-    protected $dateFin;
 
     public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
@@ -27,10 +25,5 @@ class DoorAccess
     public function setIdRoom(int $idRoom){ $this->idRoom=$idRoom; }
     public function getIdRoom(){ return $this->idRoom; }
 
-    public function setDateDebut(\Date $dateDebut){ $this->dateDebut=$dateDebut; }
-    public function getDateDebut(){ return $this->dateDebut; }
-
-    public function setDateFin(\Date $dateFin){ $this->dateFin=$dateFin; }
-    public function getDateFin(){ return $this->dateFin; }
 
 }

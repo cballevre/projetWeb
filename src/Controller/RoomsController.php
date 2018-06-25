@@ -57,10 +57,22 @@ class RoomsController extends AppController
             }
         }
 
+        $doorAccesModel = RepositoryFactory::getRepository('doorAccesss');
+        $userModel = RepositoryFactory::getRepository('users');
+        $roomAccesss = $doorAccesModel->findBy('idRoom',$room->getId());
+//        $users = $userModel->findById('idUser',$room->getId());
+
+        $users= array();
+
+        foreach($roomAccesss as $roomAccess){
+            array_push($users,  $userModel->findById($roomAccess->getIdUser()));
+        }
+
         $array = array(
             'doors' => $doors,
             'room'  => $room,
-            'keys'  => $keys
+            'keys'  => $keys,
+            'users' => $users
         );
 
         $this->setHeadline("Salle " . $room->getRoomName());
