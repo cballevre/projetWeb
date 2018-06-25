@@ -49,9 +49,6 @@ class Controller
         ob_start();
         require ROOT .'src/View/'.$this->name.'/'.$action.'.php';
         $getContent = ob_get_clean();
-
-
-
         if(!empty($this->layout)){
             require ROOT. 'src'. DS.'View'.DS.'Layout'.DS. $this->layout .'.php';
         }

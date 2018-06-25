@@ -73,6 +73,7 @@ class UsersController extends AppController
             $this->redirect(WEBROOT . "?controller=users&action=index");
 
         } else {
+
             $model = RepositoryFactory::getRepository('users');
             $user = $model->findAll();
             $this->set(compact('user'));
