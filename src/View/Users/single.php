@@ -67,6 +67,28 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
+                        <table class="table table-striped">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col">Salle</th>
+                                <th scope="col">Étage</th>
+                                <th scope="col">Bâtiment</th>
+                            </thead>
+                            <tbody>
+                            <?php foreach($user->rooms() as $room):?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $room->getId(); ?>">
+                                            <?php echo $room->getId(); ?>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $room->getRoomName()?></td>
+                                    <td><?php echo $room->getFloor()?></td>
+                                    <td><?php echo $room->getBuilding()?></td>
+                                </tr>
+                            <?endforeach;?>
+                            </tbody>
+                        </table>
 
                     </div>
 
