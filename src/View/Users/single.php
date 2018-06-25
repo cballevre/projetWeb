@@ -31,7 +31,7 @@
                             <a class="nav-link active" id="borrowKeychain-tab" data-toggle="tab" href="#borrowKeychain" role="tab">Trousseaux empruntés</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Portes accédées</a>
+                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Salles accédées</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="key-tab" data-toggle="tab" href="#key" role="tab" aria-controls="profile" aria-selected="false">Clés possédées</a>
@@ -78,7 +78,7 @@
                             <?php foreach($user->rooms() as $room):?>
                                 <tr>
                                     <td>
-                                        <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $room->getId(); ?>">
+                                        <a href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(); ?>">
                                             <?php echo $room->getId(); ?>
                                         </a>
                                     </td>
