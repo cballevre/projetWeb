@@ -70,9 +70,8 @@ class DoorsController extends AppController
             $model = RepositoryFactory::getRepository('locks');
             $locks = $model->findAll();
 
-            $this->setHeadline("Ajouter une porte");
             $this->set(compact('locks'));
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 

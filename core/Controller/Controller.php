@@ -55,6 +55,13 @@ class Controller
 
     }
 
+    public function renderWithoutLayout($action) {
+        extract($this->var);
+        ob_start();
+        require ROOT .'src/View/'.$this->name.'/'.$action.'.php';
+        echo ob_get_clean();
+    }
+
     public function renderJSON($json) {
         header('Content-Type: application/json');
         echo $json;

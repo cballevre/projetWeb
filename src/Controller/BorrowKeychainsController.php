@@ -51,9 +51,12 @@ class BorrowKeychainsController extends AppController
             $model = RepositoryFactory::getRepository('borrowKeychains');
             $model->create(array($borrowKeychain));
 
-        }
+            $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
-        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
+        } else {
+            $this->renderWithoutLayout('store');
+        }
 
     }
 
@@ -90,8 +93,6 @@ class BorrowKeychainsController extends AppController
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);
-
-
 
         // mail($borrowKeychain->user()->getEmail(), "Relance de l'emprunt du trousseau n°" . $borrowKeychain->getIdKeychain(), "Votre messsage");
 

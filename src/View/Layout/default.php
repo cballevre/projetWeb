@@ -157,10 +157,7 @@
                 </div>
                 <form id="modal-form" action="" method="post">
                     <div class="modal-body">
-                        <?php $form = file(ROOT."/src/View/".$this->getName()."/store.php");
-                        foreach($form as $form_group) {
-                            echo $form_group;
-                        } ?>
+                        <?php Core\Routing\Dispatcher::loadAction("store", $this); ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
