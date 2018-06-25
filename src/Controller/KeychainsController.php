@@ -16,6 +16,10 @@ use Core\Utils\Serializer;
 class KeychainsController extends AppController
 {
 
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index(){
 
         $model = RepositoryFactory::getRepository('keychains');

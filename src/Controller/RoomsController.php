@@ -17,6 +17,9 @@ use Core\Repositories\RepositoryFactory;
 class RoomsController extends AppController
 {
 
+    public function __construct() {
+        parent::__construct();
+    }
 
     public function index() {
 

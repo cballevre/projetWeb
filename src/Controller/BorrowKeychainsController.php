@@ -14,6 +14,11 @@ use Core\Repositories\RepositoryFactory;
 
 class BorrowKeychainsController extends AppController
 {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index(){
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
@@ -46,9 +51,12 @@ class BorrowKeychainsController extends AppController
             $model = RepositoryFactory::getRepository('borrowKeychains');
             $model->create(array($borrowKeychain));
 
-        }
+            $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
-        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
+        } else {
+            $this->renderWithoutLayout('store');
+        }
 
     }
 

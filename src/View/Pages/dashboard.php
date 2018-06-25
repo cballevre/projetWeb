@@ -46,10 +46,9 @@
                     Accès Rapide
                 </div>
                 <ul class="list-group list-group-flush">
-                    <button type="button" class="list-group-item list-group-item-action">Réaliser un emprunt</button>
-                    <button type="button" class="list-group-item list-group-item-action">Clore un emprunt</button>
+                    <button type="button" class="list-group-item list-group-item-action">Emprunter un trousseau</button>
+                    <button type="button" class="list-group-item list-group-item-action">Rendre un trousseau</button>
                     <button type="button" class="list-group-item list-group-item-action">Prolonger un emprunt</button>
-                    <button type="button" class="list-group-item list-group-item-action">Créer un trousseau</button>
                 </ul>
             </div>
         </div>
