@@ -9,8 +9,5 @@
         <id>3</id>
         <length>30</length>
     </lock>
-    <lock>
-        <id>4</id>
-        <length>40</length>
-    </lock>
-</locks>
+    
+<lock><id>4</id><length>12</length></lock></locks>

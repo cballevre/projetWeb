@@ -65,6 +65,7 @@ class DoorsController extends AppController
             $model = RepositoryFactory::getRepository('doors');
             $model->create(array($door));
 
+            $this->flash->set("La porte est bien ajoutée.", "success");
             $this->redirect(WEBROOT . "?controller=doors&action=index");
         } else {
             $model = RepositoryFactory::getRepository('locks');
@@ -87,6 +88,7 @@ class DoorsController extends AppController
             $model = RepositoryFactory::getRepository('doors');
             $model->update($door, $id);
 
+            $this->flash->set("La porte est bien modifiée.", "success");
             $this->redirect(WEBROOT . "?controller=doors&action=index");
 
         } else {
@@ -110,6 +112,7 @@ class DoorsController extends AppController
         $model = RepositoryFactory::getRepository('doors');
         $model->delete($id);
 
+        $this->flash->set("Une porte a été supprimée.", "info");
         $this->redirect(WEBROOT . "?controller=doors&action=index");
     }
 

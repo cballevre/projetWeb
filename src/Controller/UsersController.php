@@ -70,9 +70,13 @@ class UsersController extends AppController
             $model = RepositoryFactory::getRepository('users');
             $model->create(array($user));
 
+            $this->flash->set("L'utilisateur est bien ajouté.", "success");
             $this->redirect(WEBROOT . "?controller=users&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('users');
+            $user = $model->findAll();
+            $this->set(compact('user'));
             $this->renderWithoutLayout('store');
         }
 
@@ -96,6 +100,7 @@ class UsersController extends AppController
 
         }
 
+        $this->flash->set("Les données de l'utilisateur sont modifiées.", "success");
         $this->redirect(WEBROOT . "?controller=users&action=index");
 
 
@@ -106,6 +111,7 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $model->delete($id);
 
+        $this->flash->set("Un utilisateur a été supprimé.", "info");
         $this->redirect(WEBROOT . "?controller=users&action=index");
     }
 

@@ -55,9 +55,13 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->create(array($key));
 
+            $this->flash->set("La clé est bien ajoutée.", "success");
             $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('keys');
+            $key = $model->findAll();
+            $this->set(compact('key'));
             $this->renderWithoutLayout('store');
         }
     }
@@ -74,10 +78,12 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->update($key, $id);
 
+            $this->flash->set("La clé est bien modifiée.", "success");
             $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
             $this->setHeadline("Modifier une clé");
+            $this->setBack('?controller=keys&action=index');
             $this->set(compact('key'));
             $this->render('update');
         }
@@ -89,6 +95,7 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $model->delete($id);
 
+        $this->flash->set("Une clé a été supprimée.", "info");
         $this->redirect(WEBROOT . "?controller=keys&action=index");
     }
 

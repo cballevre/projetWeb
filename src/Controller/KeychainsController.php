@@ -56,9 +56,13 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
+            $this->flash->set("Le trousseau est bien ajouté.", "success");
             $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('keychains');
+            $keychain = $model->findAll();
+            $this->set(compact('keychain'));
             $this->renderWithoutLayout('store');
         }
     }
@@ -77,6 +81,7 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->update($keychain, $id);
 
+            $this->flash->set("Le trousseau est bien modifié.", "success");
             $this->redirect(WEBROOT. "?controller=keychains&action=index");
 
         } else {
@@ -92,6 +97,7 @@ class KeychainsController extends AppController
         $model = RepositoryFactory::getRepository('keychains');
         $model->delete($id);
 
+        $this->flash->set("Un trousseau a été supprimé.", "info");
         $this->redirect(WEBROOT."?controller=keychains&action=index");
     }
 

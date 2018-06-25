@@ -51,10 +51,14 @@ class BorrowKeychainsController extends AppController
             $model = RepositoryFactory::getRepository('borrowKeychains');
             $model->create(array($borrowKeychain));
 
+            $this->flash->set("L'emprunt est bien ajouté.", "success");
             $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
 
         } else {
+            $model = RepositoryFactory::getRepository('users');
+            $borrowKeychain = $model->findAll();
+            $this->set(compact('borrowKeychain'));
             $this->renderWithoutLayout('store');
         }
 
@@ -74,7 +78,7 @@ class BorrowKeychainsController extends AppController
             $model->update($borrowKeychain, $id);
 
         }
-
+        $this->flash->set("L'emprunt est bien modifié.", "success");
         $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
 
@@ -85,6 +89,7 @@ class BorrowKeychainsController extends AppController
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $model->delete($id);
 
+        $this->flash->set("Un emprunt a été supprimé.", "info");
         $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
     }
