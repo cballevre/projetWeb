@@ -31,7 +31,8 @@ class FlashComponent {
                     '<span aria-hidden="true">&times;</span>'.
                 '</button>'.
             '</div>';
-            unset($flash);
+
+            unset($_SESSION['flash']);
         }
     }
 
