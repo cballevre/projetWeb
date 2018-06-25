@@ -37,11 +37,23 @@ class KeychainsController extends AppController
         $model = RepositoryFactory::getRepository('keychains');
         $keychain = $model->findById($id);
 
-        $this->setHeadline($keychain->getId());
-        $this->setBack('?controller=keychains&action=index');
-        $this->set(compact('keychain'));
-        $this->render('single');
+        $keyAssociations = new KeyAssociation();
+        $keyAssociationsSelected = $keyAssociations->keys($keychain->getId());
 
+        $keys = array();
+        $modelKeys = RepositoryFactory::getRepository('keys');
+        foreach($keyAssociationsSelected as $keyAssociationSelected){
+            array_push($keys,$modelKeys->findById($keyAssociationSelected->getIdKey()));
+        }
+        $array = array(
+            'keys' => $keys,
+            'keychain'  => $keychain
+        );
+
+        $this->setHeadline("Trousseaux " . $keychain->getId());
+        $this->setBack('?controller=keychains&action=index');
+        $this->set(compact('array'));
+        $this->render('single');
     }
 
     public function store() {
@@ -56,6 +68,7 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
+            $this->redirect("?controller=keychains&action=index");
             $this->flash->set("Le trousseau est bien ajouté.", "success");
             $this->redirect(WEBROOT."?controller=keychains&action=index");
 

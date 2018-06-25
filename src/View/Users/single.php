@@ -28,10 +28,13 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="borrowKeychain-tab" data-toggle="tab" href="#borrowKeychain" role="tab">Trousseaux emprunter</a>
+                            <a class="nav-link active" id="borrowKeychain-tab" data-toggle="tab" href="#borrowKeychain" role="tab">Trousseaux empruntés</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Porte accéder</a>
+                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Portes accédées</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="key-tab" data-toggle="tab" href="#key" role="tab" aria-controls="profile" aria-selected="false">Clés possédées</a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +67,52 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
+                        <table class="table table-striped">
+                            <thead>
+                                <th scope="col">#</th>
+                                <th scope="col">Salle</th>
+                                <th scope="col">Étage</th>
+                                <th scope="col">Bâtiment</th>
+                            </thead>
+                            <tbody>
+                            <?php foreach($user->rooms() as $room):?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $room->getId(); ?>">
+                                            <?php echo $room->getId(); ?>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $room->getRoomName()?></td>
+                                    <td><?php echo $room->getFloor()?></td>
+                                    <td><?php echo $room->getBuilding()?></td>
+                                </tr>
+                            <?endforeach;?>
+                            </tbody>
+                        </table>
 
+                    </div>
+
+                    <div class="tab-pane fade" id="key" role="tabpanel" aria-labelledby="key-tab">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">État</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($user->keys() as $key):?>
+                                <tr>
+                                    <td><a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
+                                            <?php echo $key->getId(); ?>
+                                        </a></td>
+                                    <td><?php echo $key->getType()?></td>
+                                    <td><?php echo $key->getEtat()?></td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

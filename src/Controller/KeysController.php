@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\Key;
+use App\Model\KeyAssociation;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 
@@ -26,8 +27,8 @@ class KeysController extends AppController
         $keys = $model->findAll();
 
         $this->setHeadline("Clés");
-        $this->setButtonAdd('?controller=keys&action=store');
-        $this->setButtonImport('?controller=keys&action=import');
+        $this->setButtonAdd(WEBROOT .'?controller=keys&action=store');
+        $this->setButtonImport(WEBROOT .'?controller=keys&action=import');
         $this->set(compact('keys'));
         $this->render('index');
 
@@ -38,10 +39,23 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $key = $model->findById($id);
 
-        $this->setHeadline('Clé '.$key->getId());
-        $this->set(compact('key'));
-        $this->render('single');
+        $keyAssociations = new KeyAssociation();
+        $keyAssociationsSelected = $keyAssociations->keychains($key->getId());
 
+        $keychains = array();
+        $modelKeychains = RepositoryFactory::getRepository('keychains');
+        foreach($keyAssociationsSelected as $keyAssociationSelected){
+            array_push($keychains,$modelKeychains->findById($keyAssociationSelected->getIdKeychain()));
+        }
+        $array = array(
+            'key' => $key,
+            'keychains'  => $keychains
+        );
+
+        $this->setHeadline("Clé " . $key->getId());
+        $this->setBack('?controller=keys&action=index');
+        $this->set(compact('array'));
+        $this->render('single');
     }
 
     public function store() {
