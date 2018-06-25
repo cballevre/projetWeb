@@ -10,6 +10,7 @@
 namespace App\Controller;
 
 use App\Model\Keychain;
+use App\Model\KeyAssociation;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 

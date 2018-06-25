@@ -41,4 +41,4 @@
     <email>avrell@dalton.fr</email>
   </user>
   
-</users>
+<user><enssatPrimaryKey>5</enssatPrimaryKey><ur1identifier>1</ur1identifier><username>jDalton1</username><name>Dalton</name><surname>Joe</surname><phone>5551</phone><status>Student</status><email>joe@dalton.fr</email></user><user><enssatPrimaryKey>6</enssatPrimaryKey><ur1identifier>2</ur1identifier><username>jDalton2</username><name>Dalton</name><surname>Jack</surname><phone>5552</phone><status>Staff</status><email>jack@dalton.fr</email></user></users>

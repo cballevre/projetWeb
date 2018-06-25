@@ -91,9 +91,22 @@ class BorrowKeychainsController extends AppController
 
 
         } else {
-            $model = RepositoryFactory::getRepository('users');
-            $borrowKeychain = $model->findAll();
-            $this->set(compact('borrowKeychain'));
+
+            $usersModel = RepositoryFactory::getRepository('users');
+            $users = $usersModel->findAll();
+
+            $keysModel = RepositoryFactory::getRepository('keys');
+            $keys_preresult = $keysModel->findAll();
+
+            $keys = array();
+
+            foreach ($keys_preresult as $key) {
+                if($key->getEtat() == "Disponible") {
+                    array_push($keys, $key);
+                }
+            }
+
+            $this->set(compact('users', 'keys'));
             $this->renderWithoutLayout('store');
         }
 
