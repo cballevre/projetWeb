@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\Room;
 use App\Model\RoomDoor;
+use App\Model\OpenLock;
 use Core\Repositories\RepositoryFactory;
 
 class RoomsController extends AppController
@@ -45,9 +46,21 @@ class RoomsController extends AppController
         foreach($roomDoorsSelected as $roomDoorSelected){
             array_push($doors,$modelDoors->findById($roomDoorSelected->getIdDoor()));
         }
+
+        $keys = array();
+        $openLock = new OpenLock();
+        $modelKey = RepositoryFactory::getRepository('keys');
+        foreach($doors as $door){
+            $keysId = $openLock->keys($door->getId());
+            foreach($keysId as $keyId){
+                array_push($keys,$modelKey->findById($keyId->getIdKey()));
+            }
+        }
+
         $array = array(
             'doors' => $doors,
-            'room'  => $room
+            'room'  => $room,
+            'keys'  => $keys
         );
 
         $this->setHeadline("Salle " . $room->getRoomName());
