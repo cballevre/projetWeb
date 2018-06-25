@@ -1,4 +1,4 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <keyAssociations>
     <keyAssociation>
         <id>1</id>
@@ -11,4 +11,4 @@
         <idKey>2</idKey>
     </keyAssociation>
 
-</keyAssociations>
+<keyAssociation><id>3</id><idKeychain>16</idKeychain><idKey>2</idKey></keyAssociation><keyAssociation><id>4</id><idKeychain>16</idKeychain><idKey>5</idKey></keyAssociation></keyAssociations>

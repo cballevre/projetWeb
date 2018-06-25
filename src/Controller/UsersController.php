@@ -38,7 +38,6 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $user = $model->findById($id);
 
-
         $this->setHeadline($user->getSurname() . ' ' . $user->getName());
         $this->setBack('?controller=users&action=index');
         $this->set(compact('user'));
@@ -95,6 +94,7 @@ class UsersController extends AppController
             }
 
         } else {
+
             $model = RepositoryFactory::getRepository('users');
             $user = $model->findAll();
             $this->set(compact('user'));

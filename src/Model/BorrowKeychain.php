@@ -43,7 +43,7 @@ class BorrowKeychain {
             'id' => $this->id,
             'idKeychain' => $this->idKeychain,
             'idUser' => $this->idUser,
-            'dateRetour' => $this->dateRetour
+            'dateRetour' => $this->dateRetour->format("Y-m-d\TH:i")
         ];
     }
 }

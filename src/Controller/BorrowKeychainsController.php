@@ -36,14 +36,13 @@ class BorrowKeychainsController extends AppController
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);
 
-        $this->renderJSON(json_encode($borrowKeychain));
+        $this->renderJSON(json_encode($borrowKeychain->jsonSerialize()));
 
     }
 
     public function store() {
 
         if(!empty($this->request->data)) {
-            var_dump($this->request->data);
 
             $borrowKeychain = new BorrowKeychain();
             $borrowKeychain->setIdUser($this->request->data->idUser);
@@ -68,7 +67,7 @@ class BorrowKeychainsController extends AppController
                 var_dump($key_id);
 
                 $key = $keyModel->findById($key_id);
-                $key->setEtat("Emprunter");
+                $key->setEtat("Empruntée");
                 $keyModel->update($key, $key->getId());
 
                 $keyAssociation = new KeyAssociation();
@@ -91,9 +90,22 @@ class BorrowKeychainsController extends AppController
 
 
         } else {
-            $model = RepositoryFactory::getRepository('users');
-            $borrowKeychain = $model->findAll();
-            $this->set(compact('borrowKeychain'));
+
+            $usersModel = RepositoryFactory::getRepository('users');
+            $users = $usersModel->findAll();
+
+            $keysModel = RepositoryFactory::getRepository('keys');
+            $keys_preresult = $keysModel->findAll();
+
+            $keys = array();
+
+            foreach ($keys_preresult as $key) {
+                if($key->getEtat() == "Disponible") {
+                    array_push($keys, $key);
+                }
+            }
+
+            $this->set(compact('users', 'keys'));
             $this->renderWithoutLayout('store');
         }
 
@@ -106,25 +118,64 @@ class BorrowKeychainsController extends AppController
 
         if(!empty($this->request->data)) {
 
-            $borrowKeychain->setIdKeychain($this->request->data->idKeychain);
-            $borrowKeychain->setIdUser($this->request->data->idUser);
             $borrowKeychain->setDateRetour(\DateTime::createFromFormat("Y-m-d\TH:i", $this->request->data->dateRetour));
 
             $model->update($borrowKeychain, $id);
 
-        }
-        $this->flash->set("L'emprunt est bien modifié.", "success");
-        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+            $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
+        }
+        $this->flash->set("L'emprunt a bien été modifié.", "success");
 
     }
 
-    public function destroy($id) {
+    public function return_keychain($id) {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
+        $keychainsModel = RepositoryFactory::getRepository('keychains');
+        $keyAssociationModel = RepositoryFactory::getRepository('keyAssociations');
+        $keyModel = RepositoryFactory::getRepository('keys');
+
+        $borrowKeychain = $model->findById($id);
+        $keychain = $keychainsModel->findById($borrowKeychain->getIdKeychain());
+        $keyAssociations = $keyAssociationModel->findBy("idKeychain", $keychain->getId());
+
+        foreach ($keyAssociations as $keyAssociation) {
+            $key = $keyModel->findById($keyAssociation->getIdKey());
+            $key->setEtat("Disponible");
+            $keyModel->update($key, $keyAssociation->getIdKey());
+            $keyAssociationModel->delete($keyAssociation->getId());
+        }
+
+        $keychainsModel->delete($keychain->getId());
         $model->delete($id);
 
-        $this->flash->set("Un emprunt a été supprimé.", "info");
+        $this->flash->set("Le trousseau a bien été rendu", "success");
+        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
+    }
+
+    public function lost($id) {
+
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $keychainsModel = RepositoryFactory::getRepository('keychains');
+        $keyAssociationModel = RepositoryFactory::getRepository('keyAssociations');
+        $keyModel = RepositoryFactory::getRepository('keys');
+
+        $borrowKeychain = $model->findById($id);
+        $keychain = $keychainsModel->findById($borrowKeychain->getIdKeychain());
+        $keyAssociations = $keyAssociationModel->findBy("idKeychain", $keychain->getId());
+
+        foreach ($keyAssociations as $keyAssociation) {
+            $key = $keyModel->findById($keyAssociation->getIdKey());
+            $key->setEtat("Perdue");
+            $keyModel->update($key, $keyAssociation->getIdKey());
+            $keyAssociationModel->delete($keyAssociation->getId());
+        }
+
+        $model->delete($id);
+
+        $this->flash->set("Modification effectuée", "success");
         $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
 
     }

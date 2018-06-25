@@ -60,7 +60,6 @@ class RoomsController extends AppController
         $doorAccesModel = RepositoryFactory::getRepository('doorAccesss');
         $userModel = RepositoryFactory::getRepository('users');
         $roomAccesss = $doorAccesModel->findBy('idRoom',$room->getId());
-//        $users = $userModel->findById('idUser',$room->getId());
 
         $users= array();
 
