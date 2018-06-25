@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Portes accédées</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="key-tab" data-toggle="tab" href="#key" role="tab" aria-controls="profile" aria-selected="false">Clés possédées</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="tab-content" id="myTabContent">
@@ -65,6 +68,29 @@
                     </div>
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
 
+                    </div>
+
+                    <div class="tab-pane fade" id="key" role="tabpanel" aria-labelledby="key-tab">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">État</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($user->keys() as $key):?>
+                                <tr>
+                                    <td><a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
+                                            <?php echo $key->getId(); ?>
+                                        </a></td>
+                                    <td><?php echo $key->getType()?></td>
+                                    <td><?php echo $key->getEtat()?></td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

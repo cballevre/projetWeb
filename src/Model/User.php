@@ -56,6 +56,32 @@ class User implements \JsonSerializable{
         return $model->findBy('idUser', $this->enssatPrimaryKey);
     }
 
+    public function keys() {
+
+        $result = array();
+
+        $borrowKeychainModel = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychains = $borrowKeychainModel->findBy('idUser', $this->enssatPrimaryKey);
+
+        $keychainModel = RepositoryFactory::getRepository('keychains');
+
+        foreach ($borrowKeychains as $borrowKeychain) {
+
+            $keychain = $keychainModel->findById($borrowKeychain->getIdKeychain());
+
+            $keyAssociations = new KeyAssociation();
+            $keyAssociationsSelected = $keyAssociations->keys($keychain->getId());
+
+            $modelKeys = RepositoryFactory::getRepository('keys');
+            foreach($keyAssociationsSelected as $keyAssociationSelected){
+                array_push($result,$modelKeys->findById($keyAssociationSelected->getIdKey()));
+            }
+        }
+
+        return $result;
+    }
+
+
     public function jsonSerialize() {
         return [
             'enssatPrimaryKey' => $this->enssatPrimaryKey,

@@ -24,4 +24,10 @@
         <etat>Perdue</etat>
         <nbCommande>0</nbCommande>
     </key>
-<key><id>5</id><type>Simple</type><etat>Disponible</etat><nbCommande>0</nbCommande></key></keys>
+    <key>
+        <id>5</id>
+        <type>Simple</type>
+        <etat>Disponible</etat>
+        <nbCommande>0</nbCommande>
+    </key>
+</keys>
