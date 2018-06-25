@@ -9,17 +9,29 @@
 
 namespace App\Controller;
 
+use Core\Repositories\RepositoryFactory;
+
 class PagesController extends AppController
 {
 
     public function dashboard() {
 
-        $var = array(
-            "message" => "test dashboard"
-        );
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychains = $model->findAll();
+
+        $now = new \DateTime('now');
+
+        $borrowKeychainDelays = array();
+
+        foreach ($borrowKeychains as $borrowKeychain) {
+            if($borrowKeychain->getDateRetour() < $now) {
+                array_push($borrowKeychainDelays, $borrowKeychain);
+            }
+        }
+
         $this->setHeadline("Tableau de bord");
-        $this->set($var);
-        $this->render('home');
+        $this->set(compact('borrowKeychainDelays'));
+        $this->render('dashboard');
     }
 
     public function error404() {

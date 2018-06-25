@@ -16,30 +16,12 @@ return array(
     array(
         'title' => 'Emprunts',
         'icon' => 'fas fa-receipt',
-        'children' => array(
-            array(
-                'title' => 'Toutes les emprunts',
-                'route' => '?controller=borrowKeychains&action=index'
-            ),
-            array(
-                'title' => 'Ajouter',
-                'route' => '?controller=borrowKeychains&action=store'
-            )
-        )
+        'route' => '?controller=borrowKeychains&action=index'
     ),
     array(
         'title' => 'Utilisateurs',
         'icon' => 'fa fa-user',
-        'children' => array(
-            array(
-                'title' => 'Toutes les utilisateurs',
-                'route' => '?controller=users&action=index'
-            ),
-            array(
-                'title' => 'Ajouter',
-                'route' => '?controller=users&action=store'
-            )
-        )
+        'route' => '?controller=users&action=index'
     ),
     array(
         'title' => 'Clés',
@@ -68,7 +50,7 @@ return array(
                 'route' => '?controller=doors&action=index'
             ),
             array(
-                'title' => 'Tous les barrilets',
+                'title' => 'Tous les barillets',
                 'route' => '?controller=locks&action=index'
             ),
             array(

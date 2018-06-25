@@ -47,6 +47,7 @@ class XMLRepository {
                 $entity = $serializer->fromXML($child, $this->entityNamespace);
 
                 array_push($this->data, $entity);
+
             }
 
         } else {
@@ -112,6 +113,7 @@ class XMLRepository {
             $xml = simplexml_load_file($path);
 
             foreach ($entities as $entity) {
+
                 $xmlEntity = $xml->addChild($this->singular($this->entityName));
                 $reflect = new \ReflectionClass($entity);
 
@@ -126,9 +128,17 @@ class XMLRepository {
                         $value = $entity->$methodName();
                     }
 
+                    if(gettype($value) == 'object') {
+                        if(get_class($value) == 'DateTime') {
+                            $tmp = $value;
+                            $value = $tmp->getTimestamp();
+                        }
+                    }
+
                     $xmlEntity->addChild($propertyName, $value);
                 }
             }
+
             $xml->saveXML($path);
         }
     }
@@ -153,7 +163,17 @@ class XMLRepository {
                         foreach($reflect->getProperties() as $reflectionProperty) {
                             $propertyName = $reflectionProperty->name;
                             $methodName = 'get' . ucfirst($propertyName);
-                            $child->$propertyName = $entity->$methodName();
+
+                            $value = $entity->$methodName();
+
+                            if(gettype($value) == 'object') {
+                                if(get_class($value) == 'DateTime') {
+                                    $tmp = $value;
+                                    $value = $tmp->getTimestamp();
+                                }
+                            }
+
+                            $child->$propertyName = $value;
                         }
                     }
                 }

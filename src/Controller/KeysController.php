@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\Key;
 use Core\Repositories\RepositoryFactory;
+use Core\Utils\Serializer;
 
 class KeysController extends AppController
 {
@@ -51,7 +52,7 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->create(array($key));
 
-            $this->redirect("/?controller=keys&action=index");
+            $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
             $this->setHeadline("Ajouter une clé");
@@ -73,7 +74,7 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('keys');
             $model->update($key, $id);
 
-            $this->redirect("/?controller=keys&action=index");
+            $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
             $this->setHeadline("Modifier une clé");
@@ -88,10 +89,29 @@ class KeysController extends AppController
         $model = RepositoryFactory::getRepository('keys');
         $model->delete($id);
 
-        $this->redirect("/?controller=keys&action=index");
+        $this->redirect(WEBROOT . "?controller=keys&action=index");
     }
 
     public function import() {
+
+        if($_FILES['import']['type'] == "text/csv") {
+
+            $filename = $_FILES['import']['tmp_name'];
+
+            if(!file_exists($filename) || !is_readable($filename))
+                return FALSE;
+
+            $str_csv = file_get_contents($filename);
+
+            $serializer = new Serializer();
+            $entities = $serializer->fromCSV($str_csv, Key::class);
+
+            $model = RepositoryFactory::getRepository('keys');
+            $model->create($entities);
+
+        }
+
+        $this->redirect(WEBROOT . "?controller=keys&action=index");
 
     }
 }

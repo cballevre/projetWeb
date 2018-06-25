@@ -14,7 +14,7 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Utilisateurt</th>
+                    <th scope="col">Utilisateurs</th>
                     <th scope="col">Trousseaux</th>
                     <th scope="col">Date de retour</th>
                     <th scope="col">Action</th>
@@ -28,10 +28,9 @@
                         <td><?php echo $borrowKeychain->getIdKeychain(); ?></td>
                         <td><?php echo $borrowKeychain->getDateRetour()->format('Y-m-d H:i:s'); ?></td>
                         <td>
-                            <a href="<?php echo WEBROOT; ?>?controller=borrowKeychains&action=update&id=<?php echo $borrowKeychain->getId(); ?>">
-                                <i class="fas fa-edit"></i>
-                            </a>&nbsp;
-                            <a href="<?php echo WEBROOT; ?>?controller=borrowKeychains&action=destroy&id=<?php echo $borrowKeychain->getId(); ?>">
+                            <button type="button" class="btn btn-link btn-sm btn-modif" data-id="<?php echo $borrowKeychain->getId(); ?>"><i class="fas fa-edit"></i></button>
+                            <a href="<?php echo WEBROOT?>?controller=borrowKeychains&action=destroy&id=<?php echo $borrowKeychain->getId(); ?>"
+                               class="btn btn-link btn-sm">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>

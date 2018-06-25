@@ -7,7 +7,7 @@
     <name>Dalton</name>
     <surname>Joe</surname>
     <status>Student</status>
-    <phone>5551fsf</phone>
+    <phone>5551</phone>
     <email>joe@dalton.fr</email>
   </user>
   <user>
@@ -40,14 +40,5 @@
     <phone>5554</phone>
     <email>avrell@dalton.fr</email>
   </user>
-  <user>
-    <enssatPrimaryKey>5</enssatPrimaryKey>
-    <ur1identifier>5</ur1identifier>
-    <username>lluke</username>
-    <name>Luke1</name>
-    <surname>Lucky</surname>
-    <status>Outsider</status>
-    <phone>5555</phone>
-    <email>lucky.luke@fbi.fr</email>
-  </user>
+  
 </users>

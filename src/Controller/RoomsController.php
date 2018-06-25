@@ -24,7 +24,6 @@ class RoomsController extends AppController
 
         $this->setHeadline("Salles");
         $this->setButtonAdd('?controller=rooms&action=store');
-        $this->setButtonImport('?controller=rooms&action=import');
         $this->set(compact('rooms'));
         $this->render('index');
 

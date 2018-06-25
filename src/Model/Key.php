@@ -9,6 +9,8 @@
 
 namespace App\Model;
 
+use Core\Repositories\RepositoryFactory;
+
 class Key
 {
 
@@ -25,9 +27,7 @@ class Key
     public function setId(int $id){ $this->id = $id; }
     public function getId(){ return $this->id; }
 
-    public function setType(string $type){
-        $this->type = $type;
-    }
+    public function setType(string $type){ $this->type = $type; }
     public function getType(){ return $this->type; }
 
     public function setEtat(string $etat){ $this->etat = $etat; }
@@ -39,4 +39,33 @@ class Key
     public function setNbCommande(int $nbCommande){ $this->nbCommande = $nbCommande; }
     public function getNbCommande(){ return $this->nbCommande; }
 
+    public function doors() {
+
+        $result = array();
+
+        $openLocksModel = RepositoryFactory::getRepository('openLocks');
+        $openLocks = $openLocksModel->findBy('idKey', $this->id);
+
+        foreach ($openLocks as $openLock) {
+
+            $doorsModel = RepositoryFactory::getRepository('doors');
+            $doors = $doorsModel->findBy('idLock', $openLock->getIdLock());
+
+            $result = array_merge($result, $doors);
+
+        }
+
+        return $result;
+
+    }
+
+    public function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'type' => $this->type,
+            'etat' => $this->etat,
+            'keyParent' => $this->keyParent,
+            'nbCommande' => $this->nbCommande
+        ];
+    }
 }

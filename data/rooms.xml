@@ -2,11 +2,20 @@
 <rooms>
     <room>
         <id>1</id>
+        <roomName>005V</roomName>
+        <floor>RdC</floor>
+        <building>2</building>
     </room>
     <room>
         <id>2</id>
+        <roomName>137C</roomName>
+        <floor>1er</floor>
+        <building>1</building>
     </room>
     <room>
         <id>3</id>
+        <roomName>321J</roomName>
+        <floor>3ème</floor>
+        <building>3</building>
     </room>
 </rooms>
