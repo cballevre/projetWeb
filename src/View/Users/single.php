@@ -28,10 +28,10 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="borrowKeychain-tab" data-toggle="tab" href="#borrowKeychain" role="tab">Trousseaux emprunter</a>
+                            <a class="nav-link active" id="borrowKeychain-tab" data-toggle="tab" href="#borrowKeychain" role="tab">Trousseaux empruntés</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Porte accéder</a>
+                            <a class="nav-link" id="door-tab" data-toggle="tab" href="#door" role="tab" aria-controls="profile" aria-selected="false">Portes accédées</a>
                         </li>
                     </ul>
                 </div>

@@ -28,6 +28,7 @@ class DoorsController extends AppController
     }
 
     public function single($id) {
+
         $model = RepositoryFactory::getRepository('doors');
         $door = $model->findById($id);
 
