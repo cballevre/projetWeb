@@ -5,11 +5,11 @@
         <idRoom>1</idRoom>
     </roomDoor>
     <roomDoor>
-        <idDoor>1</idDoor>
+        <idDoor>2</idDoor>
         <idRoom>2</idRoom>
     </roomDoor>
     <roomDoor>
-        <idDoor>2</idDoor>
-        <idRoom>2</idRoom>
+        <idDoor>3</idDoor>
+        <idRoom>3</idRoom>
     </roomDoor>
 </roomDoors>
