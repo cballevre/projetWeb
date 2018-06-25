@@ -70,8 +70,12 @@ class UsersController extends AppController
             $model = RepositoryFactory::getRepository('users');
             $model->create(array($user));
 
+            $this->redirect(WEBROOT . "?controller=users&action=index");
+
+        } else {
+            $this->renderWithoutLayout('store');
         }
-        $this->redirect(WEBROOT . "?controller=users&action=index");
+
     }
 
     public function update($id) {
