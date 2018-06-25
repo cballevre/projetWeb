@@ -15,6 +15,11 @@ use Core\Repositories\RepositoryFactory;
 
 class DoorsController extends AppController
 {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index() {
 
         $model = RepositoryFactory::getRepository('doors');

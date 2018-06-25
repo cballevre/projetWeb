@@ -49,6 +49,7 @@
 </head>
 <body>
 <div class="container-fluid">
+
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
@@ -96,6 +97,7 @@
             </div>
         </nav>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <?php $this->flash->render(); ?>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 border-bottom">
                 <h1 class="h2">
                     <?php if(!is_null($this->back)): ?>
@@ -200,7 +202,6 @@
             });
         });
     });
-
 </script>
 </body>
 </html>

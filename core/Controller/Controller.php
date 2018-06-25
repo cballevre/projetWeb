@@ -143,4 +143,14 @@ class Controller
         header("Location: ".$url);
     }
 
+    /**
+     * Permet de charger un composant
+     * @param $name : Nom du composant à charger
+     */
+    public function loadComponent($name)
+    {
+        $component = '\\Core\\Controller\\Component\\'. ucfirst($name) . 'Component';
+        $this->{$name} = new $component();
+
+    }
 }

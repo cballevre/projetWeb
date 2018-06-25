@@ -14,6 +14,11 @@ use Core\Repositories\RepositoryFactory;
 
 class BorrowKeychainsController extends AppController
 {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index(){
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
@@ -85,6 +90,8 @@ class BorrowKeychainsController extends AppController
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);
+
+
 
         // mail($borrowKeychain->user()->getEmail(), "Relance de l'emprunt du trousseau n°" . $borrowKeychain->getIdKeychain(), "Votre messsage");
 
