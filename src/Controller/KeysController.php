@@ -58,8 +58,7 @@ class KeysController extends AppController
             $this->redirect(WEBROOT . "?controller=keys&action=index");
 
         } else {
-            $this->setHeadline("Ajouter une clé");
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 

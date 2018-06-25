@@ -59,9 +59,7 @@ class KeychainsController extends AppController
             $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un trousseau");
-            $this->setBack('?controller=keychains&action=index');
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 
