@@ -59,18 +59,39 @@ class UsersController extends AppController
         if(!empty($this->request->data)) {
 
             $user = new User();
-            $user->setUsername($this->request->data->username);
-            $user->setName($this->request->data->name);
-            $user->setSurname($this->request->data->surname);
-            $user->setPhone($this->request->data->phone);
-            $user->setStatus($this->request->data->status);
-            $user->setEmail($this->request->data->email);
 
-            $model = RepositoryFactory::getRepository('users');
-            $model->create(array($user));
+            if($this->request->data->username==null){
+                $this->flash->set("Le nom d'utilisateur est vide", "warning");
+                $this->render('index');
+            }else if($this->request->data->name==null){
+                $this->flash->set("Le nom n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->surname==null){
+                $this->flash->set("Le prénom n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->phone==null){
+                $this->flash->set("Le numéro de téléphone n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->status==null){
+                $this->flash->set("Le statut n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->email==null) {
+                $this->flash->set("L'adresse mail n'est pas renseignée", "warning");
+                $this->render('index');
+            } else {
+                $user->setUsername($this->request->data->username);
+                $user->setName($this->request->data->name);
+                $user->setSurname($this->request->data->surname);
+                $user->setPhone($this->request->data->phone);
+                $user->setStatus($this->request->data->status);
+                $user->setEmail($this->request->data->email);
 
-            $this->flash->set("L'utilisateur est bien ajouté.", "success");
-            $this->redirect(WEBROOT . "?controller=users&action=index");
+                $model = RepositoryFactory::getRepository('users');
+                $model->create(array($user));
+
+                $this->flash->set("L'utilisateur est bien ajouté.", "success");
+                $this->redirect(WEBROOT . "?controller=users&action=index");
+            }
 
         } else {
 
@@ -88,15 +109,34 @@ class UsersController extends AppController
         $user = $model->findById($id);
 
         if(!empty($this->request->data)) {
+            if($this->request->data->username==null){
+                $this->flash->set("Le nom d'utilisateur est vide", "warning");
+                $this->render('index');
+            }else if($this->request->data->name==null){
+                $this->flash->set("Le nom n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->surname==null){
+                $this->flash->set("Le prénom n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->phone==null){
+                $this->flash->set("Le numéro de téléphone n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->status==null){
+                $this->flash->set("Le statut n'est pas renseigné", "warning");
+                $this->render('index');
+            }else if($this->request->data->email==null) {
+                $this->flash->set("L'adresse mail n'est pas renseignée", "warning");
+                $this->render('index');
+            }else {
+                $user->setUsername($this->request->data->username);
+                $user->setName($this->request->data->name);
+                $user->setSurname($this->request->data->surname);
+                $user->setPhone($this->request->data->phone);
+                $user->setStatus($this->request->data->status);
+                $user->setEmail($this->request->data->email);
 
-            $user->setUsername($this->request->data->username);
-            $user->setName($this->request->data->name);
-            $user->setSurname($this->request->data->surname);
-            $user->setPhone($this->request->data->phone);
-            $user->setStatus($this->request->data->status);
-            $user->setEmail($this->request->data->email);
-
-            $model->update($user, $id);
+                $model->update($user, $id);
+            }
 
         }
 

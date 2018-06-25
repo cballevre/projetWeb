@@ -61,13 +61,18 @@ class DoorsController extends AppController
         if(!empty($this->request->data)) {
 
             $door = new Door();
-            $door->setIdLock($this->request->data->idLock);
+            if($this->request->data->idLock==null){
+                $this->flash->set("Impossible d'ajouter une porte", "warning");
+                $this->render('index');
+            }else {
+                $door->setIdLock($this->request->data->idLock);
 
-            $model = RepositoryFactory::getRepository('doors');
-            $model->create(array($door));
+                $model = RepositoryFactory::getRepository('doors');
+                $model->create(array($door));
 
-            $this->flash->set("La porte est bien ajoutée.", "success");
-            $this->redirect(WEBROOT . "?controller=doors&action=index");
+                $this->flash->set("La porte est bien ajoutée.", "success");
+                $this->redirect(WEBROOT . "?controller=doors&action=index");
+            }
         } else {
             $model = RepositoryFactory::getRepository('locks');
             $locks = $model->findAll();
@@ -84,13 +89,18 @@ class DoorsController extends AppController
 
         if(!empty($this->request->data)) {
 
-            $door->setIdLock($this->request->data->idLock);
+            if($this->request->data->idLock==null){
+                $this->flash->set("Impossible d'ajouter une porte", "warning");
+                $this->render('index');
+            }else {
+                $door->setIdLock($this->request->data->idLock);
 
-            $model = RepositoryFactory::getRepository('doors');
-            $model->update($door, $id);
+                $model = RepositoryFactory::getRepository('doors');
+                $model->update($door, $id);
 
-            $this->flash->set("La porte est bien modifiée.", "success");
-            $this->redirect(WEBROOT . "?controller=doors&action=index");
+                $this->flash->set("La porte est bien modifiée.", "success");
+                $this->redirect(WEBROOT . "?controller=doors&action=index");
+            }
 
         } else {
             $model = RepositoryFactory::getRepository('locks');
