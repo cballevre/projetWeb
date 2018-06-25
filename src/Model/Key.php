@@ -31,19 +31,31 @@ class Key
     public function setEtat(string $etat){ $this->etat = $etat; }
     public function getEtat(){ return $this->etat; }
 
-    public function doors() {
+    public function rooms() {
 
         $result = array();
 
         $openLocksModel = RepositoryFactory::getRepository('openLocks');
         $openLocks = $openLocksModel->findBy('idKey', $this->id);
 
+        $roomsDoorModel = RepositoryFactory::getRepository('roomDoors');
+
+        $roomModel = RepositoryFactory::getRepository('rooms');
+
+        $doorsModel = RepositoryFactory::getRepository('doors');
+
         foreach ($openLocks as $openLock) {
 
-            $doorsModel = RepositoryFactory::getRepository('doors');
             $doors = $doorsModel->findBy('idLock', $openLock->getIdLock());
 
-            $result = array_merge($result, $doors);
+            foreach ($doors as $door){
+                $roomsId = $roomsDoorModel->findBy('idDoor',$door->getId());
+
+                foreach($roomsId as $roomId){
+                    $rooms = $roomModel->findById($roomId->getIdRoom());
+                    array_push($result, $rooms);
+                }
+            }
 
         }
 

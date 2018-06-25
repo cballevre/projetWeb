@@ -15,6 +15,11 @@ use Core\Utils\Serializer;
 
 class KeysController extends AppController
 {
+
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index() {
 
         $model = RepositoryFactory::getRepository('keys');
