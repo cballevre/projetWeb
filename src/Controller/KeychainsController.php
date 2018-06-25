@@ -10,7 +10,6 @@
 namespace App\Controller;
 
 use App\Model\Keychain;
-use App\Model\KeyAssociation;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 
@@ -69,9 +68,13 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
-            $this->redirect("?controller=keychains&action=index");
+            $this->flash->set("Le trousseau est bien ajouté.", "success");
+            $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('keychains');
+            $keychain = $model->findAll();
+            $this->set(compact('keychain'));
             $this->renderWithoutLayout('store');
         }
     }
@@ -90,11 +93,12 @@ class KeychainsController extends AppController
             $model = RepositoryFactory::getRepository('keychains');
             $model->update($keychain, $id);
 
-            $this->redirect("?controller=keychains&action=index");
+            $this->flash->set("Le trousseau est bien modifié.", "success");
+            $this->redirect(WEBROOT. "?controller=keychains&action=index");
 
         } else {
             $this->setHeadline("Modifier un trousseau");
-            $this->setBack('?controller=keychains&action=index');
+            $this->setBack(WEBROOT.'?controller=keychains&action=index');
             $this->set(compact('keychain'));
             $this->render('update');
         }
@@ -105,7 +109,8 @@ class KeychainsController extends AppController
         $model = RepositoryFactory::getRepository('keychains');
         $model->delete($id);
 
-        $this->redirect("?controller=keychains&action=index");
+        $this->flash->set("Un trousseau a été supprimé.", "info");
+        $this->redirect(WEBROOT."?controller=keychains&action=index");
     }
 
     public function import() {
@@ -127,7 +132,7 @@ class KeychainsController extends AppController
 
         }
 
-        $this->redirect("?controller=keychains&action=index");
+        $this->redirect(WEBROOT . "?controller=keychains&action=index");
 
     }
 

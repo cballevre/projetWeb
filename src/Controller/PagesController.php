@@ -25,8 +25,6 @@ class PagesController extends AppController
 
         $now = new \DateTime('now');
 
-        $this->flash->set("L'utilisateur n'est pas connecté", "danger");
-
         $borrowKeychainDelays = array();
 
         foreach ($borrowKeychains as $borrowKeychain) {

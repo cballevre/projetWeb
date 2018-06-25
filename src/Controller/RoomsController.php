@@ -94,9 +94,13 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->create(array($room));
 
+            $this->flash->set("La salle est bien ajoutée.", "success");
             $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
+            $model = RepositoryFactory::getRepository('rooms');
+            $rooms = $model->findAll();
+            $this->set(compact('rooms'));
             $this->renderWithoutLayout('store');
         }
     }
@@ -115,6 +119,7 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('rooms');
             $model->update($room, $id);
 
+            $this->flash->set("La salle est bien modifiée.", "success");
             $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
@@ -130,6 +135,7 @@ class RoomsController extends AppController
         $model = RepositoryFactory::getRepository('rooms');
         $model->delete($id);
 
+        $this->flash->set("Une salle a été supprimée.", "info");
         $this->redirect(WEBROOT . "?controller=rooms&action=index");
     }
 
