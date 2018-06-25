@@ -9,7 +9,7 @@
 <div class="form-group row">
     <label class="col-sm-2 form-control-label text-xs-right"> Utilisateur : </label>
     <div class="col-sm-10">
-        <input type="text" name="idUser" class="form-control boxed" placeholder=""> </div>
+        <input type="text" name="idUser" class="form-control boxed" placeholder="Entrez l'utilisateur"> </div>
 </div>
 <div class="form-group">
     <label for="formGroupExampleInput2">Another label</label>
@@ -18,7 +18,7 @@
 <div class="form-group row">
     <label class="col-sm-2 form-control-label text-xs-right"> Date de retour : </label>
     <div class="col-sm-10">
-        <input type="datetime-local" name="dateRetour" class="form-control boxed" placeholder=""> </div>
+        <input type="datetime-local" name="dateRetour" class="form-control boxed" placeholder="Entrez la date de retour"> </div>
 </div>
 
 

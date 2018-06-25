@@ -64,8 +64,7 @@ class LocksController extends AppController {
             $this->redirect(WEBROOT . "?controller=locks&action=index");
 
         } else {
-            $this->setHeadline("Ajouter un barillet");
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
 
     }
