@@ -21,7 +21,6 @@ class Key
      */
     protected $type;
     protected $etat;
-    protected $nbCommande;
 
     public function setId(int $id){ $this->id = $id; }
     public function getId(){ return $this->id; }
@@ -31,9 +30,6 @@ class Key
 
     public function setEtat(string $etat){ $this->etat = $etat; }
     public function getEtat(){ return $this->etat; }
-
-    public function setNbCommande(int $nbCommande){ $this->nbCommande = $nbCommande; }
-    public function getNbCommande(){ return $this->nbCommande; }
 
     public function doors() {
 
@@ -59,8 +55,7 @@ class Key
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'etat' => $this->etat,
-            'nbCommande' => $this->nbCommande
+            'etat' => $this->etat
         ];
     }
 }
