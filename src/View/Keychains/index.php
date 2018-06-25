@@ -14,8 +14,9 @@
                 <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Création date</th>
-                            <th scope="col">Destruction date</th>
+                            <th scope="col">Date de création</th>
+                            <th scope="col">Date de destruction</th>
+                            <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>

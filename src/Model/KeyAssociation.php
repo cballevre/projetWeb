@@ -9,6 +9,8 @@
 
 namespace App\Model;
 
+use Core\Repositories\RepositoryFactory;
+
 class KeyAssociation
 {
     /** @Id */
@@ -28,5 +30,15 @@ class KeyAssociation
 
     public function getIdMasterKey(){ return $this->idMasterKey;}
     public function setIdMasterKey(int $idMasterKey){ $this->idMasterKey = $idMasterKey; }
+
+    public function keys($id){
+        $model = RepositoryFactory::getRepository('keyAssociations');
+        return $model->findBy('idKeychain', $id);
+    }
+
+    public function keychains($id){
+        $model = RepositoryFactory::getRepository('keyAssociations');
+        return $model->findBy('idKey', $id);
+    }
 
 }

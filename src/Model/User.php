@@ -56,6 +56,80 @@ class User implements \JsonSerializable{
         return $model->findBy('idUser', $this->enssatPrimaryKey);
     }
 
+    public function keys() {
+
+        $result = array();
+
+        $borrowKeychainModel = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychains = $borrowKeychainModel->findBy('idUser', $this->enssatPrimaryKey);
+
+        $keychainModel = RepositoryFactory::getRepository('keychains');
+
+        foreach ($borrowKeychains as $borrowKeychain) {
+
+            $keychain = $keychainModel->findById($borrowKeychain->getIdKeychain());
+
+            $keyAssociations = new KeyAssociation();
+            $keyAssociationsSelected = $keyAssociations->keys($keychain->getId());
+
+            $modelKeys = RepositoryFactory::getRepository('keys');
+            foreach($keyAssociationsSelected as $keyAssociationSelected){
+                array_push($result,$modelKeys->findById($keyAssociationSelected->getIdKey()));
+            }
+        }
+
+        return $result;
+    }
+
+    public function rooms(){
+        $result = array();
+
+
+
+
+        $borrowKeychainModel = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychains = $borrowKeychainModel->findBy('idUser', $this->enssatPrimaryKey);
+
+        $openLocksModel = RepositoryFactory::getRepository('openLocks');
+        $roomsDoorModel = RepositoryFactory::getRepository('roomDoors');
+        $roomModel = RepositoryFactory::getRepository('rooms');
+        $doorsModel = RepositoryFactory::getRepository('doors');
+
+        $keychainModel = RepositoryFactory::getRepository('keychains');
+
+        foreach ($borrowKeychains as $borrowKeychain) {
+
+            $keychain = $keychainModel->findById($borrowKeychain->getIdKeychain());
+
+            $keyAssociations = new KeyAssociation();
+            $keyAssociationsSelected = $keyAssociations->keys($keychain->getId());
+
+            $modelKeys = RepositoryFactory::getRepository('keys');
+            foreach($keyAssociationsSelected as $keyAssociationSelected){
+                $openLocks = $openLocksModel->findBy('idKey', $keyAssociationSelected->getIdKey());
+
+
+                foreach ($openLocks as $openLock) {
+
+                    $doors = $doorsModel->findBy('idLock', $openLock->getIdLock());
+
+                    foreach ($doors as $door){
+                        $roomsId = $roomsDoorModel->findBy('idDoor',$door->getId());
+
+                        foreach($roomsId as $roomId){
+                            $rooms = $roomModel->findById($roomId->getIdRoom());
+                            array_push($result, $rooms);
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return $result;
+    }
+
+
     public function jsonSerialize() {
         return [
             'enssatPrimaryKey' => $this->enssatPrimaryKey,
