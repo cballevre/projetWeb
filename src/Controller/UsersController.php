@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\User;
 use Core\Repositories\RepositoryFactory;
+use Core\Utils\Serializer;
 
 class UsersController extends AppController
 {
@@ -33,10 +34,20 @@ class UsersController extends AppController
         $model = RepositoryFactory::getRepository('users');
         $user = $model->findById($id);
 
+
         $this->setHeadline($user->getSurname() . ' ' . $user->getName());
-        $this->setBack(WEBROOT . '?controller=users&action=index');
+        $this->setBack('?controller=users&action=index');
         $this->set(compact('user'));
         $this->render('single');
+
+    }
+
+    public function singleToJson($id) {
+
+        $model = RepositoryFactory::getRepository('users');
+        $user = $model->findById($id);
+
+        $this->renderJSON(json_encode($user));
 
     }
 
@@ -55,12 +66,8 @@ class UsersController extends AppController
             $model = RepositoryFactory::getRepository('users');
             $model->create(array($user));
 
-            $this->redirect(WEBROOT . "?controller=users&action=index");
-
-        } else {
-            $this->setHeadline("Ajouter un utilisateur");
-            $this->render('store');
         }
+        $this->redirect(WEBROOT . "?controller=users&action=index");
     }
 
     public function update($id) {
@@ -77,19 +84,12 @@ class UsersController extends AppController
             $user->setStatus($this->request->data->status);
             $user->setEmail($this->request->data->email);
 
-
-
-            $model = RepositoryFactory::getRepository('users');
             $model->update($user, $id);
 
-            $this->redirect(WEBROOT . "?controller=users&action=index");
-
-        } else {
-            $this->setHeadline("Modifier un utilisateur");
-            $this->setBack('?controller=users&action=index');
-            $this->set(compact('user'));
-            $this->render('update');
         }
+
+        $this->redirect(WEBROOT . "?controller=users&action=index");
+
 
     }
 
@@ -103,5 +103,26 @@ class UsersController extends AppController
 
     public function import() {
 
+        if($_FILES['import']['type'] == "text/csv") {
+
+            $filename = $_FILES['import']['tmp_name'];
+
+            if(!file_exists($filename) || !is_readable($filename))
+                return FALSE;
+
+            $str_csv = file_get_contents($filename);
+
+            $serializer = new Serializer();
+            $entities = $serializer->fromCSV($str_csv, User::class);
+
+            $model = RepositoryFactory::getRepository('users');
+            $model->create($entities);
+
+        }
+
+        $this->redirect(WEBROOT . "?controller=users&action=index");
+
     }
+
+
 }

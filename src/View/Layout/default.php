@@ -39,7 +39,7 @@
 
     <!-- Javascripts
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <!-- Favicon
@@ -104,56 +104,11 @@
                     <?php echo $this->getHeadline(); ?></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-
                         <?php if(!is_null($this->button_add)): ?>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addButton">
-                            Ajouter
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="addButton" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <?php
-
-
-                                        $couc = file(ROOT."/src/View/".$this->getName()."/store.php");
-
-
-                                        // display file line by line
-                                        foreach($couc as $line_num => $line) {
-                                            echo $line;
-                                        }
-
-
-
-                                        ?>
-
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-
-                        <?php if(!is_null($this->button_add)): ?>
-                            <a href="<?php echo WEBROOT . $this->button_add; ?>" class="btn btn-sm btn-outline-secondary">Ajouter</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" id="btn-add" data-action="<?php echo WEBROOT . $this->button_add; ?> ">Ajouter</button>
                         <?php endif; ?>
                         <?php if(!is_null($this->button_import)): ?>
-                            <a href="<?php echo WEBROOT . $this->button_import; ?>" class="btn btn-sm btn-outline-secondary">Importer</a>
+                            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#modal-import">Importer</button>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -162,9 +117,90 @@
         </main>
     </div>
 </div>
+<?php if(!is_null($this->button_import)): ?>
+    <div class="modal fade" id="modal-import" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form enctype="multipart/form-data" action="<?php echo WEBROOT; ?>?controller=<?php echo $this->name;?>&action=import" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Votre fichier d'import au format csv</label>
+                            <input type="file" class="form-control-file" name="import">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Importer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<?php if(!is_null($this->button_add)): ?>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="modal-form" action="" method="post">
+                    <div class="modal-body">
+                        <?php $form = file(ROOT."/src/View/".$this->getName()."/store.php");
+                        foreach($form as $form_group) {
+                            echo $form_group;
+                        } ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary" id="modal-submit">Créer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+    $(document).ready(function(){
+        $( "#btn-add" ).click(function() {
+            $('#modal-title').text("Ajouter un ");
+            $('#modal-form').attr('action', $(this).data('action'));
+            $('#modal-submit').text("Ajouter");
+            $('#modal').modal('show');
+        });
+    });
+    $(document).ready(function(){
+        $( ".btn-modif" ).click(function() {
+            var id =  $(this).data('id');
+
+            $.ajax({
+                type : 'GET',
+                url : "<?php echo WEBROOT ?>?controller=<?php echo $this->getName() ?>&action=singleToJson&id=" + id,
+                dataType:'json',
+                success : function(data) {
+                    $('#modal-title').text("Modifier " + data.surname + " " + data.name);
+                    Object.keys(data).forEach(function (key) {
+                        $(".modal-body").find("input[name=" + key + "]").attr('value', data[key]);
+                    });
+                    $('#modal-form').attr('action', "<?php echo WEBROOT ?>?controller=<?php echo $this->getName() ?>&action=update&id=" + id);
+                    $('#modal-submit').text("Modifier");
+                    $('#modal').modal('show');
+                },
+                error : function(request,error)
+                {}
+            });
+        });
+    });
+
+</script>
 </body>
-<script
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
-        crossorigin="anonymous"></script>
 </html>

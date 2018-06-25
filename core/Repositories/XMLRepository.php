@@ -47,6 +47,7 @@ class XMLRepository {
                 $entity = $serializer->fromXML($child, $this->entityNamespace);
 
                 array_push($this->data, $entity);
+
             }
 
         } else {
@@ -112,6 +113,7 @@ class XMLRepository {
             $xml = simplexml_load_file($path);
 
             foreach ($entities as $entity) {
+
                 $xmlEntity = $xml->addChild($this->singular($this->entityName));
                 $reflect = new \ReflectionClass($entity);
 

@@ -22,7 +22,6 @@ class LocksController extends AppController {
 
         $this->setHeadline("Barillets");
         $this->setButtonAdd('?controller=locks&action=store');
-        $this->setButtonImport('?controller=locks&action=import');
         $this->set(compact('locks'));
         $this->render('index');
 

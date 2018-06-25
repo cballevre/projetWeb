@@ -9,8 +9,9 @@
 
 namespace App\Model;
 
-class User
-{
+use Core\Repositories\RepositoryFactory;
+
+class User implements \JsonSerializable{
     /**
      * @Id
      */
@@ -49,5 +50,23 @@ class User
 
     public function setEmail(string $email) { $this->email = $email; }
     public function getEmail() { return $this->email; }
+
+    public function borrowKeychains(){
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        return $model->findBy('idUser', $this->enssatPrimaryKey);
+    }
+
+    public function jsonSerialize() {
+        return [
+            'enssatPrimaryKey' => $this->enssatPrimaryKey,
+            'ur1identifier' => $this->ur1identifier,
+            'username' => $this->username,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'phone' => $this->phone,
+            'status' => $this->status,
+            'email' => $this->email,
+        ];
+    }
 
 }
