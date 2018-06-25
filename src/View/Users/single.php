@@ -9,7 +9,6 @@
 
 
 <section class="mt-4">
-
     <div class="row">
         <div class="col-3">
             <div class="card">
@@ -25,6 +24,7 @@
         </div>
         <div class="col-8">
             <div class="card text-center">
+
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -38,6 +38,8 @@
                         </li>
                     </ul>
                 </div>
+
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="borrowKeychain" role="tabpanel" aria-labelledby="borrowKeychain-tab">
                         <table class="table table-striped">
@@ -66,6 +68,8 @@
                             </tbody>
                         </table>
                     </div>
+
+
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
                         <table class="table table-striped">
                             <thead>
@@ -86,10 +90,9 @@
                                     <td><?php echo $room->getFloor()?></td>
                                     <td><?php echo $room->getBuilding()?></td>
                                 </tr>
-                            <?endforeach;?>
+                            <?php endforeach;?>
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="tab-pane fade" id="key" role="tabpanel" aria-labelledby="key-tab">
@@ -114,6 +117,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>
