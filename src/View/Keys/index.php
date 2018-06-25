@@ -33,10 +33,10 @@
                                 <td>
                                     <?php if($key->getType() == "Total"): ?>
 
-                                    <?php else: foreach ($key->doors() as $door): ?>
+                                    <?php else: foreach ($key->rooms() as $room): ?>
                                         <a class="btn btn-info btn-sm"
-                                           href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(); ?>"
-                                           role="button">Porte n°<?php echo $door->getId(); ?></a>
+                                           href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(); ?>"
+                                           role="button">Salle <?php echo $room->getRoomName(); ?></a>
                                     <?php endforeach; endif; ?>
                                 </td>
                                 <td>
