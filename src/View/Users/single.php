@@ -7,7 +7,6 @@
  */?>
 
 <section class="mt-4">
-
     <div class="row">
         <div class="col-3">
             <div class="card">
@@ -23,6 +22,7 @@
         </div>
         <div class="col-8">
             <div class="card text-center">
+
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -36,6 +36,8 @@
                         </li>
                     </ul>
                 </div>
+
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="borrowKeychain" role="tabpanel" aria-labelledby="borrowKeychain-tab">
                         <table class="table table-striped">
@@ -49,7 +51,9 @@
                             <tbody>
                             <?php foreach ($user->borrowKeychains() as $borrowKeychain): ?>
                                 <tr>
-                                    <td><?php echo $borrowKeychain->getIdKeychain(); ?></td>
+                                    <td><a href="<?php echo WEBROOT; ?>?controller=keychains&action=single&id=<?php echo $borrowKeychain->getIdKeychain();?>">
+                                            Trousseau n°<?php echo $borrowKeychain->getIdKeychain(); ?>
+                                        </a></td>
                                     <td><?php echo $borrowKeychain->getDateRetour()->format('Y-m-d H:i:s'); ?></td>
                                     <td>
                                         <a href="<?php echo WEBROOT; ?>?controller=borrowKeychains&action=update&id=<?php echo $borrowKeychain->getId(); ?>">
@@ -64,6 +68,8 @@
                             </tbody>
                         </table>
                     </div>
+
+
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
                         <table class="table table-striped">
                             <thead>
@@ -73,21 +79,20 @@
                             <th scope="col">Bâtiment</th>
                             </thead>
                             <tbody>
-                            <?php foreach($user->rooms() as $room): ?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(); ?>">
-                                        <?php echo $room->getId(); ?>
-                                    </a>
-                                </td>
-                                <td><?php echo $room->getRoomName(); ?></td>
-                                <td><?php echo $room->getFloor(); ?></td>
-                                <td><?php echo $room->getBuilding(); ?></td>
-                            </tr>
+                            <?php foreach($user->rooms() as $room):?>
+                                <tr>
+                                    <td>
+                                        <a href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(); ?>">
+                                            <?php echo $room->getId(); ?>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $room->getRoomName()?></td>
+                                    <td><?php echo $room->getFloor()?></td>
+                                    <td><?php echo $room->getBuilding()?></td>
+                                </tr>
                             <?php endforeach;?>
                             </tbody>
                         </table>
-
                     </div>
 
                     <div class="tab-pane fade" id="key" role="tabpanel" aria-labelledby="key-tab">
@@ -103,7 +108,7 @@
                             <?php foreach($user->keys() as $key):?>
                                 <tr>
                                     <td><a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
-                                            <?php echo $key->getId(); ?>
+                                           Clé n°<?php echo $key->getId(); ?>
                                         </a></td>
                                     <td><?php echo $key->getType(); ?></td>
                                     <td><?php echo $key->getEtat(); ?></td>
@@ -112,6 +117,7 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </div>

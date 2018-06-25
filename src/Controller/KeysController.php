@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\Key;
 use App\Model\KeyAssociation;
+use App\Model\OpenLock;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 
@@ -56,6 +57,39 @@ class KeysController extends AppController
         $this->setBack('?controller=keys&action=index');
         $this->set(compact('array'));
         $this->render('single');
+    }
+
+    public function linkLock($id){
+
+        $model = RepositoryFactory::getRepository('keys');
+        $key = $model->findById($id);
+
+        if(!empty($this->request->data)) {
+
+            $openLocks = new OpenLock();
+
+            $openLocks->setIdKey($this->request->data->idKey);
+            $openLocks->setIdLock($this->request->data->idLock);
+
+            $model = RepositoryFactory::getRepository('openLocks');
+            $model->create(array($openLocks));
+
+            $this->redirect(WEBROOT . "?controller=keys&action=single&id=" . $key->getId());
+
+        } else {
+            $model = RepositoryFactory::getRepository('locks');
+            $locks = $model->findAll();
+
+            $array = array(
+                'key'  => $key,
+                'locks' => $locks
+            );
+
+            $this->setHeadline("Associer un barillet à la clé n°" . $key->getId() . " : ");
+            $this->set(compact('array'));
+            $this->render('linkLock');
+        }
+
     }
 
     public function store() {
