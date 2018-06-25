@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Model\BorrowKeychain;
+use App\Model\Keychain;
 use Core\Repositories\RepositoryFactory;
 
 class BorrowKeychainsController extends AppController
@@ -23,25 +25,70 @@ class BorrowKeychainsController extends AppController
         $this->render('index');
     }
 
-    public function single() {
+    public function singleToJson($id) {
 
-        // TODO
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychain = $model->findById($id);
+
+        $this->renderJSON(json_encode($borrowKeychain));
+
     }
 
     public function store() {
 
-        // TODO
+        if(!empty($this->request->data)) {
+
+            $borrowKeychain = new BorrowKeychain();
+            $borrowKeychain->setIdKeychain($this->request->data->idKeychain);
+            $borrowKeychain->setIdUser($this->request->data->idUser);
+            $borrowKeychain->setDateRetour(\DateTime::createFromFormat("Y-m-d\TH:i", $this->request->data->dateRetour));
+
+            $model = RepositoryFactory::getRepository('borrowKeychains');
+            $model->create(array($borrowKeychain));
+
+        }
+
+        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
     }
 
-    public function update() {
+    public function update($id) {
 
-        // TODO
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychain = $model->findById($id);
+
+        if(!empty($this->request->data)) {
+
+            $borrowKeychain->setIdKeychain($this->request->data->idKeychain);
+            $borrowKeychain->setIdUser($this->request->data->idUser);
+            $borrowKeychain->setDateRetour(\DateTime::createFromFormat("Y-m-d\TH:i", $this->request->data->dateRetour));
+
+            $model->update($borrowKeychain, $id);
+
+        }
+
+        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
 
     }
 
-    public function destroy() {
+    public function destroy($id) {
 
-        // TODO
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $model->delete($id);
+
+        $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+
+    }
+
+    public function reminder($id) {
+
+        $model = RepositoryFactory::getRepository('borrowKeychains');
+        $borrowKeychain = $model->findById($id);
+
+        // mail($borrowKeychain->user()->getEmail(), "Relance de l'emprunt du trousseau n°" . $borrowKeychain->getIdKeychain(), "Votre messsage");
+
+        $this->redirect(WEBROOT . "?controller=pages&action=dashboard");
 
     }
 }

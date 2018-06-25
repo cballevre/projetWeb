@@ -1,31 +1,31 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <keys>
     <key>
         <id>1</id>
         <type>Simple</type>
-        <etat>Free</etat>
-        <keyParent></keyParent>
-        <nbCommande>0</nbCommande>
+        <etat>Disponible</etat>
+        <keyParent>1</keyParent>
+        <nbCommande/>
     </key>
     <key>
         <id>2</id>
         <type>Simple</type>
-        <etat>Free</etat>
+        <etat>Disponible</etat>
         <keyParent>1</keyParent>
         <nbCommande>0</nbCommande>
     </key>
     <key>
         <id>3</id>
         <type>Partiel</type>
-        <etat>Borrowed</etat>
-        <keyParent></keyParent>
+        <etat>Emprunt&#xE9;e</etat>
+        <keyParent>3</keyParent>
         <nbCommande>0</nbCommande>
     </key>
     <key>
         <id>4</id>
         <type>Total</type>
-        <etat>Lost</etat>
+        <etat>Perdue</etat>
         <keyParent>0</keyParent>
         <nbCommande>0</nbCommande>
     </key>
-</keys>
+<key><id>5</id><type>Simple</type><etat>Disponible</etat><keyParent>1</keyParent><nbCommande>0</nbCommande></key></keys>

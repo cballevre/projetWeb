@@ -11,6 +11,6 @@ class Lock
     public function setId(int $id){ $this->id = $id; }
     public function getId(){ return $this->id; }
 
-    public function setLength(float $length){ $this->length = $length; }
+    public function setLength(int $length){ $this->length = $length; }
     public function getLength(){ return $this->length; }
 }

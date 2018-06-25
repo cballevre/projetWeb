@@ -22,7 +22,7 @@ class Dispatcher
      * Repartit les différente action en fonction de l'url
      * @param $url: L'url transmise par l'utilisateur
      */
-    public function __construct(){
+    public function __construct() {
 
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);

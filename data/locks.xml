@@ -1,13 +1,10 @@
-<?xml version='1.0' standalone='yes'?>
+<?xml version="1.0" standalone="yes"?>
 <locks>
     <lock>
         <id>1</id>
         <length>10</length>
     </lock>
-    <lock>
-        <id>2</id>
-        <length>20</length>
-    </lock>
+    
     <lock>
         <id>3</id>
         <length>30</length>

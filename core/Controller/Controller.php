@@ -52,8 +52,13 @@ class Controller
         if(!empty($this->layout)){
             require ROOT. 'src'. DS.'View'.DS.'Layout'.DS. $this->layout .'.php';
         }
+
     }
 
+    public function renderJSON($json) {
+        header('Content-Type: application/json');
+        echo $json;
+    }
     /**
      * Permet de changer la View pour l'action
      * @param $layout : Layout choisit
@@ -70,6 +75,14 @@ class Controller
     private function setName() {
         $name = str_replace('App','',str_replace('\\', '', str_replace('Controller','',get_class($this))));
         return $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**

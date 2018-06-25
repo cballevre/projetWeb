@@ -11,6 +11,7 @@ namespace App\Controller;
 
 use App\Model\Keychain;
 use Core\Repositories\RepositoryFactory;
+use Core\Utils\Serializer;
 
 class KeychainsController extends AppController
 {
@@ -33,7 +34,8 @@ class KeychainsController extends AppController
         $keychain = $model->findById($id);
 
         $this->setHeadline($keychain->getId());
-        $this->set(compact('keychains'));
+        $this->setBack('?controller=keychains&action=index');
+        $this->set(compact('keychain'));
         $this->render('single');
 
     }
@@ -43,16 +45,18 @@ class KeychainsController extends AppController
         if(!empty($this->request->data)) {
 
             $keychain = new Keychain();
-            $keychain->setCreationDate($this->request->data->creationDate);
-            $keychain->setDestructionDate($this->request->data->destructionDate);
+
+            $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
+            $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
 
             $model = RepositoryFactory::getRepository('keychains');
             $model->create(array($keychain));
 
-            $this->redirect("/?controller=keychains&action=index");
+            $this->redirect(WEBROOT."?controller=keychains&action=index");
 
         } else {
             $this->setHeadline("Ajouter un trousseau");
+            $this->setBack('?controller=keychains&action=index');
             $this->render('store');
         }
     }
@@ -64,21 +68,51 @@ class KeychainsController extends AppController
 
         if(!empty($this->request->data)) {
 
-            $keychain->setCreationDate($this->request->data->creationDate);
-            $keychain->setDestructionDate($this->request->data->destructionDate);
 
-
+            $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
+            $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
 
             $model = RepositoryFactory::getRepository('keychains');
             $model->update($keychain, $id);
 
-            $this->redirect("/?controller=keychains&action=index");
+            $this->redirect(WEBROOT. "?controller=keychains&action=index");
 
         } else {
             $this->setHeadline("Modifier un trousseau");
-            $this->set(compact('keychains'));
+            $this->setBack('?controller=keychains&action=index');
+            $this->set(compact('keychain'));
             $this->render('update');
         }
+
+    }
+    public function destroy($id) {
+
+        $model = RepositoryFactory::getRepository('keychains');
+        $model->delete($id);
+
+        $this->redirect(WEBROOT."?controller=keychains&action=index");
+    }
+
+    public function import() {
+
+        if($_FILES['import']['type'] == "text/csv") {
+
+            $filename = $_FILES['import']['tmp_name'];
+
+            if(!file_exists($filename) || !is_readable($filename))
+                return FALSE;
+
+            $str_csv = file_get_contents($filename);
+
+            $serializer = new Serializer();
+            $entities = $serializer->fromCSV($str_csv, Keychain::class);
+
+            $model = RepositoryFactory::getRepository('keychains');
+            $model->create($entities);
+
+        }
+
+        $this->redirect(WEBROOT . "?controller=keychains&action=index");
 
     }
 
