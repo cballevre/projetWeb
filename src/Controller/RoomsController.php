@@ -85,8 +85,7 @@ class RoomsController extends AppController
             $this->redirect(WEBROOT . "?controller=rooms&action=index");
 
         } else {
-            $this->setHeadline("Ajouter une porte");
-            $this->render('store');
+            $this->renderWithoutLayout('store');
         }
     }
 
