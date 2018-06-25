@@ -11,17 +11,12 @@
         <div class="form-group row">
             <label class="col-sm-2 form-control-label text-xs-right"> Type de clé : </label>
             <div class="col-sm-10">
-                <input type="text" name="type" class="form-control boxed" placeholder="" value="<?php echo $key->getType();?>"> </div>
+                <input type="text" name="type" class="form-control boxed"  value="<?php echo $key->getType();?>" required> </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 form-control-label text-xs-right"> État : </label>
             <div class="col-sm-10">
-                <input type="text" name="etat" class="form-control boxed" placeholder="" value="<?php echo $key->getEtat();?>"> </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 form-control-label text-xs-right"> Nombre de clé à commander : </label>
-            <div class="col-sm-10">
-                <input type="text" name="nbCommande" class="form-control boxed" placeholder="" value="<?php echo $key->getNbCommande();?>"> </div>
+                <input type="text" name="etat" class="form-control boxed"  value="<?php echo $key->getEtat();?>" required> </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-10 col-sm-offset-2">
