@@ -6,8 +6,6 @@
  * Time: 15:34
  */?>
 
-
-
 <section class="mt-4">
     <div class="row">
         <div class="col-3">
@@ -75,10 +73,10 @@
                     <div class="tab-pane fade" id="door" role="tabpanel" aria-labelledby="door-tab">
                         <table class="table table-striped">
                             <thead>
-                                <th scope="col">#</th>
-                                <th scope="col">Salle</th>
-                                <th scope="col">Étage</th>
-                                <th scope="col">Bâtiment</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Salle</th>
+                            <th scope="col">Étage</th>
+                            <th scope="col">Bâtiment</th>
                             </thead>
                             <tbody>
                             <?php foreach($user->rooms() as $room):?>
@@ -112,8 +110,8 @@
                                     <td><a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
                                            Clé n°<?php echo $key->getId(); ?>
                                         </a></td>
-                                    <td><?php echo $key->getType()?></td>
-                                    <td><?php echo $key->getEtat()?></td>
+                                    <td><?php echo $key->getType(); ?></td>
+                                    <td><?php echo $key->getEtat(); ?></td>
                                 </tr>
                             <?php endforeach;?>
                             </tbody>
