@@ -20,17 +20,22 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($keychains as $keychain): ?>
+                <?php foreach($keychains as $keychain): ?>
                     <tr>
                         <td>
-                            <a href="<?php echo WEBROOT?>?controller=keychains&action=single&id=<?php echo $keychain->getId()?>">
+                            <a href="<?php echo WEBROOT ?>?controller=keychains&action=single&id=<?php echo $keychain->getId(
+                            ) ?>">
                                 <?php echo $keychain->getId(); ?>
                             </a>
                         </td>
-                        <td><?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s'); ?></td>
-                        <td><?php echo $keychain->getDestructionDate()->format('Y-m-d H:i:s'); ?></td>
+                        <td><?php echo $keychain->getCreationDate()->format(
+                                'Y-m-d H:i:s'
+                            ); ?></td>
+                        <td><?php echo $keychain->getDestructionDate()->format(
+                                'Y-m-d H:i:s'
+                            ); ?></td>
                     </tr>
-                <?php endforeach;?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

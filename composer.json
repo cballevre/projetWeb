@@ -1,11 +1,11 @@
 {
-    "name": "cballevre/projet-web",
-    "authors": [
-        {
-            "name": "cballevre",
-            "email": "celestin.ballevre@gmail.com"
-        }
-    ],
-    "require": {},
-    "require-dev": {}
+  "name": "cballevre/projet-web",
+  "authors": [
+    {
+      "name": "cballevre",
+      "email": "celestin.ballevre@gmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {}
 }

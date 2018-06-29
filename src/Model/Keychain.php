@@ -18,12 +18,23 @@ class Keychain
     protected $creationDate;
     protected $destructionDate;
 
-    public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
-    public function setCreationDate(\DateTime $date){ $this->creationDate=$date; }
-    public function getCreationDate(){ return $this->creationDate; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function setDestructionDate(\DateTime $date){ $this->destructionDate=$date; }
-    public function getDestructionDate(){ return $this->destructionDate; }
+    public function getCreationDate() { return $this->creationDate; }
+
+    public function setCreationDate(\DateTime $date)
+    {
+        $this->creationDate
+            = $date;
+    }
+
+    public function getDestructionDate() { return $this->destructionDate; }
+
+    public function setDestructionDate(\DateTime $date)
+    {
+        $this->destructionDate
+            = $date;
+    }
 }

@@ -18,22 +18,33 @@ class KeyAssociation
     protected $idKeychain;
     protected $idKey;
 
-    public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
-    public function getIdKeychain(){ return $this->idKeychain; }
-    public function setIdKeychain(int $idKeychain){ $this->idKeychain = $idKeychain; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function getIdKey(){ return $this->idKey; }
-    public function setIdKey(int $idKey){ $this->idKey = $idKey; }
+    public function getIdKeychain() { return $this->idKeychain; }
 
-    public function keys($id){
+    public function setIdKeychain(int $idKeychain)
+    {
+        $this->idKeychain
+            = $idKeychain;
+    }
+
+    public function getIdKey() { return $this->idKey; }
+
+    public function setIdKey(int $idKey) { $this->idKey = $idKey; }
+
+    public function keys($id)
+    {
         $model = RepositoryFactory::getRepository('keyAssociations');
+
         return $model->findBy('idKeychain', $id);
     }
 
-    public function keychains($id){
+    public function keychains($id)
+    {
         $model = RepositoryFactory::getRepository('keyAssociations');
+
         return $model->findBy('idKey', $id);
     }
 

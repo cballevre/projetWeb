@@ -3,26 +3,25 @@
     <key>
         <id>1</id>
         <type>Simple</type>
-        <etat>Disponible</etat>
+        <etat>Perdue</etat>
         <nbCommande/>
     </key>
     <key>
         <id>2</id>
         <type>Simple</type>
-        <etat>Emprunter</etat>
+        <etat>Perdue</etat>
         <nbCommande>0</nbCommande>
     </key>
     <key>
         <id>3</id>
         <type>Partiel</type>
-        <etat>Emprunt&#xE9;e</etat>
+        <etat>Perdue</etat>
         <nbCommande>0</nbCommande>
     </key>
     <key>
         <id>4</id>
         <type>Total</type>
-        <etat>Perdue</etat>
+        <etat>Disponible</etat>
         <nbCommande>0</nbCommande>
     </key>
-    
 </keys>

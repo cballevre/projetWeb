@@ -9,19 +9,21 @@
 
 namespace App\Controller;
 
-use App\Model\Keychain;
 use App\Model\KeyAssociation;
+use App\Model\Keychain;
 use Core\Repositories\RepositoryFactory;
 use Core\Utils\Serializer;
 
 class KeychainsController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index(){
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('keychains');
         $keychains = $model->findAll();
@@ -33,7 +35,8 @@ class KeychainsController extends AppController
         $this->render('index');
     }
 
-    public function single($id) {
+    public function single($id)
+    {
 
         $model = RepositoryFactory::getRepository('keychains');
         $keychain = $model->findById($id);
@@ -43,12 +46,14 @@ class KeychainsController extends AppController
 
         $keys = array();
         $modelKeys = RepositoryFactory::getRepository('keys');
-        foreach($keyAssociationsSelected as $keyAssociationSelected){
-            array_push($keys,$modelKeys->findById($keyAssociationSelected->getIdKey()));
+        foreach($keyAssociationsSelected as $keyAssociationSelected) {
+            array_push(
+                $keys, $modelKeys->findById($keyAssociationSelected->getIdKey())
+            );
         }
         $array = array(
             'keys' => $keys,
-            'keychain'  => $keychain
+            'keychain' => $keychain
         );
 
         $this->setHeadline("Trousseaux " . $keychain->getId());
@@ -57,28 +62,47 @@ class KeychainsController extends AppController
         $this->render('single');
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $keychain = new Keychain();
 
-            if($this->request->data->destructionDate==null){
-                $this->flash->set("La date de destruction n'est pas valide.", "warning");
+            if($this->request->data->destructionDate == null) {
+                $this->flash->set(
+                    "La date de destruction n'est pas valide.", "warning"
+                );
                 $this->render('index');
-            }else if($this->request->data->creationDate==null){
-                $this->flash->set("La date de création n'est pas valide.", "warning");
-                $this->render('index');
-            }else {
+            } else {
+                if($this->request->data->creationDate == null) {
+                    $this->flash->set(
+                        "La date de création n'est pas valide.", "warning"
+                    );
+                    $this->render('index');
+                } else {
 
-                $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
-                $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
+                    $keychain->setCreationDate(
+                        \DateTime::createFromFormat(
+                            "Y-m-d H:i:s", $this->request->data->creationDate
+                        )
+                    );
+                    $keychain->setDestructionDate(
+                        \DateTime::createFromFormat(
+                            "Y-m-d H:i:s", $this->request->data->destructionDate
+                        )
+                    );
 
-                $model = RepositoryFactory::getRepository('keychains');
-                $model->create(array($keychain));
+                    $model = RepositoryFactory::getRepository('keychains');
+                    $model->create(array($keychain));
 
-                $this->flash->set("Le trousseau est bien ajouté.", "success");
-                $this->redirect(WEBROOT . "?controller=keychains&action=index");
+                    $this->flash->set(
+                        "Le trousseau est bien ajouté.", "success"
+                    );
+                    $this->redirect(
+                        WEBROOT . "?controller=keychains&action=index"
+                    );
+                }
             }
 
         } else {
@@ -89,56 +113,79 @@ class KeychainsController extends AppController
         }
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('keychains');
         $keychain = $model->findById($id);
 
         if(!empty($this->request->data)) {
 
-            if($this->request->data->destructionDate==null){
-                $this->flash->set("La date de destruction n'est pas valide.", "warning");
+            if($this->request->data->destructionDate == null) {
+                $this->flash->set(
+                    "La date de destruction n'est pas valide.", "warning"
+                );
                 $this->render('index');
-            } else if($this->request->data->creationDate==null){
-                $this->flash->set("La date de création n'est pas valide.", "warning");
-                $this->render('index');
-            }else {
+            } else {
+                if($this->request->data->creationDate == null) {
+                    $this->flash->set(
+                        "La date de création n'est pas valide.", "warning"
+                    );
+                    $this->render('index');
+                } else {
 
-                $keychain->setCreationDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->creationDate));
-                $keychain->setDestructionDate(\DateTime::createFromFormat("Y-m-d H:i:s", $this->request->data->destructionDate));
+                    $keychain->setCreationDate(
+                        \DateTime::createFromFormat(
+                            "Y-m-d H:i:s", $this->request->data->creationDate
+                        )
+                    );
+                    $keychain->setDestructionDate(
+                        \DateTime::createFromFormat(
+                            "Y-m-d H:i:s", $this->request->data->destructionDate
+                        )
+                    );
 
-                $model = RepositoryFactory::getRepository('keychains');
-                $model->update($keychain, $id);
+                    $model = RepositoryFactory::getRepository('keychains');
+                    $model->update($keychain, $id);
 
-                $this->flash->set("Le trousseau est bien modifié.", "success");
-                $this->redirect(WEBROOT . "?controller=keychains&action=index");
+                    $this->flash->set(
+                        "Le trousseau est bien modifié.", "success"
+                    );
+                    $this->redirect(
+                        WEBROOT . "?controller=keychains&action=index"
+                    );
+                }
             }
 
         } else {
             $this->setHeadline("Modifier un trousseau");
-            $this->setBack(WEBROOT.'?controller=keychains&action=index');
+            $this->setBack(WEBROOT . '?controller=keychains&action=index');
             $this->set(compact('keychain'));
             $this->render('update');
         }
 
     }
-    public function destroy($id) {
+
+    public function destroy($id)
+    {
 
         $model = RepositoryFactory::getRepository('keychains');
         $model->delete($id);
 
         $this->flash->set("Un trousseau a été supprimé.", "info");
-        $this->redirect(WEBROOT."?controller=keychains&action=index");
+        $this->redirect(WEBROOT . "?controller=keychains&action=index");
     }
 
-    public function import() {
+    public function import()
+    {
 
         if($_FILES['import']['type'] == "text/csv") {
 
             $filename = $_FILES['import']['tmp_name'];
 
-            if(!file_exists($filename) || !is_readable($filename))
-                return FALSE;
+            if(!file_exists($filename) || !is_readable($filename)) {
+                return false;
+            }
 
             $str_csv = file_get_contents($filename);
 

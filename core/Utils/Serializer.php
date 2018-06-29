@@ -9,9 +9,16 @@
 
 namespace Core\Utils;
 
-class Serializer {
-
-    public function fromXML($xml, $class) {
+class Serializer
+{
+    /**
+     * @param $xml
+     * @param $class
+     *
+     * @return mixed
+     */
+    public function fromXML($xml, $class)
+    {
 
         $object = new $class();
 
@@ -33,20 +40,20 @@ class Serializer {
                 $methodTypeName = $methodType->__toString();
                 $result = $xml->$propertyName;
 
-                switch ($methodTypeName) {
+                switch($methodTypeName) {
                     case 'int':
-                        $result = (int) $result;
+                        $result = (int)$result;
                         break;
                     case 'float':
-                        $result = (float) $result;
+                        $result = (float)$result;
                         break;
                     case 'string':
-                        $result = (string) $result;
+                        $result = (string)$result;
                         break;
                     case 'DateTime':
-                        $tmp = (int) $result;
+                        $tmp = (int)$result;
                         $result = new \DateTime();
-                        $result->setTimestamp((int) $tmp);
+                        $result->setTimestamp((int)$tmp);
                         break;
 
                 }
@@ -60,29 +67,40 @@ class Serializer {
 
     }
 
-    public function toXML($class) {
-
+    /**
+     * @param $class
+     */
+    public function toXML($class)
+    {
 
 
     }
 
-    public function fromCSV($str, $class) {
+    /**
+     * @param $str
+     * @param $class
+     *
+     * @return array
+     */
+    public function fromCSV($str, $class)
+    {
 
-        $header = NULL;
+        $header = null;
         $pre_result = array();
         $entities = array();
 
-        $data = str_getcsv ($str, "\n");
+        $data = str_getcsv($str, "\n");
         foreach($data as $row) {
             $row = str_getcsv($row, ",");
-            if(!$header)
+            if(!$header) {
                 $header = $row;
-            else
+            } else {
                 $pre_result[] = array_combine($header, $row);
+            }
         }
 
 
-        foreach ($pre_result as $entity) {
+        foreach($pre_result as $entity) {
 
             $object = new $class();
 
@@ -103,20 +121,20 @@ class Serializer {
                     $methodTypeName = $methodType->__toString();
                     $result = $entity[$propertyName];
 
-                    switch ($methodTypeName) {
+                    switch($methodTypeName) {
                         case 'int':
-                            $result = (int) $result;
+                            $result = (int)$result;
                             break;
                         case 'float':
-                            $result = (float) $result;
+                            $result = (float)$result;
                             break;
                         case 'string':
-                            $result = (string) $result;
+                            $result = (string)$result;
                             break;
                         case 'DateTime':
-                            $tmp = (int) $result;
+                            $tmp = (int)$result;
                             $result = new \DateTime();
-                            $result->setTimestamp((int) $tmp);
+                            $result->setTimestamp((int)$tmp);
                             break;
 
                     }

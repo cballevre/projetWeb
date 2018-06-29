@@ -5,10 +5,6 @@
         <idKeychain>1</idKeychain>
         <idKey>1</idKey>
     </keyAssociation>
-    <keyAssociation>
-        <id>2</id>
-        <idKeychain>2</idKeychain>
-        <idKey>2</idKey>
-    </keyAssociation>
 
-<keyAssociation><id>3</id><idKeychain>16</idKeychain><idKey>2</idKey></keyAssociation><keyAssociation><id>4</id><idKeychain>16</idKeychain><idKey>5</idKey></keyAssociation></keyAssociations>
+
+</keyAssociations>

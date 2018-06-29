@@ -10,22 +10,22 @@ return array(
 
     array(
         'title' => 'Tableau de bord',
-        'icon' => 'fas fa-tachometer-alt',
+        'icon'  => 'fas fa-tachometer-alt',
         'route' => '?controller=pages&action=dashboard'
     ),
     array(
         'title' => 'Emprunts',
-        'icon' => 'fas fa-receipt',
+        'icon'  => 'fas fa-receipt',
         'route' => '?controller=borrowKeychains&action=index'
     ),
     array(
         'title' => 'Utilisateurs',
-        'icon' => 'fa fa-user',
+        'icon'  => 'fa fa-user',
         'route' => '?controller=users&action=index'
     ),
     array(
-        'title' => 'Clés',
-        'icon' => 'fa fa-key',
+        'title'    => 'Clés',
+        'icon'     => 'fa fa-key',
         'children' => array(
             array(
                 'title' => 'Toutes les clés',
@@ -38,8 +38,8 @@ return array(
         )
     ),
     array(
-        'title' => 'Portes',
-        'icon' => 'fas fa-door-open',
+        'title'    => 'Portes',
+        'icon'     => 'fas fa-door-open',
         'children' => array(
             array(
                 'title' => 'Toutes les portes',

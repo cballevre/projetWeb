@@ -1,27 +1,5 @@
 <?xml version="1.0" standalone="yes"?>
 <borrowKeychains>
-    <borrowKeychain>
-        <id>1</id>
-        <idKeychain>1</idKeychain>
-        <idUser>1</idUser>
-        <dateRetour>1272508903</dateRetour>
-    </borrowKeychain>
-    <borrowKeyChain>
-        <id>2</id>
-        <idKeychain>2</idKeychain>
-        <idUser>2</idUser>
-        <dateRetour>1282508903</dateRetour>
-    </borrowKeyChain>
-    <borrowKeychain>
-        <id>3</id>
-        <idKeychain>4</idKeychain>
-        <idUser>3</idUser>
-        <dateRetour>1530389445</dateRetour>
-    </borrowKeychain>
-    <borrowKeychain>
-        <id>4</id>
-        <idKeychain>3</idKeychain>
-        <idUser>4</idUser>
-        <dateRetour>1529380860</dateRetour>
-    </borrowKeychain>
-<borrowKeychain><id>5</id><idKeychain>16</idKeychain><idUser>4</idUser><dateRetour>1530280800</dateRetour></borrowKeychain></borrowKeychains>
+
+
+</borrowKeychains>

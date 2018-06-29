@@ -9,6 +9,11 @@
 
 namespace Core\Routing;
 
+/**
+ * Class Dispatcher
+ *
+ * @package Core\Routing
+ */
 class Dispatcher
 {
 
@@ -19,23 +24,27 @@ class Dispatcher
     public $request;
 
     /**
-     * Repartit les différente action en fonction de l'url
-     * @param $url: L'url transmise par l'utilisateur
+     * Dispatcher constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
 
         $this->request = new Request();
         Router::parse($this->request->url, $this->request);
 
         try {
-            $controller = self::loadController($this->request->controller, $this->request);
-        } catch (\RuntimeException $e) {
+            $controller = self::loadController(
+                $this->request->controller, $this->request
+            );
+        } catch(\RuntimeException $e) {
             $controller = self::loadController("pages", $this->request);
             self::loadAction("error404", $controller);
         } finally {
             try {
-                self::loadAction($this->request->action, $controller, $this->request->params);
-            } catch (\RuntimeException $e) {
+                self::loadAction(
+                    $this->request->action, $controller, $this->request->params
+                );
+            } catch(\RuntimeException $e) {
                 if($this->request->controller != 'pages') {
                     $controller = self::loadController("pages", $this->request);
                 }
@@ -46,17 +55,22 @@ class Dispatcher
     }
 
     /**
-     * Permet de charger le controller en fonction de l'url demander par l'utilisateur
+     * @param $name
+     * @param $request
+     *
+     * @return mixed
      */
-    public static function loadController($name, $request){
+    public static function loadController($name, $request)
+    {
 
-        $name = ucfirst($name).'Controller';
-        $namespace = '\App\Controller\\'. $name;
+        $name = ucfirst($name) . 'Controller';
+        $namespace = '\App\Controller\\' . $name;
         $file = ROOT . DS . 'src/Controller/' . $name . '.php';
-        if(file_exists($file)){
+        if(file_exists($file)) {
             require($file);
             $controller = new $namespace();
             $controller->setRequest($request);
+
             return $controller;
         } else {
             throw new \RuntimeException("File doesn't exist");
@@ -64,10 +78,12 @@ class Dispatcher
     }
 
     /**
-     * Permet d\'afficher l\'action demander par l\'utilisateur
-     * @param $controller : Controller créer
+     * @param       $name
+     * @param       $controller
+     * @param array $params
      */
-    public static function loadAction($name, $controller, $params = array()){
+    public static function loadAction($name, $controller, $params = array())
+    {
 
         if(method_exists($controller, $name)) {
 
@@ -76,10 +92,10 @@ class Dispatcher
 
             $methodParams = array();
 
-            foreach ($reflectMethod->getParameters() as $reflectionParameter) {
-                foreach ($params as $key => $value) {
+            foreach($reflectMethod->getParameters() as $reflectionParameter) {
+                foreach($params as $key => $value) {
                     if($reflectionParameter->getName() == $key) {
-                      array_push($methodParams, $value);
+                        array_push($methodParams, $value);
                     }
                 }
             }

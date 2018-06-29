@@ -16,11 +16,13 @@ use Core\Repositories\RepositoryFactory;
 class BorrowKeychainsController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index(){
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychains = $model->findAll();
@@ -31,7 +33,8 @@ class BorrowKeychainsController extends AppController
         $this->render('index');
     }
 
-    public function singleToJson($id) {
+    public function singleToJson($id)
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);
@@ -40,14 +43,17 @@ class BorrowKeychainsController extends AppController
 
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $borrowKeychain = new BorrowKeychain();
             $borrowKeychain->setIdUser($this->request->data->idUser);
 
-            $date_retour = \DateTime::createFromFormat("Y-m-d\TH:i", $this->request->data->dateRetour);
+            $date_retour = \DateTime::createFromFormat(
+                "Y-m-d\TH:i", $this->request->data->dateRetour
+            );
             $date_now = new \DateTime();
             $keychainsModel = RepositoryFactory::getRepository('keychains');
             $keychain = new Keychain();
@@ -59,10 +65,12 @@ class BorrowKeychainsController extends AppController
             $keys = array();
             $keyAssociations = array();
 
-            $keyAssociationModel = RepositoryFactory::getRepository('keyAssociations');
+            $keyAssociationModel = RepositoryFactory::getRepository(
+                'keyAssociations'
+            );
             $keyModel = RepositoryFactory::getRepository('keys');
 
-            foreach ($this->request->data->keys as $key_id) {
+            foreach($this->request->data->keys as $key_id) {
 
                 var_dump($key_id);
 
@@ -86,7 +94,9 @@ class BorrowKeychainsController extends AppController
             $model->create(array($borrowKeychain));
 
             $this->flash->set("L'emprunt est bien ajouté.", "success");
-            $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+            $this->redirect(
+                WEBROOT . "?controller=borrowKeychains&action=index"
+            );
 
 
         } else {
@@ -99,7 +109,7 @@ class BorrowKeychainsController extends AppController
 
             $keys = array();
 
-            foreach ($keys_preresult as $key) {
+            foreach($keys_preresult as $key) {
                 if($key->getEtat() == "Disponible") {
                     array_push($keys, $key);
                 }
@@ -111,36 +121,48 @@ class BorrowKeychainsController extends AppController
 
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);
 
         if(!empty($this->request->data)) {
 
-            $borrowKeychain->setDateRetour(\DateTime::createFromFormat("Y-m-d\TH:i", $this->request->data->dateRetour));
+            $borrowKeychain->setDateRetour(
+                \DateTime::createFromFormat(
+                    "Y-m-d\TH:i", $this->request->data->dateRetour
+                )
+            );
 
             $model->update($borrowKeychain, $id);
 
-            $this->redirect(WEBROOT . "?controller=borrowKeychains&action=index");
+            $this->redirect(
+                WEBROOT . "?controller=borrowKeychains&action=index"
+            );
 
         }
         $this->flash->set("L'emprunt a bien été modifié.", "success");
 
     }
 
-    public function return_keychain($id) {
+    public function return_keychain($id)
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $keychainsModel = RepositoryFactory::getRepository('keychains');
-        $keyAssociationModel = RepositoryFactory::getRepository('keyAssociations');
+        $keyAssociationModel = RepositoryFactory::getRepository(
+            'keyAssociations'
+        );
         $keyModel = RepositoryFactory::getRepository('keys');
 
         $borrowKeychain = $model->findById($id);
         $keychain = $keychainsModel->findById($borrowKeychain->getIdKeychain());
-        $keyAssociations = $keyAssociationModel->findBy("idKeychain", $keychain->getId());
+        $keyAssociations = $keyAssociationModel->findBy(
+            "idKeychain", $keychain->getId()
+        );
 
-        foreach ($keyAssociations as $keyAssociation) {
+        foreach($keyAssociations as $keyAssociation) {
             $key = $keyModel->findById($keyAssociation->getIdKey());
             $key->setEtat("Disponible");
             $keyModel->update($key, $keyAssociation->getIdKey());
@@ -155,18 +177,23 @@ class BorrowKeychainsController extends AppController
 
     }
 
-    public function lost($id) {
+    public function lost($id)
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $keychainsModel = RepositoryFactory::getRepository('keychains');
-        $keyAssociationModel = RepositoryFactory::getRepository('keyAssociations');
+        $keyAssociationModel = RepositoryFactory::getRepository(
+            'keyAssociations'
+        );
         $keyModel = RepositoryFactory::getRepository('keys');
 
         $borrowKeychain = $model->findById($id);
         $keychain = $keychainsModel->findById($borrowKeychain->getIdKeychain());
-        $keyAssociations = $keyAssociationModel->findBy("idKeychain", $keychain->getId());
+        $keyAssociations = $keyAssociationModel->findBy(
+            "idKeychain", $keychain->getId()
+        );
 
-        foreach ($keyAssociations as $keyAssociation) {
+        foreach($keyAssociations as $keyAssociation) {
             $key = $keyModel->findById($keyAssociation->getIdKey());
             $key->setEtat("Perdue");
             $keyModel->update($key, $keyAssociation->getIdKey());
@@ -180,7 +207,8 @@ class BorrowKeychainsController extends AppController
 
     }
 
-    public function reminder($id) {
+    public function reminder($id)
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychain = $model->findById($id);

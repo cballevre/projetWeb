@@ -18,24 +18,27 @@ use Core\Utils\Serializer;
 class KeysController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('keys');
         $keys = $model->findAll();
 
         $this->setHeadline("Clés");
         $this->setButtonAdd('?controller=keys&action=store');
-        $this->setButtonImport(WEBROOT .'?controller=keys&action=import');
+        $this->setButtonImport(WEBROOT . '?controller=keys&action=import');
         $this->set(compact('keys'));
         $this->render('index');
 
     }
 
-    public function single($id) {
+    public function single($id)
+    {
 
         $model = RepositoryFactory::getRepository('keys');
         $key = $model->findById($id);
@@ -45,12 +48,16 @@ class KeysController extends AppController
 
         $keychains = array();
         $modelKeychains = RepositoryFactory::getRepository('keychains');
-        foreach($keyAssociationsSelected as $keyAssociationSelected){
-            array_push($keychains,$modelKeychains->findById($keyAssociationSelected->getIdKeychain()));
+        foreach($keyAssociationsSelected as $keyAssociationSelected) {
+            array_push(
+                $keychains, $modelKeychains->findById(
+                $keyAssociationSelected->getIdKeychain()
+            )
+            );
         }
         $array = array(
-            'key' => $key,
-            'keychains'  => $keychains
+            'key'       => $key,
+            'keychains' => $keychains
         );
 
         $this->setHeadline("Clé " . $key->getId());
@@ -59,7 +66,8 @@ class KeysController extends AppController
         $this->render('single');
     }
 
-    public function linkLock($id){
+    public function linkLock($id)
+    {
 
         $model = RepositoryFactory::getRepository('keys');
         $key = $model->findById($id);
@@ -74,46 +82,53 @@ class KeysController extends AppController
             $model = RepositoryFactory::getRepository('openLocks');
             $model->create(array($openLocks));
 
-            $this->redirect(WEBROOT . "?controller=keys&action=single&id=" . $key->getId());
+            $this->redirect(
+                WEBROOT . "?controller=keys&action=single&id=" . $key->getId()
+            );
 
         } else {
             $model = RepositoryFactory::getRepository('locks');
             $locks = $model->findAll();
 
             $array = array(
-                'key'  => $key,
+                'key'   => $key,
                 'locks' => $locks
             );
 
-            $this->setHeadline("Associer un barillet à la clé n°" . $key->getId() . " : ");
+            $this->setHeadline(
+                "Associer un barillet à la clé n°" . $key->getId() . " : "
+            );
             $this->set(compact('array'));
             $this->render('linkLock');
         }
 
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $key = new Key();
 
-            if($this->request->data->type==null){
+            if($this->request->data->type == null) {
                 $this->flash->set("Le type n'est pas valide", "warning");
                 $this->render('index');
-            }else if($this->request->data->etat==null){
-                $this->render('index');
-                $this->flash->set("L'état n'est pas valide", "warning");
-            }else {
-                $key->setType($this->request->data->type);
-                $key->setEtat($this->request->data->etat);
+            } else {
+                if($this->request->data->etat == null) {
+                    $this->render('index');
+                    $this->flash->set("L'état n'est pas valide", "warning");
+                } else {
+                    $key->setType($this->request->data->type);
+                    $key->setEtat($this->request->data->etat);
 
-                $model = RepositoryFactory::getRepository('keys');
-                $model->create(array($key));
+                    $model = RepositoryFactory::getRepository('keys');
+                    $model->create(array($key));
 
-                $this->flash->set("La clé est bien ajoutée", "success");
+                    $this->flash->set("La clé est bien ajoutée", "success");
 
-                $this->redirect(WEBROOT . "?controller=keys&action=index");
+                    $this->redirect(WEBROOT . "?controller=keys&action=index");
+                }
             }
 
         } else {
@@ -121,27 +136,30 @@ class KeysController extends AppController
         }
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('keys');
         $key = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            if($this->request->data->type==null){
+            if($this->request->data->type == null) {
                 $this->flash->set("Le type n'est pas valide", "warning");
                 $this->render('index');
-            }else if($this->request->data->etat==null){
-                $this->flash->set("L'état n'est pas valide", "warning");
-                $this->render('index');
-            }else {
-                $key->setType($this->request->data->type);
-                $key->setEtat($this->request->data->etat);
+            } else {
+                if($this->request->data->etat == null) {
+                    $this->flash->set("L'état n'est pas valide", "warning");
+                    $this->render('index');
+                } else {
+                    $key->setType($this->request->data->type);
+                    $key->setEtat($this->request->data->etat);
 
-                $model = RepositoryFactory::getRepository('keys');
-                $model->update($key, $id);
+                    $model = RepositoryFactory::getRepository('keys');
+                    $model->update($key, $id);
 
-                $this->flash->set("La clé est bien modifiée", "success");
-                $this->redirect(WEBROOT . "?controller=keys&action=index");
+                    $this->flash->set("La clé est bien modifiée", "success");
+                    $this->redirect(WEBROOT . "?controller=keys&action=index");
+                }
             }
 
         } else {
@@ -153,7 +171,8 @@ class KeysController extends AppController
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $model = RepositoryFactory::getRepository('keys');
         $model->delete($id);
@@ -162,14 +181,16 @@ class KeysController extends AppController
         $this->redirect(WEBROOT . "?controller=keys&action=index");
     }
 
-    public function import() {
+    public function import()
+    {
 
         if($_FILES['import']['type'] == "text/csv") {
 
             $filename = $_FILES['import']['tmp_name'];
 
-            if(!file_exists($filename) || !is_readable($filename))
-                return FALSE;
+            if(!file_exists($filename) || !is_readable($filename)) {
+                return false;
+            }
 
             $str_csv = file_get_contents($filename);
 

@@ -25,26 +25,32 @@ $keychains = $array['keychains'];
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($keychains as $keychain): ?>
+                <?php foreach($keychains as $keychain): ?>
                     <tr>
                         <td>
-                            <a href="<?php echo WEBROOT; ?>?controller=keychains&action=single&id=<?php echo $keychain->getId(); ?>">
+                            <a href="<?php echo WEBROOT; ?>?controller=keychains&action=single&id=<?php echo $keychain->getId(
+                            ); ?>">
                                 Trousseau n°<?php echo $keychain->getId(); ?>
                             </a>
                         </td>
                         <td>
-                            <?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s');; ?>
+                            <?php echo $keychain->getCreationDate()->format(
+                                'Y-m-d H:i:s'
+                            );; ?>
                         </td>
                         <td>
-                            <?php echo $keychain->getDestructionDate()->format('Y-m-d H:i:s');; ?>
+                            <?php echo $keychain->getDestructionDate()->format(
+                                'Y-m-d H:i:s'
+                            );; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
             <div class="col-sm-10 col-sm-offset-2 text-left">
-                <a href="<?php echo WEBROOT; ?>?controller=keys&action=linkLock&id=<?php echo $key->getId(); ?>">
-                    <button class="btn btn-primary"> Ajouter barillet </button>
+                <a href="<?php echo WEBROOT; ?>?controller=keys&action=linkLock&id=<?php echo $key->getId(
+                ); ?>">
+                    <button class="btn btn-primary"> Ajouter barillet</button>
                 </a>
             </div>
         </div>

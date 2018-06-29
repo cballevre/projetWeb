@@ -9,69 +9,55 @@
 
 namespace Core\Controller;
 
+/**
+ * Class Controller
+ *
+ * @package Core\Controller
+ */
 class Controller
 {
 
     /**
+     * @var
+     */
+    protected $request;
+    /**
      * Retourne le nom du controller courant
+     *
      * @var string
      */
     private $name;
+    /**
+     * @var array
+     */
     private $var = array();
+    /**
+     * @var string
+     */
     private $layout = "default";
+    /**
+     * @var
+     */
     private $headline;
+    /**
+     * @var null
+     */
     private $button_add = null;
+    /**
+     * @var null
+     */
     private $button_import = null;
+    /**
+     * @var null
+     */
     private $back = null;
-    protected $request;
 
     /**
      * Constructeur
      */
-    function __construct() {
+    function __construct()
+    {
         $this->name = $this->setName();
-    }
-
-    /**
-     * Permet d'ajouter un variable à la page
-     * @param $var
-     */
-    function set($var) {
-        $this->var = array_merge($this->var, $var);
-    }
-
-    /**
-     * Permet de rendre une vue
-     * @param $action Nom de l'action à rendre
-     */
-    public function render($action) {
-        extract($this->var);
-        ob_start();
-        require ROOT .'src/View/'.$this->name.'/'.$action.'.php';
-        $getContent = ob_get_clean();
-        if(!empty($this->layout)){
-            require ROOT. 'src'. DS.'View'.DS.'Layout'.DS. $this->layout .'.php';
-        }
-
-    }
-
-    public function renderWithoutLayout($action) {
-        extract($this->var);
-        ob_start();
-        require ROOT .'src/View/'.$this->name.'/'.$action.'.php';
-        echo ob_get_clean();
-    }
-
-    public function renderJSON($json) {
-        header('Content-Type: application/json');
-        echo $json;
-    }
-    /**
-     * Permet de changer la View pour l'action
-     * @param $layout : Layout choisit
-     */
-    public function setLayout($layout) {
-        $this->layout = $layout;
     }
 
     /**
@@ -79,9 +65,73 @@ class Controller
      *
      * @return : Retourne un string
      */
-    private function setName() {
-        $name = str_replace('App','',str_replace('\\', '', str_replace('Controller','',get_class($this))));
+    private function setName()
+    {
+        $name = str_replace(
+            'App', '', str_replace(
+                '\\', '', str_replace('Controller', '', get_class($this))
+            )
+        );
+
         return $name;
+    }
+
+    /**
+     * Permet d'ajouter un variable à la page
+     *
+     * @param $var
+     */
+    function set($var)
+    {
+        $this->var = array_merge($this->var, $var);
+    }
+
+    /**
+     * Permet de rendre une vue
+     *
+     * @param $action Nom de l'action à rendre
+     */
+    public function render($action)
+    {
+        extract($this->var);
+        ob_start();
+        require ROOT . 'src/View/' . $this->name . '/' . $action . '.php';
+        $getContent = ob_get_clean();
+        if(!empty($this->layout)) {
+            require ROOT . 'src' . DS . 'View' . DS . 'Layout' . DS
+                . $this->layout . '.php';
+        }
+
+    }
+
+    /**
+     * @param $action
+     */
+    public function renderWithoutLayout($action)
+    {
+        extract($this->var);
+        ob_start();
+        require ROOT . 'src/View/' . $this->name . '/' . $action . '.php';
+        echo ob_get_clean();
+    }
+
+    /**
+     * @param $json
+     */
+    public function renderJSON($json)
+    {
+        header('Content-Type: application/json');
+        echo $json;
+    }
+
+    /**
+     * Permet de changer la View pour l'action
+     *
+     * @param $layout : Layout choisit
+     */
+    public function setLayout($layout)
+    {
+        $this->layout = $layout;
     }
 
     /**
@@ -95,14 +145,16 @@ class Controller
     /**
      * @return mixed
      */
-    public function getHeadline() {
+    public function getHeadline()
+    {
         return $this->headline;
     }
 
     /**
      * @param mixed $headline
      */
-    public function setHeadline($headline) {
+    public function setHeadline($headline)
+    {
         $this->headline = $headline;
     }
 
@@ -146,17 +198,23 @@ class Controller
         $this->back = $back;
     }
 
-    function redirect($url) {
-        header("Location: ".$url);
+    /**
+     * @param $url
+     */
+    function redirect($url)
+    {
+        header("Location: " . $url);
     }
 
     /**
      * Permet de charger un composant
+     *
      * @param $name : Nom du composant à charger
      */
     public function loadComponent($name)
     {
-        $component = '\\Core\\Controller\\Component\\'. ucfirst($name) . 'Component';
+        $component = '\\Core\\Controller\\Component\\' . ucfirst($name)
+            . 'Component';
         $this->{$name} = new $component();
 
     }

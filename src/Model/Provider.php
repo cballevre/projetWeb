@@ -13,25 +13,36 @@ class Provider
     protected $office;
     protected $email;
 
-    public function setId(int $id){ $this->id = $id; }
-    public function getId(){ return $this->id; }
+    public function getId() { return $this->id; }
 
-    public function setUsername(string $username){ $this->username = $username; }
-    public function getUsername(){ return $this->username; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function setName(string $name){ $this->name = $name; }
-    public function getName(){ return $this->name; }
+    public function getUsername() { return $this->username; }
 
-    public function setSurname(string $surname){ $this->surname = $surname; }
-    public function getSurname(){ return $this->surname; }
+    public function setUsername(string $username)
+    {
+        $this->username
+            = $username;
+    }
 
-    public function setPhone(string $phone){ $this->phone = $phone; }
-    public function getPhone(){ return $this->phone; }
+    public function getName() { return $this->name; }
 
-    public function setOffice(string $office){ $this->office = $office; }
-    public function getOffice(){ return $this->office; }
+    public function setName(string $name) { $this->name = $name; }
 
-    public function setEmail(string $email){ $this->email = $email; }
-    public function getEmail(){ return $this->email; }
+    public function getSurname() { return $this->surname; }
+
+    public function setSurname(string $surname) { $this->surname = $surname; }
+
+    public function getPhone() { return $this->phone; }
+
+    public function setPhone(string $phone) { $this->phone = $phone; }
+
+    public function getOffice() { return $this->office; }
+
+    public function setOffice(string $office) { $this->office = $office; }
+
+    public function getEmail() { return $this->email; }
+
+    public function setEmail(string $email) { $this->email = $email; }
 
 }

@@ -10,9 +10,11 @@ namespace Core\Repositories;
 
 /**
  * Interface RepositoryInterface
+ *
  * @package Core\Repositories
  */
-interface RepositoryInterface {
+interface RepositoryInterface
+{
 
     /**
      * @return mixed
@@ -21,31 +23,36 @@ interface RepositoryInterface {
 
     /**
      * @param array $param
+     *
      * @return mixed
      */
     public function findById($id);
 
     /**
      * @param array $param
+     *
      * @return mixed
      */
     public function findBy($type, $value);
 
     /**
      * @param array $data
+     *
      * @return mixed
      */
     public function create(array $entities);
 
     /**
      * @param array $data
-     * @param $id
+     * @param       $id
+     *
      * @return mixed
      */
     public function update($entity, $id);
 
     /**
      * @param $id
+     *
      * @return mixed
      */
     public function delete($id);

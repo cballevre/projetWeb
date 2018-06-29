@@ -9,17 +9,18 @@
 namespace App\Controller;
 
 use App\Model\Lock;
-
 use Core\Repositories\RepositoryFactory;
-use App\Model\Door;
 
-class LocksController extends AppController {
+class LocksController extends AppController
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('locks');
         $locks = $model->findAll();
@@ -31,17 +32,18 @@ class LocksController extends AppController {
 
     }
 
-    public function single($id) {
+    public function single($id)
+    {
 
         $model = RepositoryFactory::getRepository('locks');
         $lock = $model->findById($id);
 
         $modelDoors = RepositoryFactory::getRepository('doors');
-        $doors = $modelDoors->findBy('idLock',$id);
+        $doors = $modelDoors->findBy('idLock', $id);
 
         $array = array(
-            'lock' => $lock,
-            'doors'  => $doors
+            'lock'  => $lock,
+            'doors' => $doors
         );
 
         $this->setHeadline("Barillet " . $id);
@@ -51,15 +53,16 @@ class LocksController extends AppController {
 
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $lock = new Lock();
-            if($this->request->data->length==null){
+            if($this->request->data->length == null) {
                 $this->flash->set("Le type n'est pas valide.", "warning");
                 $this->render('index');
-            }else {
+            } else {
                 $lock->setLength($this->request->data->length);
                 $model = RepositoryFactory::getRepository('locks');
                 $model->create(array($lock));
@@ -77,16 +80,17 @@ class LocksController extends AppController {
 
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('locks');
         $lock = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            if($this->request->data->length==null){
+            if($this->request->data->length == null) {
                 $this->flash->set("Le type n'est pas valide.", "warning");
                 $this->render('index');
-            }else {
+            } else {
                 $lock->setLength($this->request->data->length);
                 $model->update($lock, $id);
 
@@ -102,7 +106,8 @@ class LocksController extends AppController {
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $model = RepositoryFactory::getRepository('locks');
         $model->delete($id);

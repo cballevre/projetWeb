@@ -12,8 +12,9 @@ $rooms = $array['rooms'];
 $door = $array['door'];
 
 ?>
-<h5>Barillet :  
-    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(); ?>">
+<h5>Barillet :
+    <a href="<?php echo WEBROOT; ?>?controller=locks&action=single&id=<?php echo $door->getIdLock(
+    ); ?>">
         <?php echo $door->getIdLock(); ?>
     </a>
 </h5>
@@ -24,19 +25,20 @@ $door = $array['door'];
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Salle</th>
-                        <th scope="col">Étage</th>
-                        <th scope="col">Bâtiment</th>
-                    </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Salle</th>
+                    <th scope="col">Étage</th>
+                    <th scope="col">Bâtiment</th>
+                </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($rooms as $room): ?>
+                <?php foreach($rooms as $room): ?>
                     <tr>
                         <td><?php echo $room->getId(); ?></td>
                         <td colspan="1">
-                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(); ?>">
+                            <a href="<?php echo WEBROOT; ?>?controller=rooms&action=single&id=<?php echo $room->getId(
+                            ); ?>">
                                 <?php echo $room->getRoomName(); ?>
                             </a>
                         </td>

@@ -16,14 +16,17 @@ class DoorAccess
     protected $idUser;
     protected $idRoom;
 
-    public function setId(int $id) { $this->id = $id; }
     public function getId() { return $this->id; }
 
-    public function setIdUser(int $idUser){ $this->idUser=$idUser; }
-    public function getIdUser(){ return $this->idUser; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function setIdRoom(int $idRoom){ $this->idRoom=$idRoom; }
-    public function getIdRoom(){ return $this->idRoom; }
+    public function getIdUser() { return $this->idUser; }
+
+    public function setIdUser(int $idUser) { $this->idUser = $idUser; }
+
+    public function getIdRoom() { return $this->idRoom; }
+
+    public function setIdRoom(int $idRoom) { $this->idRoom = $idRoom; }
 
 
 }

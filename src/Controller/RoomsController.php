@@ -9,19 +9,21 @@
 
 namespace App\Controller;
 
+use App\Model\OpenLock;
 use App\Model\Room;
 use App\Model\RoomDoor;
-use App\Model\OpenLock;
 use Core\Repositories\RepositoryFactory;
 
 class RoomsController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('rooms');
         $rooms = $model->findAll();
@@ -33,7 +35,8 @@ class RoomsController extends AppController
 
     }
 
-    public function single($id) {
+    public function single($id)
+    {
 
         $model = RepositoryFactory::getRepository('rooms');
         $room = $model->findById($id);
@@ -43,28 +46,30 @@ class RoomsController extends AppController
 
         $doors = array();
         $modelDoors = RepositoryFactory::getRepository('doors');
-        foreach($roomDoorsSelected as $roomDoorSelected){
-            array_push($doors,$modelDoors->findById($roomDoorSelected->getIdDoor()));
+        foreach($roomDoorsSelected as $roomDoorSelected) {
+            array_push(
+                $doors, $modelDoors->findById($roomDoorSelected->getIdDoor())
+            );
         }
 
         $keys = array();
         $openLock = new OpenLock();
         $modelKey = RepositoryFactory::getRepository('keys');
-        foreach($doors as $door){
+        foreach($doors as $door) {
             $keysId = $openLock->keys($door->getId());
-            foreach($keysId as $keyId){
-                array_push($keys,$modelKey->findById($keyId->getIdKey()));
+            foreach($keysId as $keyId) {
+                array_push($keys, $modelKey->findById($keyId->getIdKey()));
             }
         }
 
         $doorAccesModel = RepositoryFactory::getRepository('doorAccesss');
         $userModel = RepositoryFactory::getRepository('users');
-        $roomAccesss = $doorAccesModel->findBy('idRoom',$room->getId());
+        $roomAccesss = $doorAccesModel->findBy('idRoom', $room->getId());
 
-        $users= array();
+        $users = array();
 
-        foreach($roomAccesss as $roomAccess){
-            array_push($users,  $userModel->findById($roomAccess->getIdUser()));
+        foreach($roomAccesss as $roomAccess) {
+            array_push($users, $userModel->findById($roomAccess->getIdUser()));
         }
 
         $array = array(
@@ -81,30 +86,45 @@ class RoomsController extends AppController
 
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $room = new Room();
-            if($this->request->data->roomName==null){
-                $this->flash->set("Le champ nom de la salle est vide", "warning");
+            if($this->request->data->roomName == null) {
+                $this->flash->set(
+                    "Le champ nom de la salle est vide", "warning"
+                );
                 $this->render('index');
-            }else if($this->request->data->building==null){
-                $this->flash->set("Renseignez le champ Bâtiment", "warning");
-                $this->render('index');
-            }else if($this->request->data->floor==null){
-                $this->flash->set("Renseignez le champ Étage", "warning");
-                $this->render('index');
-            }else {
-                $room->setRoomName($this->request->data->roomName);
-                $room->setFloor($this->request->data->floor);
-                $room->setBuilding($this->request->data->building);
+            } else {
+                if($this->request->data->building == null) {
+                    $this->flash->set(
+                        "Renseignez le champ Bâtiment", "warning"
+                    );
+                    $this->render('index');
+                } else {
+                    if($this->request->data->floor == null) {
+                        $this->flash->set(
+                            "Renseignez le champ Étage", "warning"
+                        );
+                        $this->render('index');
+                    } else {
+                        $room->setRoomName($this->request->data->roomName);
+                        $room->setFloor($this->request->data->floor);
+                        $room->setBuilding($this->request->data->building);
 
-                $model = RepositoryFactory::getRepository('rooms');
-                $model->create(array($room));
+                        $model = RepositoryFactory::getRepository('rooms');
+                        $model->create(array($room));
 
-                $this->flash->set("La salle est bien ajoutée.", "success");
-                $this->redirect(WEBROOT . "?controller=rooms&action=index");
+                        $this->flash->set(
+                            "La salle est bien ajoutée.", "success"
+                        );
+                        $this->redirect(
+                            WEBROOT . "?controller=rooms&action=index"
+                        );
+                    }
+                }
             }
 
         } else {
@@ -115,32 +135,47 @@ class RoomsController extends AppController
         }
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('rooms');
         $room = $model->findById($id);
 
         if(!empty($this->request->data)) {
 
-            if($this->request->data->roomName==null){
-                $this->flash->set("Le champ nom de la salle est vide", "warning");
+            if($this->request->data->roomName == null) {
+                $this->flash->set(
+                    "Le champ nom de la salle est vide", "warning"
+                );
                 $this->render('index');
-            }else if($this->request->data->building==null){
-                $this->flash->set("Renseignez le champ Bâtiment", "warning");
-                $this->render('index');
-            }else if($this->request->data->floor==null){
-                $this->flash->set("Renseignez le champ Étage", "warning");
-                $this->render('index');
-            }else {
-                $room->setRoomName($this->request->data->roomName);
-                $room->setFloor($this->request->data->floor);
-                $room->setBuilding($this->request->data->building);
+            } else {
+                if($this->request->data->building == null) {
+                    $this->flash->set(
+                        "Renseignez le champ Bâtiment", "warning"
+                    );
+                    $this->render('index');
+                } else {
+                    if($this->request->data->floor == null) {
+                        $this->flash->set(
+                            "Renseignez le champ Étage", "warning"
+                        );
+                        $this->render('index');
+                    } else {
+                        $room->setRoomName($this->request->data->roomName);
+                        $room->setFloor($this->request->data->floor);
+                        $room->setBuilding($this->request->data->building);
 
-                $model = RepositoryFactory::getRepository('rooms');
-                $model->update($room, $id);
+                        $model = RepositoryFactory::getRepository('rooms');
+                        $model->update($room, $id);
 
-                $this->flash->set("La salle est bien modifiée.", "success");
-                $this->redirect(WEBROOT . "?controller=rooms&action=index");
+                        $this->flash->set(
+                            "La salle est bien modifiée.", "success"
+                        );
+                        $this->redirect(
+                            WEBROOT . "?controller=rooms&action=index"
+                        );
+                    }
+                }
             }
 
         } else {
@@ -151,7 +186,8 @@ class RoomsController extends AppController
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $model = RepositoryFactory::getRepository('rooms');
         $model->delete($id);
@@ -160,7 +196,8 @@ class RoomsController extends AppController
         $this->redirect(WEBROOT . "?controller=rooms&action=index");
     }
 
-    public function destroyLink($id) {
+    public function destroyLink($id)
+    {
 
         //TODO
 
@@ -170,16 +207,18 @@ class RoomsController extends AppController
         $this->redirect(WEBROOT . "?controller=rooms&action=index");
     }
 
-    public function import() {
+    public function import()
+    {
 
     }
 
-    public function linkDoor($id) {
+    public function linkDoor($id)
+    {
         $model = RepositoryFactory::getRepository('rooms');
         $room = $model->findById($id);
 
         if(!empty($this->request->data)) {
-            
+
             $roomDoors = new RoomDoor();
 
             $roomDoors->setIdDoor($this->request->data->idDoor);
@@ -188,18 +227,22 @@ class RoomsController extends AppController
             $model = RepositoryFactory::getRepository('roomDoors');
             $model->create(array($roomDoors));
 
-            $this->redirect(WEBROOT . "?controller=rooms&action=single&id=" . $room->getId());
+            $this->redirect(
+                WEBROOT . "?controller=rooms&action=single&id=" . $room->getId()
+            );
 
         } else {
             $model = RepositoryFactory::getRepository('doors');
             $doors = $model->findAll();
 
             $array = array(
-                'room'  => $room,
+                'room' => $room,
                 'doors' => $doors
             );
 
-            $this->setHeadline("Associer une porte à la salle : " . $room->getRoomName());
+            $this->setHeadline(
+                "Associer une porte à la salle : " . $room->getRoomName()
+            );
             $this->set(compact('array'));
             $this->render('linkDoor');
         }

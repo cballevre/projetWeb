@@ -16,21 +16,22 @@ $lock = $array['lock'];
         <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
-                        <tr>
-                            <th scope="col">Numéro</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($doors as $door): ?>
-                            <tr>
-                                <td>
-                                    <a href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(); ?>">
-                                        Porte n°<?php echo $door->getId(); ?>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
+                <tr>
+                    <th scope="col">Numéro</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach($doors as $door): ?>
+                    <tr>
+                        <td>
+                            <a href="<?php echo WEBROOT; ?>?controller=doors&action=single&id=<?php echo $door->getId(
+                            ); ?>">
+                                Porte n°<?php echo $door->getId(); ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
             </table>
         </div>
     </div>

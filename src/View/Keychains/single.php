@@ -9,8 +9,12 @@ $keys = $array['keys'];
 $keychain = $array['keychain'];
 ?>
 
-<h5>Date de création : <?php echo $keychain->getCreationDate()->format('Y-m-d H:i:s');; ?></h5>
-<h5>Date de destruction : <?php echo $keychain->getDestructionDate()->format('Y-m-d H:i:s');; ?></h5>
+<h5>Date de création : <?php echo $keychain->getCreationDate()->format(
+        'Y-m-d H:i:s'
+    ); ?></h5>
+<h5>Date de destruction : <?php echo $keychain->getDestructionDate()->format(
+        'Y-m-d H:i:s'
+    ); ?></h5>
 
 <section>
     <h4>Clés associées</h4>
@@ -25,10 +29,11 @@ $keychain = $array['keychain'];
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($keys as $key): ?>
+                <?php foreach($keys as $key): ?>
                     <tr>
                         <td>
-                            <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(); ?>">
+                            <a href="<?php echo WEBROOT; ?>?controller=keys&action=single&id=<?php echo $key->getId(
+                            ); ?>">
                                 <?php echo $key->getId(); ?>
                             </a>
                         </td>

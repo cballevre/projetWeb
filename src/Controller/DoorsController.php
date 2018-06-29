@@ -16,11 +16,13 @@ use Core\Repositories\RepositoryFactory;
 class DoorsController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function index() {
+    public function index()
+    {
 
         $model = RepositoryFactory::getRepository('doors');
         $doors = $model->findAll();
@@ -32,7 +34,8 @@ class DoorsController extends AppController
 
     }
 
-    public function single($id) {
+    public function single($id)
+    {
 
         $model = RepositoryFactory::getRepository('doors');
         $door = $model->findById($id);
@@ -42,8 +45,10 @@ class DoorsController extends AppController
 
         $rooms = array();
         $modelRooms = RepositoryFactory::getRepository('rooms');
-        foreach($roomDoorsSelected as $roomDoorSelected){
-            array_push($rooms,$modelRooms->findById($roomDoorSelected->getIdRoom()));
+        foreach($roomDoorsSelected as $roomDoorSelected) {
+            array_push(
+                $rooms, $modelRooms->findById($roomDoorSelected->getIdRoom())
+            );
         }
         $array = array(
             'rooms' => $rooms,
@@ -56,15 +61,16 @@ class DoorsController extends AppController
         $this->render('single');
     }
 
-    public function store() {
+    public function store()
+    {
 
         if(!empty($this->request->data)) {
 
             $door = new Door();
-            if($this->request->data->idLock==null){
+            if($this->request->data->idLock == null) {
                 $this->flash->set("Impossible d'ajouter une porte", "warning");
                 $this->render('index');
-            }else {
+            } else {
                 $door->setIdLock($this->request->data->idLock);
 
                 $model = RepositoryFactory::getRepository('doors');
@@ -82,17 +88,18 @@ class DoorsController extends AppController
         }
     }
 
-    public function update($id) {
+    public function update($id)
+    {
 
         $model = RepositoryFactory::getRepository('doors');
         $door = $model->findById($id);
 
         if(!empty($this->request->data)) {
 
-            if($this->request->data->idLock==null){
+            if($this->request->data->idLock == null) {
                 $this->flash->set("Impossible d'ajouter une porte", "warning");
                 $this->render('index');
-            }else {
+            } else {
                 $door->setIdLock($this->request->data->idLock);
 
                 $model = RepositoryFactory::getRepository('doors');
@@ -118,7 +125,8 @@ class DoorsController extends AppController
 
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
 
         $model = RepositoryFactory::getRepository('doors');
         $model->delete($id);

@@ -12,4 +12,9 @@
         <idDoor>3</idDoor>
         <idRoom>3</idRoom>
     </roomDoor>
-<roomDoor><id>4</id><idDoor>4</idDoor><idRoom>1</idRoom></roomDoor></roomDoors>
+    <roomDoor>
+        <id>4</id>
+        <idDoor>4</idDoor>
+        <idRoom>1</idRoom>
+    </roomDoor>
+</roomDoors>

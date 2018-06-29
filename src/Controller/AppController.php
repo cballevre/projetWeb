@@ -14,11 +14,12 @@ use Core\Controller\Controller;
 class AppController extends Controller
 {
 
-    public function __construct() {
+    public function __construct()
+    {
 
         parent::__construct();
 
-       $this->loadComponent('flash');
+        $this->loadComponent('flash');
     }
 
 }

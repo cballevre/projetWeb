@@ -10,9 +10,11 @@ namespace Core\Repositories;
 
 /**
  * Class RepositoryFactory
+ *
  * @package Core\Repositories
  */
-class RepositoryFactory{
+class RepositoryFactory
+{
 
     /**
      * @var array
@@ -21,9 +23,11 @@ class RepositoryFactory{
 
     /**
      * @param string $entityName
+     *
      * @return mixed
      */
-    public static function getRepository(string $entityName) {
+    public static function getRepository(string $entityName)
+    {
 
         if(!isset(self::$instances[$entityName])) {
             self::$instances[$entityName] = new XMLRepository($entityName);

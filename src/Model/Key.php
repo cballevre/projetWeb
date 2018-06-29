@@ -22,16 +22,20 @@ class Key
     protected $type;
     protected $etat;
 
-    public function setId(int $id){ $this->id = $id; }
-    public function getId(){ return $this->id; }
+    public function getId() { return $this->id; }
 
-    public function setType(string $type){ $this->type = $type; }
-    public function getType(){ return $this->type; }
+    public function setId(int $id) { $this->id = $id; }
 
-    public function setEtat(string $etat){ $this->etat = $etat; }
-    public function getEtat(){ return $this->etat; }
+    public function getType() { return $this->type; }
 
-    public function rooms() {
+    public function setType(string $type) { $this->type = $type; }
+
+    public function getEtat() { return $this->etat; }
+
+    public function setEtat(string $etat) { $this->etat = $etat; }
+
+    public function rooms()
+    {
 
         $result = array();
 
@@ -44,14 +48,14 @@ class Key
 
         $doorsModel = RepositoryFactory::getRepository('doors');
 
-        foreach ($openLocks as $openLock) {
+        foreach($openLocks as $openLock) {
 
             $doors = $doorsModel->findBy('idLock', $openLock->getIdLock());
 
-            foreach ($doors as $door){
-                $roomsId = $roomsDoorModel->findBy('idDoor',$door->getId());
+            foreach($doors as $door) {
+                $roomsId = $roomsDoorModel->findBy('idDoor', $door->getId());
 
-                foreach($roomsId as $roomId){
+                foreach($roomsId as $roomId) {
                     $rooms = $roomModel->findById($roomId->getIdRoom());
                     array_push($result, $rooms);
                 }
@@ -63,9 +67,10 @@ class Key
 
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
-            'id' => $this->id,
+            'id'   => $this->id,
             'type' => $this->type,
             'etat' => $this->etat
         ];

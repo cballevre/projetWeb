@@ -13,13 +13,15 @@ class Router
 {
 
     /**
-     *
+     * @param $url
+     * @param $request
      */
-    static function parse($url, $request){
+    static function parse($url, $request)
+    {
 
-        $url = trim($url,'/');
+        $url = trim($url, '/');
 
-        if(empty($url)){
+        if(empty($url)) {
             $url = 'pages/dashboard';
         }
 
@@ -27,7 +29,7 @@ class Router
 
         $request->controller = $params[0];
         $request->action = isset($params[1]) ? $params[1] : 'index';
-        $request->params = array_slice($_GET,2);
+        $request->params = array_slice($_GET, 2);
 
     }
 

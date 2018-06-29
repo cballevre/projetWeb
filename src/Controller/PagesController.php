@@ -14,11 +14,13 @@ use Core\Repositories\RepositoryFactory;
 class PagesController extends AppController
 {
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function dashboard() {
+    public function dashboard()
+    {
 
         $model = RepositoryFactory::getRepository('borrowKeychains');
         $borrowKeychains = $model->findAll();
@@ -27,7 +29,7 @@ class PagesController extends AppController
 
         $borrowKeychainDelays = array();
 
-        foreach ($borrowKeychains as $borrowKeychain) {
+        foreach($borrowKeychains as $borrowKeychain) {
             if($borrowKeychain->getDateRetour() < $now) {
                 array_push($borrowKeychainDelays, $borrowKeychain);
             }
@@ -38,7 +40,8 @@ class PagesController extends AppController
         $this->render('dashboard');
     }
 
-    public function error404() {
+    public function error404()
+    {
         $this->setHeadline("Page non trouvée");
         $this->render('../Errors/404');
     }
